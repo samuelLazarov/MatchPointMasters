@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MatchPointMasters.Infrastructure\MatchPointMasters.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

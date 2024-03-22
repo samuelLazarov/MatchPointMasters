@@ -1,4 +1,4 @@
-﻿using MatchPointMasters.Data;
+﻿using MatchPointMasters.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
