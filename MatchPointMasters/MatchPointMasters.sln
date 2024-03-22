@@ -5,6 +5,10 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchPointMasters", "MatchPointMasters\MatchPointMasters.csproj", "{8E0EE65C-B90E-438F-867C-61C97011F9DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchPointMasters.Core", "MatchPointMasters.Core\MatchPointMasters.Core.csproj", "{62541244-7194-4457-B302-78BBF8EE3FD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchPointMasters.Infrastructure", "MatchPointMasters.Infrastructure\MatchPointMasters.Infrastructure.csproj", "{75C11BC1-F314-4A49-8C42-55983B390D80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{8E0EE65C-B90E-438F-867C-61C97011F9DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E0EE65C-B90E-438F-867C-61C97011F9DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E0EE65C-B90E-438F-867C-61C97011F9DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62541244-7194-4457-B302-78BBF8EE3FD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62541244-7194-4457-B302-78BBF8EE3FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62541244-7194-4457-B302-78BBF8EE3FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62541244-7194-4457-B302-78BBF8EE3FD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75C11BC1-F314-4A49-8C42-55983B390D80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75C11BC1-F314-4A49-8C42-55983B390D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75C11BC1-F314-4A49-8C42-55983B390D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75C11BC1-F314-4A49-8C42-55983B390D80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
