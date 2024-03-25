@@ -12,9 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Constants\" />
     <Folder Include="Data\SeedDb\" />
-    <Folder Include="Data\Models\" />
   </ItemGroup>
 
 </Project>
