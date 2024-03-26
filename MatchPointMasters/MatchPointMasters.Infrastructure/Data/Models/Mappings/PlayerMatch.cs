@@ -18,10 +18,10 @@
 
         [Required]
         [Comment("The current Tennis Match Identifier")]
-        public int TennisMatchId { get; set; }
+        public int MatchId { get; set; }
 
-        [ForeignKey(nameof(TennisMatchId))]
+        [ForeignKey(nameof(MatchId))]
         [Comment("The current Tennis Match")]
-        public Match TennisMatch { get; set; } = null!;
+        public Match Match { get; set; } = null!;
     }
 }

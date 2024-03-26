@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MatchPointMasters.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(MatchPointMastersDbContext))]
     [Migration("20240322175135_InitialMigration")]
     partial class InitialMigration
     {

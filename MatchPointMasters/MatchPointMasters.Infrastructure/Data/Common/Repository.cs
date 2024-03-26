@@ -6,7 +6,7 @@ namespace MatchPointMasters.Infrastructure.Data.Common
     {
         private readonly DbContext context;
 
-        public Repository(ApplicationDbContext _context)
+        public Repository(MatchPointMastersDbContext _context)
         {
             context = _context;
         }
