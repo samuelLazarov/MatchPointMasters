@@ -1,5 +1,4 @@
-﻿
-namespace MatchPointMasters.Infrastructure.Data.Models.Mappings
+﻿namespace MatchPointMasters.Infrastructure.Data.Models.Mappings
 {
     using MatchPointMasters.Infrastructure.Data.Models.Match;
     using MatchPointMasters.Infrastructure.Data.Models.Player;
@@ -23,6 +22,6 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Mappings
 
         [ForeignKey(nameof(TennisMatchId))]
         [Comment("The current Tennis Match")]
-        public TennisMatch TennisMatch { get; set; } = null!;
+        public Match TennisMatch { get; set; } = null!;
     }
 }

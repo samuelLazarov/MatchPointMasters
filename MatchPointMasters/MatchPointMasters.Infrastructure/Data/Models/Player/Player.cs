@@ -45,15 +45,17 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Player
 
         public PlayingStyle? PlayingStyle { get; set; }
 
+        public TennisRacket? TennisRacket { get; set; }
+
         public int Wins { get; set; }
 
         public int Losses { get; set; }
 
         public int TournamentWins { get; set; }
 
-        public string ImageUrl { get; set; } = string.Empty;
+        public string AvatarImageUrl { get; set; } = string.Empty;
 
-        public ICollection<Tournament> Tournaments { get; set; } = new HashSet<Tournament>();
+        public ICollection<Tournament> Tournaments { get; set; } = new List<Tournament>();
 
 
     }

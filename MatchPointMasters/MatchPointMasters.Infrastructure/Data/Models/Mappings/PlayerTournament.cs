@@ -1,6 +1,5 @@
 ﻿namespace MatchPointMasters.Infrastructure.Data.Models.Mappings
 {
-
     using MatchPointMasters.Infrastructure.Data.Models.Player;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
     using Microsoft.EntityFrameworkCore;

@@ -2,8 +2,9 @@
 {
     public enum TennisBalls
     {
-        HeadTour,
-        WilsonTour,
-        DunlopAllCourt,
+        HeadTourXT,
+        WilsonTourPremier,
+        DunlopFortAllCourt,
+        BabolatTeamAllCourt
     }
 }
