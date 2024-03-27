@@ -9,7 +9,6 @@
         public int Id { get; set; }
 
         [Required]
-        [Range(0, 7)]
         [Comment("Player One points")]
         public int PlayerOnePoints { get; set; }
 

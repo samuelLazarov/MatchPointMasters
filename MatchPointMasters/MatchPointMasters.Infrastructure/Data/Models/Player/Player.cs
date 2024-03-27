@@ -7,6 +7,7 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Player
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations.Schema;
+    using static MatchPointMasters.Infrastructure.Constants.DataConstants.PlayerConstants;
 
     public class Player
     {
@@ -15,14 +16,17 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Player
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(PlayerNameMaxLength)]
         [Comment("The current Player's First Name")]
         public string FirstName { get; set; } = string.Empty;
 
         [Required]
+        [MaxLength(PlayerNameMaxLength)]
         [Comment("The current Player's Last Name")]
         public string LastName { get; set; } = string.Empty;
 
         [Required]
+        [MaxLength(PlayerPhoneMaxLength)]
         [Comment("Player's phone")]
         public string PhoneNumber { get; set; } = string.Empty;
 
@@ -39,21 +43,30 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Player
         [Required]
         public Gender Gender { get; set; }
 
+        [Comment("Player's dominant hand")]
         public DominantHand? DominantHand { get; set; }
 
+        [Comment("Player's backhand style")]
         public Backhand? Backhand { get; set; }
 
+        [Comment("Player's style of play")]
         public PlayingStyle? PlayingStyle { get; set; }
 
+        [Comment("Player's racket brand")]
         public TennisRacket? TennisRacket { get; set; }
 
+        [Comment("Player's wins counter")]
         public int Wins { get; set; }
 
+        [Comment("Player's losses counter")]
         public int Losses { get; set; }
 
-        public int TournamentWins { get; set; }
+        [Comment("Player's Tournament wins counter")]
+        public int? TournamentWins { get; set; }
 
-        public string AvatarImageUrl { get; set; } = string.Empty;
+        [Required]
+        [MaxLength(PlayerImageUrlMaxLength)]
+        public string ImageUrl { get; set; } = string.Empty;
 
         public ICollection<Tournament> Tournaments { get; set; } = new List<Tournament>();
 

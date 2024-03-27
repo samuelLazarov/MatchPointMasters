@@ -7,24 +7,23 @@
     public class Game
     {
         [Key]
-        [Comment("The current game identifier")]
+        [Comment("The current Game's identifier")]
         public int Id { get; set; }
 
         [Required]
-        [Range(0, 13)]
-        [Comment("The current game's number")]
+        [Comment("The current Game's number")]
         public int GameNumber { get; set; }
 
-        public TennisPoint PlayerOneCurrentPoint { get; set; }
+        public TennisPoint PlayerOneCurrentPoint { get; set; } = TennisPoint.Love;
 
-        public TennisPoint PlayerTwoCurrentPoint { get; set; }
+        public TennisPoint PlayerTwoCurrentPoint { get; set; } = TennisPoint.Love;
 
         [Required]
-        [Comment("When Player One wins the game")]
+        [Comment("When Player One wins the current game")]
         public bool PlayerOneWon { get; set; }
 
         [Required]
-        [Comment("When Player Two wins the game")]
+        [Comment("When Player Two wins the current game")]
         public bool PlayerTwoWon { get; set; }
 
         [Required]

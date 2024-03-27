@@ -27,20 +27,20 @@
         public MatchRound MatchRound { get; set; }
 
         [Required]
-        [Comment("The current First Player's Identifier")]
-        public int FirstPlayerId { get; set; }
+        [Comment("The current Player One's Identifier")]
+        public int PlayerOneId { get; set; }
 
-        [ForeignKey(nameof(FirstPlayerId))]
-        [Comment("The current First Player")]
-        public Player FirstPlayer { get; set; }= null!;
+        [ForeignKey(nameof(PlayerOneId))]
+        [Comment("The current Player One")]
+        public Player PlayerOne { get; set; }= null!;
 
         [Required]
-        [Comment("The current First Player's Identifier")]
-        public int SecondPlayerId { get; set; }
+        [Comment("The current Player Two's Identifier")]
+        public int PlayerTwoId { get; set; }
 
-        [ForeignKey(nameof(SecondPlayerId))]
-        [Comment("The current Second Player")]
-        public Player SecondPlayer { get; set; } = null!;
+        [ForeignKey(nameof(PlayerTwoId))]
+        [Comment("The current Player Two")]
+        public Player PlayerTwo { get; set; } = null!;
 
         [Required]
         [Comment("The current Match Score's Identifier")]
@@ -52,8 +52,7 @@
         
         public ICollection<PlayerMatch> PlayerMatches { get; set; } = new List<PlayerMatch>();
 
-        //public ICollection<int> FirstPlayerGamesWon { get; set; } = new List<int>();
-        //public ICollection<int> SecondPlayerGamesWon { get; set; } = new List<int>();
+        
 
     }
 }
