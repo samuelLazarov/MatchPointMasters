@@ -98,7 +98,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
             Player1User = new IdentityUser()
             {
-                Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                Id = "dea12856-c198-4129-b3f3-b893d83950p1",
                 UserName = "Samuel_Lazarov",
                 NormalizedUserName = "samuel_lazarov",
                 Email = "player1@gmail.com",
@@ -109,7 +109,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
             Player2User = new IdentityUser()
             {
-                Id = "dea12856-c198-4129-b3f3-b893d8395083",
+                Id = "dea12856-c198-4129-b3f3-b893d83950p2",
                 UserName = "Sarkis_Haralampiev",
                 NormalizedUserName = "sarkis_haralampiev",
                 Email = "player2@gmail.com",
@@ -120,7 +120,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
             Player3User = new IdentityUser()
             {
-                Id = "f98e572e-f64b-40f5-a37f-783d2d1ff06c",
+                Id = "f98e572e-f64b-40f5-a37f-783d2d1ff0p3",
                 UserName = "Ivan_Pritargov",
                 NormalizedUserName = "ivan_pritargov",
                 Email = "player3@gmail.com",
@@ -131,9 +131,9 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
             Player4User = new IdentityUser()
             {
-                Id = "4a08e50c-9f8d-4ac7-bbc1-05a7f0f14602",
-                UserName = "Danail_Kurian",
-                NormalizedUserName = "danail_kurian",
+                Id = "4a08e50c-9f8d-4ac7-bbc1-05a7f0f146p4",
+                UserName = "Daniil_Kurian",
+                NormalizedUserName = "daniil_kurian",
                 Email = "player4@gmail.com",
                 NormalizedEmail = "player4@gmail.com"
             };
@@ -142,7 +142,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
             Player5User = new IdentityUser()
             {
-                Id = "adb4186a-f51d-4969-aa0f-938a5241284c",
+                Id = "adb4186a-f51d-4969-aa0f-938a524128p5",
                 UserName = "Rado_Vladimirov",
                 NormalizedUserName = "rado_vladimirov",
                 Email = "player5@gmail.com",
@@ -153,7 +153,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
             Player6User = new IdentityUser()
             {
-                Id = "4319f732-1f7d-44e3-8b4b-7d698f7c445a",
+                Id = "4319f732-1f7d-44e3-8b4b-7d698f7c44p6",
                 UserName = "Dimitar_Berdankov",
                 NormalizedUserName = "dimitar_berdankov",
                 Email = "player6@gmail.com",
@@ -164,7 +164,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
             Player7User = new IdentityUser()
             {
-                Id = "9b9265e6-61b2-4b6f-af23-1e1af744b1a7",
+                Id = "9b9265e6-61b2-4b6f-af23-1e1af744b1p7",
                 UserName = "Dimitar_Randev",
                 NormalizedUserName = "dimitar_randev",
                 Email = "player7@gmail.com",
@@ -175,7 +175,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
             Player8User = new IdentityUser()
             {
-                Id = "c45b149d-4c95-4742-b848-739af7b0bf3e",
+                Id = "c45b149d-4c95-4742-b848-739af7b0bfp8",
                 UserName = "Rosen_Markov",
                 NormalizedUserName = "rosen_markov",
                 Email = "player8@gmail.com",
@@ -184,9 +184,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
             Player8User.PasswordHash = hasher.HashPassword(Player8User, "player8pass");
 
-
         }
-
 
         private void SeedClubs()
         {
@@ -280,7 +278,165 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
         private void SeedPlayers()
         {
+            Player1 = new Player()
+            {
+                Id = 1,
+                FirstName = "Samuel",
+                LastName = "Lazarov",
+                PhoneNumber = "0898836929",
+                UserId = "dea12856-c198-4129-b3f3-b893d83950p1",
+                BirthDate = DateTime.ParseExact("29/08/1989", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                Gender = Enums.Player.Gender.Male,
+                DominantHand = Enums.Player.DominantHand.Right,
+                Backhand = Enums.Player.Backhand.OneHanded,
+                PlayingStyle = Enums.Player.PlayingStyle.Combined,
+                TennisRacket = Enums.Player.TennisRacket.Wilson,
+                Wins = 10,
+                Losses = 3,
+                TournamentWins = 0,
+                ImageUrl = "https://division.albatros-tennis.com/products/202.jpg"
 
+            };
+
+            Player2 = new Player()
+            {
+                Id = 2,
+                FirstName = "Sarkis",
+                LastName = "Haralampiev",
+                PhoneNumber = "0888121314",
+                UserId = "dea12856-c198-4129-b3f3-b893d83950p2",
+                BirthDate = DateTime.ParseExact("24/10/1992", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                Gender = Enums.Player.Gender.Male,
+                DominantHand = Enums.Player.DominantHand.Right,
+                Backhand = Enums.Player.Backhand.TwoHanded,
+                PlayingStyle = Enums.Player.PlayingStyle.Combined,
+                TennisRacket = Enums.Player.TennisRacket.Yonex,
+                Wins = 12,
+                Losses = 2,
+                TournamentWins = 0,
+                ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
+
+            };
+
+            Player3 = new Player()
+            {
+                Id = 3,
+                FirstName = "Ivan",
+                LastName = "Pritargov",
+                PhoneNumber = "0884989898",
+                UserId = "f98e572e-f64b-40f5-a37f-783d2d1ff0p3",
+                BirthDate = DateTime.ParseExact("24/10/1984", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                Gender = Enums.Player.Gender.Male,
+                DominantHand = Enums.Player.DominantHand.Right,
+                Backhand = Enums.Player.Backhand.TwoHanded,
+                PlayingStyle = Enums.Player.PlayingStyle.Aggressive,
+                TennisRacket = Enums.Player.TennisRacket.Yonex,
+                Wins = 75,
+                Losses = 2,
+                TournamentWins = 6,
+                ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
+
+            };
+
+            Player4 = new Player()
+            {
+                Id = 4,
+                FirstName = "Daniil",
+                LastName = "Kurian",
+                PhoneNumber = "0888777666",
+                UserId = "4a08e50c-9f8d-4ac7-bbc1-05a7f0f146p4",
+                BirthDate = DateTime.ParseExact("13/10/1988", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                Gender = Enums.Player.Gender.Male,
+                DominantHand = Enums.Player.DominantHand.Right,
+                Backhand = Enums.Player.Backhand.TwoHanded,
+                PlayingStyle = Enums.Player.PlayingStyle.Defensive,
+                TennisRacket = Enums.Player.TennisRacket.Wilson,
+                Wins = 18,
+                Losses = 5,
+                TournamentWins = 1,
+                ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
+
+            };
+
+            Player5 = new Player()
+            {
+                Id = 5,
+                FirstName = "Rado",
+                LastName = "Vladimirov",
+                PhoneNumber = "0888777666",
+                UserId = "adb4186a-f51d-4969-aa0f-938a524128p5",
+                BirthDate = DateTime.ParseExact("18/05/1990", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                Gender = Enums.Player.Gender.Male,
+                DominantHand = Enums.Player.DominantHand.Right,
+                Backhand = Enums.Player.Backhand.OneHanded,
+                PlayingStyle = Enums.Player.PlayingStyle.Combined,
+                TennisRacket = Enums.Player.TennisRacket.Head,
+                Wins = 69,
+                Losses = 3,
+                TournamentWins = 4,
+                ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
+
+            };
+
+            Player6 = new Player()
+            {
+                Id = 6,
+                FirstName = "Dimitar",
+                LastName = "Berdankov",
+                PhoneNumber = "0877111333",
+                UserId = "4319f732-1f7d-44e3-8b4b-7d698f7c44p6",
+                BirthDate = DateTime.ParseExact("27/02/2006", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                Gender = Enums.Player.Gender.Male,
+                DominantHand = Enums.Player.DominantHand.Right,
+                Backhand = Enums.Player.Backhand.TwoHanded,
+                PlayingStyle = Enums.Player.PlayingStyle.Aggressive,
+                TennisRacket = Enums.Player.TennisRacket.Wilson,
+                Wins = 14,
+                Losses = 5,
+                TournamentWins = 0,
+                ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
+
+            };
+
+            Player7 = new Player()
+            {
+                Id = 7,
+                FirstName = "Dimitar",
+                LastName = "Randev",
+                PhoneNumber = "0888777666",
+                UserId = "9b9265e6-61b2-4b6f-af23-1e1af744b1p7",
+                BirthDate = DateTime.ParseExact("14/11/1974", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                Gender = Enums.Player.Gender.Male,
+                DominantHand = Enums.Player.DominantHand.Right,
+                Backhand = Enums.Player.Backhand.OneHanded,
+                PlayingStyle = Enums.Player.PlayingStyle.Defensive,
+                TennisRacket = Enums.Player.TennisRacket.Head,
+                Wins = 45,
+                Losses = 23,
+                TournamentWins = 2,
+                ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
+
+            };
+
+            Player8 = new Player()
+            {
+                Id = 8,
+                FirstName = "Rosen",
+                LastName = "Markov",
+                PhoneNumber = "0892555333",
+                UserId = "c45b149d-4c95-4742-b848-739af7b0bfp8",
+                BirthDate = DateTime.ParseExact("25/07/1992", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
+                Gender = Enums.Player.Gender.Male,
+                DominantHand = Enums.Player.DominantHand.Left,
+                Backhand = Enums.Player.Backhand.TwoHanded,
+                PlayingStyle = Enums.Player.PlayingStyle.Aggressive,
+                TennisRacket = Enums.Player.TennisRacket.Yonex,
+                Wins = 22,
+                Losses = 13,
+                TournamentWins = 0,
+                ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
+
+            };
 
 
         }
@@ -289,16 +445,86 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
         private void SeedMatches()
         {
+            MatchP1P2 = new Match()
+            {
+                Id = 1,
+                TournamentId = 1,
+                MatchRound = Enums.Match.MatchRound.Quarterfinals,
+                PlayerOneId = 1,
+                PlayerTwoId = 2,
+                MatchScoreId = 1
+            };
 
+            MatchP3P4 = new Match()
+            {
+                Id = 2,
+                TournamentId = 1,
+                MatchRound = Enums.Match.MatchRound.Quarterfinals,
+                PlayerOneId = 3,
+                PlayerTwoId = 4,
+                MatchScoreId = 2
+            };
 
+            MatchP5P6 = new Match() 
+            {
+                Id = 3,
+                TournamentId = 1,
+                MatchRound = Enums.Match.MatchRound.Quarterfinals,
+                PlayerOneId = 5,
+                PlayerTwoId = 6,
+                MatchScoreId = 3
+            };
 
+            MatchP7P8 = new Match()
+            {
+                Id = 4,
+                TournamentId = 1,
+                MatchRound = Enums.Match.MatchRound.Quarterfinals,
+                PlayerOneId = 7,
+                PlayerTwoId = 8,
+                MatchScoreId = 4
+            };
         }
 
 
 
         private void SeedMatchScores()
         {
-            
+            MatchScoreP1P2 = new MatchScore()
+            {
+                Id = 1,
+                PlayerOneWon = false,
+                PlayerTwoWon = true,
+                MatchId = 1,
+                PlayerOneSetsWon = new List<Set>() 
+                {
+                    new Set()
+                    {
+                        Id = 1,
+                        PlayerOneWon = false,
+                        PlayerTwoWon = true,
+                        IsTiebreak = true,
+                        MatchScoreId= 1,
+
+                    }
+                },
+
+            };
+
+            MatchScoreP3P4 = new MatchScore()
+            {
+
+            };
+
+            MatchScoreP5P6 = new MatchScore()
+            {
+
+            };
+
+            MatchScoreP7P8 = new MatchScore()
+            {
+
+            };
 
 
         }

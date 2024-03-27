@@ -50,6 +50,9 @@
             public const int PlayerPhoneMinLength = 7;
             public const int PlayerPhoneMaxLength = 15;
 
+            //Birthdate
+            public const string DateTimeBirthdayFormat = "dd/MM/yyyy";
+
             //ImageUrl
             public const int PlayerImageUrlMinLength = 5;
             public const int PlayerImageUrlMaxLength = 500;
