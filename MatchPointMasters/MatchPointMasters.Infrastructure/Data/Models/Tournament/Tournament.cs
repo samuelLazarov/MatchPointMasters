@@ -57,12 +57,8 @@
         [Required]
         public TennisBalls TournamentBalls { get; set; }
 
-        //public ICollection<Player> Players { get; set; } = new HashSet<Player>();
-
-        //public ICollection<Match> Matches { get; set; } = new HashSet<Match>();
-
-        public ICollection<PlayerMatch> PlayerMatches { get; set; } = new List<PlayerMatch>();  
-
         public ICollection<TournamentMatch> TournamentMatches { get; set; } = new List<TournamentMatch>();
+
+        public ICollection<PlayerTournament> PlayerTournaments { get; set; } = new List<PlayerTournament>();
     }
 }

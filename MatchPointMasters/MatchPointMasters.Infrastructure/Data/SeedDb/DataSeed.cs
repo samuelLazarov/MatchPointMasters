@@ -629,6 +629,47 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             };
         }
 
+        //private void SeedMatches()
+        //{
+        //    MatchP1P2 = new Match()
+        //    {
+        //        Id = 1,
+        //        TournamentId = 1,
+        //        MatchRound = Enums.Match.MatchRound.Semifinals,
+        //        PlayerOneId = 1,
+        //        PlayerTwoId = 2,
+        //        PlayerOneSetsWon = 1,
+        //        PlayerTwoSetsWon = 2,
+        //        Winner = Enums.Match.Winner.PlayerTwo
+        //    };
+
+        //    modelBuilder.Entity<Match>().HasData(MatchP1P2);
+
+        //    var set1 = new Set()
+        //    {
+        //        Id = 1,
+        //        PlayerOneGamesWon = 6,
+        //        PlayerTwoGamesWon = 4,
+        //        HasTiebreak = false,
+        //        TiebreakId = null,
+        //        Tiebreak = null,
+        //        MatchId = 1
+        //    };
+
+        //    var set2 = new Set()
+        //    {
+        //        Id = 2,
+        //        PlayerOneGamesWon = 5,
+        //        PlayerTwoGamesWon = 7,
+        //        HasTiebreak = false,
+        //        TiebreakId = null,
+        //        Tiebreak = null,
+        //        MatchId = 1
+        //    };
+
+        //    modelBuilder.Entity<Set>().HasData(set1, set2);
+        //}
+
 
         private void SeedArticles()
         {
