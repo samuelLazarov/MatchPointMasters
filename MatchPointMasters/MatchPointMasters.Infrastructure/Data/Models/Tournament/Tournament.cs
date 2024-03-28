@@ -5,9 +5,10 @@
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
     using MatchPointMasters.Infrastructure.Data.Enums.Tournament;
-    using static MatchPointMasters.Infrastructure.Constants.DataConstants.TournamentConstants;
     using System.ComponentModel.DataAnnotations.Schema;
     using MatchPointMasters.Infrastructure.Data.Models.Roles;
+    using MatchPointMasters.Infrastructure.Data.Models.Mappings;
+    using static MatchPointMasters.Infrastructure.Constants.DataConstants.TournamentConstants;
 
     public class Tournament
     {
@@ -51,13 +52,17 @@
 
         [Required]
         [Comment("Tournament fee")]
-        [Column(TypeName = "decimal(18,2)")]
         public decimal Fee { get; set; }
 
+        [Required]
         public TennisBalls TournamentBalls { get; set; }
 
-        public ICollection<Player> Players { get; set; } = new HashSet<Player>();
+        //public ICollection<Player> Players { get; set; } = new HashSet<Player>();
 
-        public ICollection<Match> Matches { get; set; } = new HashSet<Match>();
+        //public ICollection<Match> Matches { get; set; } = new HashSet<Match>();
+
+        public ICollection<PlayerMatch> PlayerMatches { get; set; } = new List<PlayerMatch>();  
+
+        public ICollection<TournamentMatch> TournamentMatches { get; set; } = new List<TournamentMatch>();
     }
 }

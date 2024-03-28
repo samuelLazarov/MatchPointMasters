@@ -15,7 +15,7 @@
 
         [Required]
         [Comment("The current author's identifier")]
-        public int HostUserId { get; set; }
+        public string HostUserId { get; set; }
 
         [ForeignKey(nameof(HostUserId))]
         [Comment("The current article's author")]

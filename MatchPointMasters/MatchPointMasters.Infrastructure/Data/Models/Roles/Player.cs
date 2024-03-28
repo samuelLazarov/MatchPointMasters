@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MatchPointMasters.Infrastructure.Data.Models.Player
 {
+    using MatchPointMasters.Infrastructure.Data.Models.Mappings;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -67,6 +68,8 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Player
         [Required]
         [MaxLength(PlayerImageUrlMaxLength)]
         public string ImageUrl { get; set; } = string.Empty;
+
+        public ICollection<PlayerMatch> PlayerMatches { get; set; } = new List<PlayerMatch>();
 
         public ICollection<Tournament> Tournaments { get; set; } = new List<Tournament>();
 

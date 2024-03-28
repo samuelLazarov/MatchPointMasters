@@ -12,6 +12,14 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Match
         public int Id { get; set; }
 
         [Required]
+        [Comment("Current Match Identifier")]
+        public int MatchId { get; set; }
+
+        [ForeignKey(nameof(MatchId))]
+        [Comment("Current Match")]
+        public Match Match { get; set; } = null!;
+
+        [Required]
         [Comment("Indicates number of games won by Player One in the current set")]
         public int PlayerOneGamesWon { get; set; }
 
@@ -21,15 +29,16 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Match
 
         [Required]
         [Comment("Indicates if current set is decided by tiebreak")]
-        public bool IsTiebreak { get; set; } = false;
+        public bool HasTiebreak { get; set; } = false;
 
-        [Required]
         [Comment("The curent Tiebreak's Identifier")]
         public int? TiebreakId { get; set; }
 
         [ForeignKey(nameof(TiebreakId))]
-        public Tiebreak Tiebreak { get; set; } = null!;
+        public Tiebreak? Tiebreak { get; set; }
 
         
+
+
     }
 }

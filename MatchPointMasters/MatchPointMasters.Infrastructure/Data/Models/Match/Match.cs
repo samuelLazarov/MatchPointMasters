@@ -57,6 +57,8 @@
 
         public ICollection<PlayerMatch> PlayerMatches { get; set; } = new List<PlayerMatch>();
 
+        public ICollection<TournamentMatch> TournamentMatches { get; set;} = new List<TournamentMatch>();
+
         
 
     }

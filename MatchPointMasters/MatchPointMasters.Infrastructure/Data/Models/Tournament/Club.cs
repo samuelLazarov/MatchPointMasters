@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.ClubConstants;
     
-    [Comment("Tennis club to host a tournament")]
+    [Comment("Tennis club hosting a tournament")]
     public class Club
     {
         [Key]
@@ -32,6 +32,7 @@
         [Comment("Tennis club's image url")]
         public string ImageUrl { get; set; } = string.Empty;
 
+        [Required]
         public CourtSurface CourtSurface { get; set; }
 
         
