@@ -7,7 +7,18 @@
     {
         public void Configure(EntityTypeBuilder<Player> builder)
         {
-            throw new NotImplementedException();
+            var data = new DataSeed();
+            builder.HasData(new Player[] 
+            {
+                data.Player1,
+                data.Player2,
+                data.Player3,
+                data.Player4,
+                data.Player5,
+                data.Player6,
+                data.Player7,
+                data.Player8,
+            });
         }
     }
 }

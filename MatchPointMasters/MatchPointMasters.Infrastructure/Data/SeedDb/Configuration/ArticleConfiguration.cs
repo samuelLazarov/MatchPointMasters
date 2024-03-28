@@ -1,5 +1,4 @@
-﻿
-namespace MatchPointMasters.Infrastructure.Data.SeedDb.Configuration
+﻿namespace MatchPointMasters.Infrastructure.Data.SeedDb.Configuration
 {
     using MatchPointMasters.Infrastructure.Data.Models.Article;
     using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,12 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb.Configuration
         {
             var data = new DataSeed();
 
-            builder.HasData(new Article[] { data.ZashoTournament2024, data.FedererRetires2024, data.GrigorNewTitleBrisbane });
+            builder.HasData(new Article[] 
+            { 
+                data.ArticleZashoOpen2024, 
+                data.ArticleVSSportOpen2024, 
+                data.ArticleLeaderOpen2024 
+            });
         }
     }
 }

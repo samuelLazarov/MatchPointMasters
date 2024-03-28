@@ -1,13 +1,25 @@
 ﻿namespace MatchPointMasters.Infrastructure.Data.Models.Article
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.ArticleConstants;
+
+    [Comment("Articles can be created by Tournament Hosts and commented by Players")]
     public class Article
     {
         [Key]
         [Comment("The current Article's Identifier")]
         public int Id { get; set; }
+
+        [Required]
+        [Comment("The current author's identifier")]
+        public int HostUserId { get; set; }
+
+        [ForeignKey(nameof(HostUserId))]
+        [Comment("The current article's author")]
+        public IdentityUser HostUser { get; set; } = null!;
 
         [Required]
         [MaxLength(ArticleContentMaxLength)]

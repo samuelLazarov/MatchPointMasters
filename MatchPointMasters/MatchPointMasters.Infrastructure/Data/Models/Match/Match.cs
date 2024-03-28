@@ -8,6 +8,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    [Comment("Tennis match between two players in a tournament")]
     public class Match
     {
         [Key]
@@ -43,13 +44,17 @@
         public Player PlayerTwo { get; set; } = null!;
 
         [Required]
-        [Comment("The current Match Score's Identifier")]
-        public int MatchScoreId { get; set; }
+        public int PlayerOneSetsWon { get; set; } = 0;
 
-        [ForeignKey(nameof(MatchScoreId))]
-        [Comment("The current Match Score")]
-        public MatchScore MatchScore { get; set; } = null!;
-        
+        [Required]
+        public int PlayerTwoSetsWon { get; set; } = 0;
+
+        [Required]
+        [Comment("Indicates who wins the match")]
+        public Winner Winner { get; set; }
+
+        public ICollection<Set> Sets { get; set; } = new List<Set>();
+
         public ICollection<PlayerMatch> PlayerMatches { get; set; } = new List<PlayerMatch>();
 
         

@@ -70,6 +70,5 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Player
 
         public ICollection<Tournament> Tournaments { get; set; } = new List<Tournament>();
 
-
     }
 }

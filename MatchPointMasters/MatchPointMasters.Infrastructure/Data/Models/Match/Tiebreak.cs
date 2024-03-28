@@ -3,6 +3,8 @@
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+
+    [Comment("If a set must be decided by tiebreak")]
     public class Tiebreak
     {
         [Key]
@@ -10,17 +12,15 @@
 
         [Required]
         [Comment("Player One points")]
-        public int PlayerOnePoints { get; set; }
+        public int PlayerOnePoints { get; set; } = 0;
 
         [Required]
-        [Range(0, 7)]
         [Comment("Player Two points")]
-        public int PlayerTwoPoints { get; set; }
+        public int PlayerTwoPoints { get; set; } = 0;
 
         [Required]
         [Comment("Current Set Identifier")]
         public int SetId { get; set; }
-
 
         [ForeignKey(nameof(SetId))]
         [Comment("Current Set")]

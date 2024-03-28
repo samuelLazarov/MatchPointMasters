@@ -5,11 +5,11 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
     using MatchPointMasters.Infrastructure.Data.Models.Article;
     using MatchPointMasters.Infrastructure.Data.Models.Match;
     using MatchPointMasters.Infrastructure.Data.Models.Player;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
     using Microsoft.AspNetCore.Identity;
     using System.Globalization;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.ArticleConstants;
-    using static MatchPointMasters.Infrastructure.Constants.DataConstants.ClubConstants;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.PlayerConstants;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.TournamentConstants;
 
@@ -22,12 +22,11 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
         {
             SeedUsers();
             SeedClubs();
-            SeedTournament();
+            SeedTournaments();
+            SeedTournamentHosts();
             SeedPlayers();
             SeedMatches();
-            SeedMatchScores();
             SeedArticles();
-
         }
 
         //Users
@@ -52,6 +51,9 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
         public Tournament VSSportOpen { get; set; } = null!;
         public Tournament LeaderOpen { get; set; } = null!;
 
+        //Tournament host
+        public TournamentHost TournamentHost { get; set; } = null!;
+
         //Tennis players
         public Player Player1 { get; set; } = null!;
         public Player Player2 { get; set; } = null!;
@@ -67,12 +69,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
         public Match MatchP3P4 { get; set; } = null!;
         public Match MatchP5P6 { get; set; } = null!;
         public Match MatchP7P8 { get; set; } = null!;
-
-        //MatchScores
-        public MatchScore MatchScoreP1P2 { get; set; } = null!;
-        public MatchScore MatchScoreP3P4 { get; set; } = null!;
-        public MatchScore MatchScoreP5P6 { get; set; } = null!;
-        public MatchScore MatchScoreP7P8 { get; set; } = null!;
 
 
         //Articles
@@ -195,20 +191,18 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 Address = "гр. Бургас, ул. \"Ремсова\" 9",
                 PhoneNumber = "087 957 8998",
                 ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrwrXYCDoRqOa8d0Gbp0sXwcdsnEaP7UMMLRLbktc5sw&s",
-                CourtSurface = CourtSurface.Clay,
-                UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
+                CourtSurface = CourtSurface.Clay
             };
 
 
             TkLokoPlovdiv = new Club()
             {
-                Id =2,
+                Id = 2,
                 Name = "Тенис клуб \"Локомотив\" - Пловдив",
                 Address = "гр. Пловдив, ул. „Ясна поляна“ 4 ( Стадион Пловдив )",
                 PhoneNumber = "0887 500 577",
                 ImageUrl = "https://clickandplay.bg/f/clubs/o/0/c9d5f8339205cc200c539915e90abc06.jpeg",
                 CourtSurface = CourtSurface.Clay,
-                UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
             };
 
             TkAvenue = new Club()
@@ -219,7 +213,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 PhoneNumber = "+359 88 714 1111",
                 ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMNT5XsqUtV2SbtWba-CRF3FdCytyOy7Nc6xDd-WZNBA&s",
                 CourtSurface = CourtSurface.Hard,
-                UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
             };
 
             TkVelto = new Club()
@@ -230,11 +223,10 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 PhoneNumber = "052 711 457",
                 ImageUrl = "https://tennis.bg/uploaded/courts/26/25e4c446e9e415930c4b3b094efffcf5.jpg",
                 CourtSurface = CourtSurface.Grass,
-                UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
             };
         }
 
-        private void SeedTournament()
+        private void SeedTournaments()
         {
             ZashoOpen = new Tournament()
             {
@@ -244,8 +236,9 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 StartDate = DateTime.ParseExact("27/04/2024 09:00", DateTimeTournamentFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                 EndDate = DateTime.ParseExact("28/04/2024 18:00", DateTimeTournamentFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                 HostClubId = 2,
+                TournamentHostId = 1,
                 Fee = 30.00m,
-                TournamentBalls = TennisBalls.DunlopFortAllCourt
+                TournamentBalls = TennisBalls.HeadTourXT
             };
 
             VSSportOpen = new Tournament()
@@ -256,8 +249,9 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 StartDate = DateTime.ParseExact("12/05/2024 08:30", DateTimeTournamentFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                 EndDate = DateTime.ParseExact("14/05/2024 20:00", DateTimeTournamentFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                 HostClubId = 1,
+                TournamentHostId = 1,
                 Fee = 50.00m,
-                TournamentBalls = TennisBalls.DunlopFortAllCourt
+                TournamentBalls = TennisBalls.WilsonTourPremier
             };
 
             LeaderOpen = new Tournament()
@@ -268,13 +262,22 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 StartDate = DateTime.ParseExact("21/09/2024 09:00", DateTimeTournamentFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                 EndDate = DateTime.ParseExact("22/09/2024 20:00", DateTimeTournamentFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                 HostClubId = 3,
+                TournamentHostId = 1,
                 Fee = 40.00m,
                 TournamentBalls = TennisBalls.DunlopFortAllCourt
             };
 
-
         }
 
+        private void SeedTournamentHosts()
+        {
+            TournamentHost = new TournamentHost()
+            {
+                Id = 1,
+                PhoneNumber = "0888111222",
+                UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
+            };
+        }
 
         private void SeedPlayers()
         {
@@ -310,7 +313,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 DominantHand = Enums.Player.DominantHand.Right,
                 Backhand = Enums.Player.Backhand.TwoHanded,
                 PlayingStyle = Enums.Player.PlayingStyle.Combined,
-                TennisRacket = Enums.Player.TennisRacket.Yonex,
+                TennisRacket = Enums.Player.TennisRacket.Babolat,
                 Wins = 12,
                 Losses = 2,
                 TournamentWins = 0,
@@ -332,7 +335,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 PlayingStyle = Enums.Player.PlayingStyle.Aggressive,
                 TennisRacket = Enums.Player.TennisRacket.Yonex,
                 Wins = 75,
-                Losses = 2,
+                Losses = 6,
                 TournamentWins = 6,
                 ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
 
@@ -351,8 +354,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 Backhand = Enums.Player.Backhand.TwoHanded,
                 PlayingStyle = Enums.Player.PlayingStyle.Defensive,
                 TennisRacket = Enums.Player.TennisRacket.Wilson,
-                Wins = 18,
-                Losses = 5,
+                Wins = 28,
+                Losses = 10,
                 TournamentWins = 1,
                 ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
 
@@ -411,8 +414,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 Backhand = Enums.Player.Backhand.OneHanded,
                 PlayingStyle = Enums.Player.PlayingStyle.Defensive,
                 TennisRacket = Enums.Player.TennisRacket.Head,
-                Wins = 45,
-                Losses = 23,
+                Wins = 75,
+                Losses = 43,
                 TournamentWins = 2,
                 ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
 
@@ -437,11 +440,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
 
             };
-
-
         }
-
-
 
         private void SeedMatches()
         {
@@ -449,87 +448,162 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             {
                 Id = 1,
                 TournamentId = 1,
-                MatchRound = Enums.Match.MatchRound.Quarterfinals,
+                MatchRound = Enums.Match.MatchRound.Semifinals,
                 PlayerOneId = 1,
                 PlayerTwoId = 2,
-                MatchScoreId = 1
+                PlayerOneSetsWon = 1,
+                PlayerTwoSetsWon = 2,
+                Winner = Enums.Match.Winner.PlayerTwo,
+                Sets = new List<Set>()
+                {
+                    new Set()
+                    {
+                        Id = 1,
+                        PlayerOneGamesWon = 6,
+                        PlayerTwoGamesWon = 4,
+                        IsTiebreak = false,
+                        TiebreakId = null
+                    },
+                    new Set()
+                    {
+                        Id = 2,
+                        PlayerOneGamesWon = 5,
+                        PlayerTwoGamesWon = 7,
+                        IsTiebreak = false,
+                        TiebreakId = null
+                    },
+                    new Set()
+                    {
+                        Id = 3,
+                        PlayerOneGamesWon = 6,
+                        PlayerTwoGamesWon = 7,
+                        IsTiebreak = true,
+                        Tiebreak = new Tiebreak()
+                        {
+                            Id= 1,
+                            PlayerOnePoints = 6,
+                            PlayerTwoPoints = 8,
+                            SetId = 1
+                        }
+                    }
+                }
             };
 
             MatchP3P4 = new Match()
             {
                 Id = 2,
-                TournamentId = 1,
-                MatchRound = Enums.Match.MatchRound.Quarterfinals,
+                TournamentId = 2,
+                MatchRound = Enums.Match.MatchRound.Final,
                 PlayerOneId = 3,
                 PlayerTwoId = 4,
-                MatchScoreId = 2
+                PlayerOneSetsWon = 2,
+                PlayerTwoSetsWon = 0,
+                Winner = Enums.Match.Winner.PlayerOne,
+                Sets = new List<Set>()
+                {
+                    new Set()
+                    {
+                        Id = 4,
+                        PlayerOneGamesWon = 6,
+                        PlayerTwoGamesWon = 3,
+                        IsTiebreak = false,
+                        TiebreakId = null
+                    },
+                    new Set()
+                    {
+                        Id = 5,
+                        PlayerOneGamesWon = 6,
+                        PlayerTwoGamesWon = 4,
+                        IsTiebreak = false,
+                        TiebreakId = null
+                    }
+                }
             };
 
-            MatchP5P6 = new Match() 
+            MatchP5P6 = new Match()
             {
                 Id = 3,
-                TournamentId = 1,
+                TournamentId = 3,
                 MatchRound = Enums.Match.MatchRound.Quarterfinals,
                 PlayerOneId = 5,
                 PlayerTwoId = 6,
-                MatchScoreId = 3
+                PlayerOneSetsWon = 0,
+                PlayerTwoSetsWon = 2,
+                Winner = Enums.Match.Winner.PlayerTwo,
+                Sets = new List<Set>()
+                {
+                    new Set()
+                    {
+                        Id = 6,
+                        PlayerOneGamesWon = 1,
+                        PlayerTwoGamesWon = 6,
+                        IsTiebreak = false,
+                        TiebreakId = null
+                    },
+                    new Set()
+                    {
+                        Id = 7,
+                        PlayerOneGamesWon = 5,
+                        PlayerTwoGamesWon = 7,
+                        IsTiebreak = false,
+                        TiebreakId = null
+                    }
+                }
             };
 
             MatchP7P8 = new Match()
             {
                 Id = 4,
-                TournamentId = 1,
+                TournamentId = 3,
                 MatchRound = Enums.Match.MatchRound.Quarterfinals,
                 PlayerOneId = 7,
                 PlayerTwoId = 8,
-                MatchScoreId = 4
-            };
-        }
-
-
-
-        private void SeedMatchScores()
-        {
-            MatchScoreP1P2 = new MatchScore()
-            {
-                Id = 1,
-                PlayerOneWon = false,
-                PlayerTwoWon = true,
-                MatchId = 1,
-                PlayerOneSetsWon = new List<Set>() 
+                PlayerOneSetsWon = 1,
+                PlayerTwoSetsWon = 2,
+                Winner = Enums.Match.Winner.PlayerTwo,
+                Sets = new List<Set>()
                 {
                     new Set()
                     {
-                        Id = 1,
-                        PlayerOneWon = false,
-                        PlayerTwoWon = true,
+                        Id = 8,
+                        PlayerOneGamesWon = 7,
+                        PlayerTwoGamesWon = 6,
                         IsTiebreak = true,
-                        MatchScoreId= 1,
-
+                        Tiebreak = new Tiebreak()
+                        {
+                            Id= 2,
+                            PlayerOnePoints = 7,
+                            PlayerTwoPoints = 5,
+                            SetId = 8
+                        }
+                    },
+                    new Set()
+                    {
+                        Id = 9,
+                        PlayerOneGamesWon = 1,
+                        PlayerTwoGamesWon = 6,
+                        IsTiebreak = false,
+                        TiebreakId = null
+                    },
+                    new Set()
+                    {
+                        Id = 10,
+                        PlayerOneGamesWon = 7,
+                        PlayerTwoGamesWon = 6,
+                        IsTiebreak = true,
+                        Tiebreak = new Tiebreak()
+                        {
+                            Id= 3,
+                            PlayerOnePoints = 7,
+                            PlayerTwoPoints = 2,
+                            SetId = 10
+                        }
                     }
-                },
-
+                }
             };
-
-            MatchScoreP3P4 = new MatchScore()
-            {
-
-            };
-
-            MatchScoreP5P6 = new MatchScore()
-            {
-
-            };
-
-            MatchScoreP7P8 = new MatchScore()
-            {
-
-            };
-
-
         }
 
-        
+
         private void SeedArticles()
         {
             ArticleZashoOpen2024 = new Article()
@@ -561,16 +635,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 DatePublished = DateTime.ParseExact("28/09/2023 19:30", DateTimeArticleFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
                 ViewsCount = 0
             };
-
-
         }
-
-
-
-
-
-
-
-
     }
 }

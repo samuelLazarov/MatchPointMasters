@@ -7,7 +7,9 @@
     {
         public void Configure(EntityTypeBuilder<Tournament> builder)
         {
-            throw new NotImplementedException();
+            var data = new DataSeed();
+
+            builder.HasData(new Tournament[] { data.ZashoOpen, data.VSSportOpen, data.LeaderOpen });
         }
     }
 }

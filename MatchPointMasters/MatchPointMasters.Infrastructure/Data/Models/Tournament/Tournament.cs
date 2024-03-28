@@ -7,6 +7,7 @@
     using MatchPointMasters.Infrastructure.Data.Enums.Tournament;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.TournamentConstants;
     using System.ComponentModel.DataAnnotations.Schema;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
 
     public class Tournament
     {
@@ -39,6 +40,14 @@
         [Required]
         [ForeignKey(nameof(HostClubId))]
         public Club HostClub { get; set; } = null!;
+
+        [Required]
+        [Comment("Tournament Host's Identifier")]
+        public int TournamentHostId { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(HostClubId))]
+        public TournamentHost TournamentHost { get; set; } = null!;
 
         [Required]
         [Comment("Tournament fee")]

@@ -6,7 +6,6 @@
         public const string LengthErrorMessage = "{0} must be between {2} and {1} characters long!";
         public const string RangeErrorMessage = "{0} must be a number between {1} and {2}!";
 
-
         public static class TournamentConstants
         {
             public const string DateTimeTournamentFormat = "dd/MM/yyyy HH:mm";
@@ -58,6 +57,13 @@
             public const int PlayerImageUrlMaxLength = 500;
         }
 
+        public static class TournamentHostConstants
+        {
+            //Phone
+            public const int HostPhoneMinLength = 7;
+            public const int HostPhoneMaxLength = 15;
+        }
+
         public static class ArticleConstants
         {
             public const string DateTimeArticleFormat = "dd/MM/yyyy HH:mm";
@@ -77,6 +83,17 @@
             //ViewsCount
             public const int ArticleViewsCountMinRange = 0;
             public const int ArticleViewsCountMaxLength = int.MaxValue;
+        }
+
+        public static class ArticleCommentConstants
+        {
+            //Title
+            public const int ArticleCommentTitleMinLength = 1;
+            public const int ArticleCommentTitleMaxLength = 50;
+
+            //Description
+            public const int ArticleCommentDescriptionMinLength = 15;
+            public const int ArticleCommentDescriptionMaxLength = 8000;
         }
     }
 }

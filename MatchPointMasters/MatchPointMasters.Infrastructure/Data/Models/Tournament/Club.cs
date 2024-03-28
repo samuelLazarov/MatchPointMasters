@@ -1,11 +1,10 @@
 ﻿namespace MatchPointMasters.Infrastructure.Data.Models.Tournament
 {
     using MatchPointMasters.Infrastructure.Data.Enums.Tournament;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.ClubConstants;
+    
     [Comment("Tennis club to host a tournament")]
     public class Club
     {
@@ -35,13 +34,7 @@
 
         public CourtSurface CourtSurface { get; set; }
 
-        [Required]
-        [Comment("The current User's Identifier")]
-        public string UserId { get; set; } = string.Empty;
-
-        [ForeignKey(nameof(UserId))]
-        [Comment("The current User")]
-        public IdentityUser User { get; set; } = null!;
+        
 
     }
 }
