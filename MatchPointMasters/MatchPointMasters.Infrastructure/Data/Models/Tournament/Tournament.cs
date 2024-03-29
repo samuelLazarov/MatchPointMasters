@@ -47,7 +47,7 @@
         public int TournamentHostId { get; set; }
 
         [Required]
-        [ForeignKey(nameof(HostClubId))]
+        [ForeignKey(nameof(TournamentHostId))]
         public TournamentHost TournamentHost { get; set; } = null!;
 
         [Required]

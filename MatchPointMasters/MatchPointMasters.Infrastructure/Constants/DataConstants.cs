@@ -32,7 +32,7 @@
 
             //Phone
             public const int ClubPhoneMinLength = 7;
-            public const int ClubPhoneMaxLength = 15;
+            public const int ClubPhoneMaxLength = 20;
 
             //ImageUrl
             public const int ClubImageUrlMinLength = 5;
@@ -47,7 +47,7 @@
 
             //Phone
             public const int PlayerPhoneMinLength = 7;
-            public const int PlayerPhoneMaxLength = 15;
+            public const int PlayerPhoneMaxLength = 20;
 
             //Birthdate
             public const string DateTimeBirthdayFormat = "dd/MM/yyyy";
@@ -61,7 +61,7 @@
         {
             //Phone
             public const int HostPhoneMinLength = 7;
-            public const int HostPhoneMaxLength = 15;
+            public const int HostPhoneMaxLength = 20;
         }
 
         public static class ArticleConstants

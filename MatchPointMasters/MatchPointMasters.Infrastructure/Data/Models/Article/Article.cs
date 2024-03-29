@@ -43,5 +43,7 @@
         [Required]
         [Comment("The current Article's Views Count")]
         public int ViewsCount { get; set; }
+
+        public ICollection<ArticleComment> ArticleComments { get; set; } = new List<ArticleComment>();
     }
 }

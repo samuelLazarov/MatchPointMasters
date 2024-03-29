@@ -27,6 +27,7 @@ namespace MatchPointMasters.Infrastructure.Data
         public DbSet<PlayerTournament> PlayersTournaments { get; set; } = null!;
         public DbSet<TournamentMatch> TournamentMatches { get; set; } = null!;
         public DbSet<Article> Articles { get; set; } = null!;
+        public DbSet<ArticleComment> ArticleComments { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -39,14 +40,14 @@ namespace MatchPointMasters.Infrastructure.Data
                 .HasOne(pt => pt.Player)
                 .WithMany(p => p.PlayerTournaments)
                 .HasForeignKey(pt => pt.PlayerId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<PlayerTournament>()
                 .HasOne(pt => pt.Tournament)
                 .WithMany(pt => pt.PlayerTournaments)
                 .HasForeignKey(pt => pt.TournamentId)
-                .OnDelete(DeleteBehavior.NoAction);
-
+                .OnDelete(DeleteBehavior.Restrict);
+                
 
             builder.Entity<PlayerMatch>()
                 .HasKey(pm => new { pm.PlayerId, pm.MatchId });
@@ -56,14 +57,13 @@ namespace MatchPointMasters.Infrastructure.Data
                 .HasOne(p => p.Player)
                 .WithMany(pm => pm.PlayerMatches)
                 .HasForeignKey(p => p.PlayerId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<PlayerMatch>()
                 .HasOne(m => m.Match)
                 .WithMany(pm => pm.PlayerMatches)
                 .HasForeignKey(m => m.MatchId)
-                .OnDelete(DeleteBehavior.NoAction);
-
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<TournamentMatch>()
                 .HasKey(tm => new { tm.TournamentId, tm.MatchId });
@@ -72,13 +72,13 @@ namespace MatchPointMasters.Infrastructure.Data
                 .HasOne(m => m.Tournament)
                 .WithMany(pm => pm.TournamentMatches)
                 .HasForeignKey(m => m.TournamentId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<TournamentMatch>()
                 .HasOne(m => m.Match)
                 .WithMany(pm => pm.TournamentMatches)
                 .HasForeignKey(m => m.MatchId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Tournament>()
                 .Property(f => f.Fee)
@@ -88,19 +88,26 @@ namespace MatchPointMasters.Infrastructure.Data
                 .HasOne(m => m.PlayerOne)
                 .WithMany()
                 .HasForeignKey(m => m.PlayerOneId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Match>()
                 .HasOne(m => m.PlayerTwo)
                 .WithMany()
                 .HasForeignKey(m => m.PlayerTwoId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Set>()
-                .HasOne(m => m.Match)
-                .WithMany()
-                .HasForeignKey(m => m.MatchId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasOne(s => s.Tiebreak)
+                .WithOne(t => t.Set)
+                .HasForeignKey<Tiebreak>(t => t.SetId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ArticleComment>()
+                .HasOne(a => a.Article)
+                .WithMany(ac => ac.ArticleComments)
+                .HasForeignKey(a => a.ArticleId) 
+                .OnDelete(DeleteBehavior.Restrict);
+
 
             //Configuration(Data Seeding)
             builder.ApplyConfiguration(new UserConfiguration());
@@ -108,9 +115,9 @@ namespace MatchPointMasters.Infrastructure.Data
             builder.ApplyConfiguration(new TournamentConfiguration());
             builder.ApplyConfiguration(new ClubConfiguration());
             builder.ApplyConfiguration(new PlayerConfiguration());
-            builder.ApplyConfiguration(new TiebreakConfiguration());
-            builder.ApplyConfiguration(new SetConfiguration());
             builder.ApplyConfiguration(new MatchConfiguration());
+            builder.ApplyConfiguration(new SetConfiguration());
+            builder.ApplyConfiguration(new TiebreakConfiguration());
             builder.ApplyConfiguration(new ArticleConfiguration());
             
 
