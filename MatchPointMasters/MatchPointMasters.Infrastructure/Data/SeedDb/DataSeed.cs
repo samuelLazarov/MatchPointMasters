@@ -26,8 +26,12 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             SeedTournamentHosts();
             SeedPlayers();
             SeedMatches();
+            SeedSets();
+            SeedTiebreaks();
             SeedArticles();
         }
+
+
 
         //Users
         public IdentityUser HostUser { get; set; } = null!;
@@ -70,6 +74,22 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
         public Match MatchP5P6 { get; set; } = null!;
         public Match MatchP7P8 { get; set; } = null!;
 
+        //Sets
+        public Set Set1Player1Player2 { get; set; } = null!;
+        public Set Set2Player1Player2 { get; set; } = null!;
+        public Set Set3Player1Player2 { get; set; } = null!;
+        public Set Set4Player3Player4 { get; set; } = null!;
+        public Set Set5Player3Player4 { get; set; } = null!;
+        public Set Set6Player5Player6 { get; set; } = null!;
+        public Set Set7Player5Player6 { get; set; } = null!;
+        public Set Set8Player7Player8 { get; set; } = null!;
+        public Set Set9Player7Player8 { get; set; } = null!;
+        public Set Set10Player7Player8 { get; set; } = null!;
+
+        //Tiebreaks
+        public Tiebreak Tiebreak1Player1Player2 { get; set; } = null!;
+        public Tiebreak Tiebreak2Player7Player8 { get; set; } = null!;
+        public Tiebreak Tiebreak3Player7Player8 { get; set; } = null!;
 
         //Articles
         public Article ArticleZashoOpen2024 { get; set; } = null!;
@@ -456,44 +476,48 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 Winner = Enums.Match.Winner.PlayerTwo,
                 Sets = new List<Set>()
                 {
-                    new Set()
-                    {
-                        Id = 1,
-                        PlayerOneGamesWon = 6,
-                        PlayerTwoGamesWon = 4,
-                        HasTiebreak = false,
-                        TiebreakId = null,
-                        Tiebreak = null,
-                        MatchId = 1
-                    },
+                    Set1Player1Player2,
+                    Set2Player1Player2,
+                    Set3Player1Player2,
 
-                    new Set()
-                    {
-                        Id = 2,
-                        PlayerOneGamesWon = 5,
-                        PlayerTwoGamesWon = 7,
-                        HasTiebreak = false,
-                        TiebreakId = null,
-                        Tiebreak = null,
-                        MatchId = 1
-                    },
+                    //new Set()
+                    //{
+                    //    Id = 1,
+                    //    PlayerOneGamesWon = 6,
+                    //    PlayerTwoGamesWon = 4,
+                    //    HasTiebreak = false,
+                    //    TiebreakId = null,
+                    //    Tiebreak = null,
+                    //    MatchId = 1
+                    //},
 
-                    new Set()
-                    {
-                        Id = 3,
-                        PlayerOneGamesWon = 6,
-                        PlayerTwoGamesWon = 7,
-                        HasTiebreak = true,
-                        TiebreakId = 1,
-                        Tiebreak = new Tiebreak()
-                        {
-                            Id= 1,
-                            PlayerOnePoints = 6,
-                            PlayerTwoPoints = 8,
-                            SetId = 3
-                        },
-                        MatchId = 1
-                    }
+                    //new Set()
+                    //{
+                    //    Id = 2,
+                    //    PlayerOneGamesWon = 5,
+                    //    PlayerTwoGamesWon = 7,
+                    //    HasTiebreak = false,
+                    //    TiebreakId = null,
+                    //    Tiebreak = null,
+                    //    MatchId = 1
+                    //},
+
+                    //new Set()
+                    //{
+                    //    Id = 3,
+                    //    PlayerOneGamesWon = 6,
+                    //    PlayerTwoGamesWon = 7,
+                    //    HasTiebreak = true,
+                    //    TiebreakId = 1,
+                    //    Tiebreak = new Tiebreak()
+                    //    {
+                    //        Id= 1,
+                    //        PlayerOnePoints = 6,
+                    //        PlayerTwoPoints = 8,
+                    //        SetId = 3
+                    //    },
+                    //    MatchId = 1
+                    //}
                 }
             };
 
@@ -509,27 +533,29 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 Winner = Enums.Match.Winner.PlayerOne,
                 Sets = new List<Set>()
                 {
-                    new Set()
-                    {
-                        Id = 4,
-                        PlayerOneGamesWon = 6,
-                        PlayerTwoGamesWon = 3,
-                        HasTiebreak = false,
-                        TiebreakId = null,
-                        Tiebreak = null,
-                        MatchId = 2
-                    },
+                    Set4Player3Player4,
+                    Set5Player3Player4
+                    //new Set()
+                    //{
+                    //    Id = 4,
+                    //    PlayerOneGamesWon = 6,
+                    //    PlayerTwoGamesWon = 3,
+                    //    HasTiebreak = false,
+                    //    TiebreakId = null,
+                    //    Tiebreak = null,
+                    //    MatchId = 2
+                    //},
 
-                    new Set()
-                    {
-                        Id = 5,
-                        PlayerOneGamesWon = 6,
-                        PlayerTwoGamesWon = 4,
-                        HasTiebreak = false,
-                        TiebreakId = null,
-                        Tiebreak = null,
-                        MatchId = 2
-                    }
+                    //new Set()
+                    //{
+                    //    Id = 5,
+                    //    PlayerOneGamesWon = 6,
+                    //    PlayerTwoGamesWon = 4,
+                    //    HasTiebreak = false,
+                    //    TiebreakId = null,
+                    //    Tiebreak = null,
+                    //    MatchId = 2
+                    //}
                 }
             };
 
@@ -545,27 +571,29 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 Winner = Enums.Match.Winner.PlayerTwo,
                 Sets = new List<Set>()
                 {
-                    new Set()
-                    {
-                        Id = 6,
-                        PlayerOneGamesWon = 1,
-                        PlayerTwoGamesWon = 6,
-                        HasTiebreak = false,
-                        TiebreakId = null,
-                        Tiebreak = null,
-                        MatchId = 3
-                    },
+                    Set6Player5Player6,
+                    Set7Player5Player6
+                    //new Set()
+                    //{
+                    //    Id = 6,
+                    //    PlayerOneGamesWon = 1,
+                    //    PlayerTwoGamesWon = 6,
+                    //    HasTiebreak = false,
+                    //    TiebreakId = null,
+                    //    Tiebreak = null,
+                    //    MatchId = 3
+                    //},
 
-                    new Set()
-                    {
-                        Id = 7,
-                        PlayerOneGamesWon = 5,
-                        PlayerTwoGamesWon = 7,
-                        HasTiebreak = false,
-                        TiebreakId = null,
-                        Tiebreak = null,
-                        MatchId = 3
-                    }
+                    //new Set()
+                    //{
+                    //    Id = 7,
+                    //    PlayerOneGamesWon = 5,
+                    //    PlayerTwoGamesWon = 7,
+                    //    HasTiebreak = false,
+                    //    TiebreakId = null,
+                    //    Tiebreak = null,
+                    //    MatchId = 3
+                    //}
                 }
             };
 
@@ -581,94 +609,195 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 Winner = Enums.Match.Winner.PlayerTwo,
                 Sets = new List<Set>()
                 {
-                    new Set()
-                    {
-                        Id = 8,
-                        PlayerOneGamesWon = 7,
-                        PlayerTwoGamesWon = 6,
-                        HasTiebreak = true,
-                        TiebreakId = 2,
-                        Tiebreak = new Tiebreak()
-                        {
-                            Id= 2,
-                            PlayerOnePoints = 7,
-                            PlayerTwoPoints = 5,
-                            SetId = 8
-                        },
-                        MatchId = 4
-                    },
+                    Set8Player7Player8,
+                    Set9Player7Player8,
+                    Set10Player7Player8
 
-                    new Set()
-                    {
-                        Id = 9,
-                        PlayerOneGamesWon = 1,
-                        PlayerTwoGamesWon = 6,
-                        HasTiebreak = false,
-                        TiebreakId = null,
-                        Tiebreak = null,
-                        MatchId = 4
-                    },
+                    //new Set()
+                    //{
+                    //    Id = 8,
+                    //    PlayerOneGamesWon = 7,
+                    //    PlayerTwoGamesWon = 6,
+                    //    HasTiebreak = true,
+                    //    TiebreakId = 2,
+                    //    Tiebreak = new Tiebreak()
+                    //    {
+                    //        Id= 2,
+                    //        PlayerOnePoints = 7,
+                    //        PlayerTwoPoints = 5,
+                    //        SetId = 8
+                    //    },
+                    //    MatchId = 4
+                    //},
 
-                    new Set()
-                    {
-                        Id = 10,
-                        PlayerOneGamesWon = 7,
-                        PlayerTwoGamesWon = 6,
-                        HasTiebreak = true,
-                        TiebreakId = 3,
-                        Tiebreak = new Tiebreak()
-                        {
-                            Id= 3,
-                            PlayerOnePoints = 7,
-                            PlayerTwoPoints = 2,
-                            SetId = 10
-                        },
-                        MatchId = 4
-                    }
+                    //new Set()
+                    //{
+                    //    Id = 9,
+                    //    PlayerOneGamesWon = 1,
+                    //    PlayerTwoGamesWon = 6,
+                    //    HasTiebreak = false,
+                    //    TiebreakId = null,
+                    //    Tiebreak = null,
+                    //    MatchId = 4
+                    //},
+
+                    //new Set()
+                    //{
+                    //    Id = 10,
+                    //    PlayerOneGamesWon = 7,
+                    //    PlayerTwoGamesWon = 6,
+                    //    HasTiebreak = true,
+                    //    TiebreakId = 3,
+                    //    Tiebreak = new Tiebreak()
+                    //    {
+                    //        Id= 3,
+                    //        PlayerOnePoints = 7,
+                    //        PlayerTwoPoints = 2,
+                    //        SetId = 10
+                    //    },
+                    //    MatchId = 4
+                    //}
                 }
             };
         }
 
-        //private void SeedMatches()
-        //{
-        //    MatchP1P2 = new Match()
-        //    {
-        //        Id = 1,
-        //        TournamentId = 1,
-        //        MatchRound = Enums.Match.MatchRound.Semifinals,
-        //        PlayerOneId = 1,
-        //        PlayerTwoId = 2,
-        //        PlayerOneSetsWon = 1,
-        //        PlayerTwoSetsWon = 2,
-        //        Winner = Enums.Match.Winner.PlayerTwo
-        //    };
+        private void SeedSets()
+        {
+            Set1Player1Player2 = new Set()
+            {
+                Id = 1,
+                PlayerOneGamesWon = 6,
+                PlayerTwoGamesWon = 4,
+                HasTiebreak = false,
+                TiebreakId = null,
+                Tiebreak = null,
+                MatchId = 1
+            };
 
-        //    modelBuilder.Entity<Match>().HasData(MatchP1P2);
+            Set2Player1Player2 = new Set()
+            {
+                Id = 2,
+                PlayerOneGamesWon = 5,
+                PlayerTwoGamesWon = 7,
+                HasTiebreak = false,
+                TiebreakId = null,
+                Tiebreak = null,
+                MatchId = 1
+            };
 
-        //    var set1 = new Set()
-        //    {
-        //        Id = 1,
-        //        PlayerOneGamesWon = 6,
-        //        PlayerTwoGamesWon = 4,
-        //        HasTiebreak = false,
-        //        TiebreakId = null,
-        //        Tiebreak = null,
-        //        MatchId = 1
-        //    };
+            Set3Player1Player2 = new Set()
+            {
+                Id = 3,
+                PlayerOneGamesWon = 6,
+                PlayerTwoGamesWon = 7,
+                HasTiebreak = true,
+                TiebreakId = 1,
+                MatchId = 1
+            };
 
-        //    var set2 = new Set()
-        //    {
-        //        Id = 2,
-        //        PlayerOneGamesWon = 5,
-        //        PlayerTwoGamesWon = 7,
-        //        HasTiebreak = false,
-        //        TiebreakId = null,
-        //        Tiebreak = null,
-        //        MatchId = 1
-        //    };
+            Set4Player3Player4 = new Set()
+            {
+                Id = 4,
+                PlayerOneGamesWon = 6,
+                PlayerTwoGamesWon = 3,
+                HasTiebreak = false,
+                TiebreakId = null,
+                Tiebreak = null,
+                MatchId = 2
+            };
 
-        //    modelBuilder.Entity<Set>().HasData(set1, set2);
-        //}
+            Set5Player3Player4 = new Set()
+            {
+                Id = 5,
+                PlayerOneGamesWon = 6,
+                PlayerTwoGamesWon = 4,
+                HasTiebreak = false,
+                TiebreakId = null,
+                Tiebreak = null,
+                MatchId = 2
+            };
+
+            Set6Player5Player6 = new Set()
+            {
+                Id = 6,
+                PlayerOneGamesWon = 1,
+                PlayerTwoGamesWon = 6,
+                HasTiebreak = false,
+                TiebreakId = null,
+                Tiebreak = null,
+                MatchId = 3
+            };
+
+            Set7Player5Player6 = new Set()
+            {
+                Id = 7,
+                PlayerOneGamesWon = 5,
+                PlayerTwoGamesWon = 7,
+                HasTiebreak = false,
+                TiebreakId = null,
+                Tiebreak = null,
+                MatchId = 3
+            };
+
+            Set8Player7Player8 = new Set()
+            {
+                Id = 8,
+                PlayerOneGamesWon = 7,
+                PlayerTwoGamesWon = 6,
+                HasTiebreak = true,
+                TiebreakId = 2,
+                MatchId = 4
+            };
+
+            Set9Player7Player8 = new Set()
+            {
+                Id = 9,
+                PlayerOneGamesWon = 1,
+                PlayerTwoGamesWon = 6,
+                HasTiebreak = false,
+                TiebreakId = null,
+                Tiebreak = null,
+                MatchId = 4
+            };
+
+            Set10Player7Player8 = new Set()
+            {
+                Id = 10,
+                PlayerOneGamesWon = 7,
+                PlayerTwoGamesWon = 6,
+                HasTiebreak = true,
+                TiebreakId = 3,
+                MatchId = 4
+            };
+        }
+
+        private void SeedTiebreaks()
+        {
+            Tiebreak1Player1Player2 = new Tiebreak()
+            {
+                Id = 1,
+                PlayerOnePoints = 6,
+                PlayerTwoPoints = 8,
+                SetId = 3
+            };
+
+            Tiebreak2Player7Player8 = new Tiebreak()
+            {
+                Id = 2,
+                PlayerOnePoints = 7,
+                PlayerTwoPoints = 5,
+                SetId = 8
+            };
+
+            Tiebreak3Player7Player8 = new Tiebreak()
+            {
+                Id = 3,
+                PlayerOnePoints = 7,
+                PlayerTwoPoints = 2,
+                SetId = 10
+            };
+
+        }
 
 
         private void SeedArticles()
