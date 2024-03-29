@@ -25,12 +25,11 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             SeedTournaments();
             SeedTournamentHosts();
             SeedPlayers();
-            SeedMatches();
-            SeedSets();
             SeedTiebreaks();
+            SeedSets();
+            SeedMatches();
             SeedArticles();
         }
-
 
 
         //Users

@@ -9,7 +9,6 @@ namespace MatchPointMasters.Infrastructure.Data
     using MatchPointMasters.Infrastructure.Data.SeedDb.Configuration;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using System.Reflection.Emit;
 
     public class MatchPointMastersDbContext : IdentityDbContext
     {
@@ -97,6 +96,11 @@ namespace MatchPointMasters.Infrastructure.Data
                 .HasForeignKey(m => m.PlayerTwoId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Set>()
+                .HasOne(m => m.Match)
+                .WithMany()
+                .HasForeignKey(m => m.MatchId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             //Configuration(Data Seeding)
             builder.ApplyConfiguration(new UserConfiguration());
@@ -104,9 +108,11 @@ namespace MatchPointMasters.Infrastructure.Data
             builder.ApplyConfiguration(new TournamentConfiguration());
             builder.ApplyConfiguration(new ClubConfiguration());
             builder.ApplyConfiguration(new PlayerConfiguration());
+            builder.ApplyConfiguration(new TiebreakConfiguration());
+            builder.ApplyConfiguration(new SetConfiguration());
             builder.ApplyConfiguration(new MatchConfiguration());
             builder.ApplyConfiguration(new ArticleConfiguration());
-
+            
 
             base.OnModelCreating(builder);
         }
