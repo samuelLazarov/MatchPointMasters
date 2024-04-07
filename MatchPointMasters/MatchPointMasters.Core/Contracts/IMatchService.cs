@@ -1,9 +1,9 @@
-﻿using MatchPointMasters.Core.Models;
+﻿using MatchPointMasters.Core.Models.Match;
 
 namespace MatchPointMasters.Core.Contracts
 {
     public interface IMatchService
     {
-        Task<MatchServiceModel> GetMatchById(string id);
+        Task<MatchServiceModel> GetMatchById(int id);
     }
 }

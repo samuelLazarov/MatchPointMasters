@@ -1,7 +1,7 @@
 ﻿namespace MatchPointMasters.Core.Services
 {
     using MatchPointMasters.Core.Contracts;
-    using MatchPointMasters.Core.Models;
+    using MatchPointMasters.Core.Models.Match;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Match;
     using Microsoft.EntityFrameworkCore;

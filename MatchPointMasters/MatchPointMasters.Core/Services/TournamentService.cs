@@ -1,16 +1,16 @@
 ﻿namespace MatchPointMasters.Core.Services
 {
     using MatchPointMasters.Core.Contracts;
-    using MatchPointMasters.Core.Models;
+    using MatchPointMasters.Core.Models.Tournament;
 
     public class TournamentService : ITournamentService
     {
-        public Task<TournamentServiceModel> GetAllMatchesInTournament(string tourId)
+        public Task<TournamentServiceModel> GetAllMatchesInTournament(int tourId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TournamentServiceModel> GetAllPlayersInTournament(string tourId)
+        public Task<TournamentServiceModel> GetAllPlayersInTournament(int tourId)
         {
             throw new NotImplementedException();
         }
@@ -20,7 +20,7 @@
             throw new NotImplementedException();
         }
 
-        public Task<TournamentServiceModel> GetTournamentByID(string id)
+        public Task<TournamentServiceModel> GetTournamentByID(int id)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-﻿namespace MatchPointMasters.Core.Models
+﻿namespace MatchPointMasters.Core.Models.Player
 {
     public class PlayerServiceModel
     {
