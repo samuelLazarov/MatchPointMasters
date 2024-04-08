@@ -16,11 +16,11 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Article
 
         [MaxLength(ArticleCommentTitleMaxLength)]
         [Comment("The current Article Comment's Title")]
-        public string CommentTitle { get; set; } = null!;
+        public string Title { get; set; } = null!;
 
         [MaxLength(ArticleCommentDescriptionMaxLength)]
         [Comment("The current Article Comment's Description")]
-        public string CommentDescription { get; set; } = null!;
+        public string Description { get; set; } = null!;
 
         [Required]
         [Comment("The current Article's Identifier")]
