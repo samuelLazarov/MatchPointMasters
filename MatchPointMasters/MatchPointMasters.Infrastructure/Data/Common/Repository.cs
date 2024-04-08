@@ -21,7 +21,7 @@ namespace MatchPointMasters.Infrastructure.Data.Common
             return DbSet<T>();
         }
 
-        public IQueryable<T> AllReadOnly<T>() where T : class
+        public IQueryable<T> AllAsReadOnly<T>() where T : class
         {
             return DbSet<T>()
                 .AsNoTracking();
@@ -41,6 +41,16 @@ namespace MatchPointMasters.Infrastructure.Data.Common
         public async Task<int> SaveChangesAsync()
         {
             return await context.SaveChangesAsync();
+        }
+
+        public async Task RemoveAsync<T>(T entity) where T : class
+        {
+            DbSet<T>().Remove(entity);
+        }
+
+        public async Task RemoveRangeAsync<T>(IEnumerable<T> entities) where T : class
+        {
+            DbSet<T>().RemoveRange(entities);
         }
     }
 }

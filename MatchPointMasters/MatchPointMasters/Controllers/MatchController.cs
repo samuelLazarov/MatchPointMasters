@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MatchPointMasters.Controllers
 {
-    public class MatchController : Controller
+    public class MatchController : BaseController
     {
         private readonly IMatchService matchService;
 

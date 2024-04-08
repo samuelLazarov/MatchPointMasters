@@ -26,6 +26,9 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
+    <Folder Include="Views\Tournament\" />
+    <Folder Include="Views\Player\" />
+    <Folder Include="Views\Match\" />
   </ItemGroup>
 
 </Project>

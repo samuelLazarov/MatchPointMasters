@@ -1,13 +1,21 @@
-﻿using MatchPointMasters.Infrastructure.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace Microsoft.Extensions.DependencyInjection
+﻿namespace Microsoft.Extensions.DependencyInjection
 {
+    using MatchPointMasters.Core.Contracts;
+    using MatchPointMasters.Core.Services;
+    using MatchPointMasters.Infrastructure.Data;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+
     public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+
+            services.AddScoped<IPlayerService, PlayerService>();
+            services.AddScoped<IMatchService, MatchService>();
+            services.AddScoped<ITournamentService, TournamentService>();
+            services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<ITournamentHostService, TournamentHostService>();
 
             return services;
         }

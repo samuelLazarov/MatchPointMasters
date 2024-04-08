@@ -2,7 +2,7 @@
 
 namespace MatchPointMasters.Controllers
 {
-    public class TournamentController : Controller
+    public class TournamentController : BaseController
     {
         public IActionResult Index()
         {

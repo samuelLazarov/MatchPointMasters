@@ -4,7 +4,7 @@ namespace MatchPointMasters.Controllers
     using MatchPointMasters.Core.Contracts;
     using Microsoft.AspNetCore.Mvc;
 
-    public class PlayerController : Controller
+    public class PlayerController : BaseController
     {
         private readonly IPlayerService playerService;
 
