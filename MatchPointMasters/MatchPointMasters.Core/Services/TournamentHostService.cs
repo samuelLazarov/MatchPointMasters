@@ -1,10 +1,11 @@
-﻿using MatchPointMasters.Core.Contracts;
-using MatchPointMasters.Infrastructure.Data.Common;
-using MatchPointMasters.Infrastructure.Data.Models.Roles;
-using Microsoft.EntityFrameworkCore;
-
+﻿
 namespace MatchPointMasters.Core.Services
 {
+    using MatchPointMasters.Core.Contracts;
+    using MatchPointMasters.Infrastructure.Data.Common;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
+    using Microsoft.EntityFrameworkCore;
+
     public class TournamentHostService : ITournamentHostService
     {
         public readonly IRepository repository;
@@ -26,7 +27,7 @@ namespace MatchPointMasters.Core.Services
             return (await repository
                 .AllAsReadOnly<TournamentHost>()
                 .FirstOrDefaultAsync(th => th.UserId == userId))?.Id;
-                
+
         }
     }
 }

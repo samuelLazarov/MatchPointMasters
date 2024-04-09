@@ -9,6 +9,7 @@
 
         private readonly IRepository repository;
 
+
         public TournamentService(IRepository _repository)
         {
             repository = _repository;

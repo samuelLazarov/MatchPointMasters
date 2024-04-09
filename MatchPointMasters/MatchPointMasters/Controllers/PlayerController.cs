@@ -1,5 +1,4 @@
-﻿
-namespace MatchPointMasters.Controllers
+﻿namespace MatchPointMasters.Controllers
 {
     using MatchPointMasters.Core.Contracts;
     using Microsoft.AspNetCore.Mvc;
