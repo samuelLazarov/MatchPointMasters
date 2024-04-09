@@ -1,0 +1,15 @@
+﻿@model PlayerServiceModel
+
+<div class="playerProfileBody">
+    <div id="wrapper">
+        <div id="avatar">
+            <img src="@Model.ImageUrl" alt="@Model.LastName" class="playerImage">
+        </div>
+        <div class="user-info">
+            <div id="main-info">
+                <h1> @Model.FirstName<br />@Model.LastName</h1>
+                <a asp-area="" asp-controller="player" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-success">See more</a>
+            </div>
+        </div>
+    </div>
+</div>

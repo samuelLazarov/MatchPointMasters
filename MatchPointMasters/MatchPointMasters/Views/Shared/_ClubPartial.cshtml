@@ -1,0 +1,11 @@
+﻿@model ClubServiceModel
+
+<div class="card" id="club-card">
+    <img src="@Model.ImageUrl" class="tournamentImage" alt="@Model.Name">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">Surface: @Model.CourtSurface.ToString()</p>
+        <hr />
+        <a asp-area="" asp-controller="Club" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">Details</a>
+    </div>
+</div>

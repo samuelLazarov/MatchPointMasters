@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace MatchPointMasters.Components
+﻿namespace MatchPointMasters.Components
 {
+    using Microsoft.AspNetCore.Mvc;
+
     public class MainMenuComponent : ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync()

@@ -1,13 +1,11 @@
 ﻿namespace MatchPointMasters.Infrastructure.Data.Models.Tournament
 {
-    using MatchPointMasters.Infrastructure.Data.Models.Match;
-    using MatchPointMasters.Infrastructure.Data.Models.Player;
+    using MatchPointMasters.Infrastructure.Data.Enums.Tournament;
+    using MatchPointMasters.Infrastructure.Data.Models.Mappings;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
-    using MatchPointMasters.Infrastructure.Data.Enums.Tournament;
     using System.ComponentModel.DataAnnotations.Schema;
-    using MatchPointMasters.Infrastructure.Data.Models.Roles;
-    using MatchPointMasters.Infrastructure.Data.Models.Mappings;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.TournamentConstants;
 
     public class Tournament
