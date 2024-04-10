@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace MatchPointMasters.Core.Models.Match
+namespace MatchPointMasters.Core.Models.Set
 {
     public class SetServiceModel
     {

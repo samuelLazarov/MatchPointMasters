@@ -1,8 +1,9 @@
-﻿using MatchPointMasters.Infrastructure.Data.Common;
+﻿using MatchPointMasters.Core.Contracts;
+using MatchPointMasters.Infrastructure.Data.Common;
 
 namespace MatchPointMasters.Core.Services
 {
-    public class TiebreakService
+    public class TiebreakService : ITiebreakService
     {
         private readonly IRepository repository;
 

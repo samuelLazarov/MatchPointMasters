@@ -1,5 +1,4 @@
-﻿
-namespace MatchPointMasters.Core.Services
+﻿namespace MatchPointMasters.Core.Services
 {
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Infrastructure.Data.Common;

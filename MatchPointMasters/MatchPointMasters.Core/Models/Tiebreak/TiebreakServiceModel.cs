@@ -1,4 +1,4 @@
-﻿namespace MatchPointMasters.Core.Models.Match
+﻿namespace MatchPointMasters.Core.Models.Tiebreak
 {
     using System.ComponentModel.DataAnnotations;
 

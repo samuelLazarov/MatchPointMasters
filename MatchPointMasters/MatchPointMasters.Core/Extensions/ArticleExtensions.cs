@@ -1,12 +1,12 @@
-﻿using MatchPointMasters.Core.Contracts;
-
-namespace MatchPointMasters.Core.Extensions
+﻿namespace MatchPointMasters.Core.Extensions
 {
+	using MatchPointMasters.Core.Contracts;
+
 	public static class ArticleExtensions
 	{
-		public static string GetArticleInformation(this IArticleModel tournament)
+		public static string GetArticleInformation(this IArticleModel article)
 		{
-			return tournament.Title;
+			return article.Title;
 		}
 	}
 }
