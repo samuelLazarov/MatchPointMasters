@@ -1,9 +1,11 @@
-﻿
-namespace MatchPointMasters.Core.Models.Player
+﻿namespace MatchPointMasters.Core.Models.Player
 {
     using MatchPointMasters.Infrastructure.Data.Enums.Player;
     using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
+    using static MatchPointMasters.Infrastructure.Constants.DataConstants;
+    using static MatchPointMasters.Infrastructure.Constants.DataConstants.PlayerConstants;
+
 
     public class PlayerServiceModel
     {
@@ -11,12 +13,15 @@ namespace MatchPointMasters.Core.Models.Player
         public int Id { get; set; }
 
         [Required]
+        [StringLength(PlayerNameMaxLength, MinimumLength = PlayerNameMinLength, ErrorMessage = LengthErrorMessage)]
         public string FirstName { get; set; } = string.Empty;
 
         [Required]
+        [StringLength(PlayerNameMaxLength, MinimumLength = PlayerNameMinLength, ErrorMessage = LengthErrorMessage)]
         public string LastName { get; set; } = string.Empty;
 
         [Required]
+        [MaxLength(PlayerPhoneMaxLength)]
         public string PhoneNumber { get; set; } = string.Empty;
 
         [Required]

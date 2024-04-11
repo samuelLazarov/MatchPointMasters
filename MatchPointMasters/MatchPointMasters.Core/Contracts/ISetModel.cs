@@ -2,8 +2,8 @@
 {
     public interface ISetModel
     {
-        public string PlayerOneGamesWon { get; set; }
-        public string PlayerTwoGamesWon { get; set; }
-        public bool HasTieBreak {  get; set; }
+        public int PlayerOneGamesWon { get; set; }
+        public int PlayerTwoGamesWon { get; set; }
+        public bool HasTiebreak {  get; set; }
     }
 }

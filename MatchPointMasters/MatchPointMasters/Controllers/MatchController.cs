@@ -14,7 +14,7 @@ namespace MatchPointMasters.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            var match = await matchService.GetMatchById(id);
+            var match = await matchService.FindMatchByIdAsync(id);
 
             if (match == null)
             {

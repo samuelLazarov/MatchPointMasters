@@ -2,6 +2,7 @@
 {
     public interface ITiebreakModel
     {
-        public string Result { get; set; }
+        public int PlayerOnePoints { get; set; }
+        public int PlayerTwoPoints { get; set; }
     }
 }

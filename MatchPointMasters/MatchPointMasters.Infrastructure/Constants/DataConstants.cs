@@ -51,6 +51,22 @@
             public const int ClubImageUrlMaxLength = 500;
         }
 
+
+        public static class MatchConstants
+        {
+            //Tiebreaks Range
+            public const int TiebreakMinRange = 0;
+            public const uint TiebreakMaxRange = 50;
+
+            //Games Range
+            public const int GamesMinRange = 0;
+            public const uint GamesMaxRange = 7;
+
+            //Sets Range
+            public const int SetsMinRange = 0;
+            public const uint SetsMaxRange = 5;
+        }
+
         public static class PlayerConstants
         {
             //Name
@@ -107,5 +123,7 @@
             public const int ArticleCommentDescriptionMinLength = 15;
             public const int ArticleCommentDescriptionMaxLength = 8000;
         }
+
+
     }
 }

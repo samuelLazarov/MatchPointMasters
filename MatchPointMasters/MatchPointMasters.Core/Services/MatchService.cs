@@ -15,7 +15,7 @@
             repository = _repository;
         }
 
-        public async Task<MatchServiceModel> GetMatchById(int id)
+        public async Task<MatchServiceModel> FindMatchByIdAsync(int id)
         {
             var match = await repository.All<Match>()
                                     .FirstOrDefaultAsync(m => m.Id == id);

@@ -15,6 +15,7 @@
             );
         Task<bool> TournamentExistsAsync(int tournamentId);
         Task<Tournament> FindTournamentByIdAsync(int tournamentId);
+        Task<TournamentDetailsViewModel> DetailsAsync(int tournamentId);
         Task<TournamentServiceModel> GetAllPlayersInTournament(int tourId);
         Task<TournamentServiceModel> GetAllMatchesInTournament(int tourId);
     }

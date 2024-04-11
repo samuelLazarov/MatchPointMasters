@@ -13,7 +13,7 @@
         public int PlayerTwoPoints { get; set; }
 
         [Required]
-        public int SetId { get; set; }
+        public int SetId { get; set;}
 
     }
 }

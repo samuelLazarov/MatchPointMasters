@@ -1,6 +1,6 @@
 ﻿namespace MatchPointMasters.Core.Enumerations
 {
-    public enum TournamentStatus
+    public enum MatchStatus
     {
         All = 0,
         Upcoming = 1,
