@@ -12,10 +12,12 @@
         {
 
             services.AddScoped<IPlayerService, PlayerService>();
+            services.AddScoped<ITournamentHostService, TournamentHostService>();
+            services.AddScoped<ITiebreakService, TiebreakService>();
+            services.AddScoped<ISetService, SetService>();
             services.AddScoped<IMatchService, MatchService>();
             services.AddScoped<ITournamentService, TournamentService>();
             services.AddScoped<IArticleService, ArticleService>();
-            services.AddScoped<ITournamentHostService, TournamentHostService>();
 
             return services;
         }

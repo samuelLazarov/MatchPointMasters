@@ -257,6 +257,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 HostClubId = 2,
                 TournamentHostId = 1,
                 Fee = 30.00m,
+                Capacity = 8,
+                ImageUrl = "https://t3.ftcdn.net/jpg/03/13/24/94/360_F_313249442_rVaztYCo9u5FOKtxWWGtKgw38AVvt7Qb.jpg",
                 TournamentBalls = TennisBalls.HeadTourXT
             };
 
@@ -270,6 +272,9 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 HostClubId = 1,
                 TournamentHostId = 1,
                 Fee = 50.00m,
+                Capacity = 8,
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8fpiUYEQEoUFiJwYQJ8382V2wnmam4k1233V8qVD4mg&s",
+
                 TournamentBalls = TennisBalls.WilsonTourPremier
             };
 
@@ -283,6 +288,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 HostClubId = 3,
                 TournamentHostId = 1,
                 Fee = 40.00m,
+                Capacity = 8,
+                ImageUrl = "https://leader96.com/wp-content/uploads/2021/10/leader96_post_1-1000x550.jpg",
                 TournamentBalls = TennisBalls.DunlopFortAllCourt
             };
 

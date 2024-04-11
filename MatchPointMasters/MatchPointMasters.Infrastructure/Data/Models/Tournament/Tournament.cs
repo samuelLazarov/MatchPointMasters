@@ -53,6 +53,15 @@
         public decimal Fee { get; set; }
 
         [Required]
+        [Comment("Tournament's total capacity")]
+        public int Capacity { get; set; }
+        
+        [Required]
+        [MaxLength(TournamentImageUrlMaxLength)]
+        [Comment("The current Event's Image Url")]
+        public string ImageUrl { get; set; } = null!;
+
+        [Required]
         public TennisBalls TournamentBalls { get; set; }
 
         public ICollection<TournamentMatch> TournamentMatches { get; set; } = new List<TournamentMatch>();

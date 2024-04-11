@@ -25,7 +25,7 @@
             throw new NotImplementedException();
         }
 
-        public Task<ICollection<TournamentServiceModel>> GetAllTournaments()
+        public Task<ICollection<TournamentServiceModel>> AllAsync()
         {
             throw new NotImplementedException();
         }

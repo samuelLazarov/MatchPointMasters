@@ -18,6 +18,18 @@
             public const int TournamentDescriptionMinLength = 50;
             public const int TournamentDescriptionMaxLength = 1000;
 
+            //ImageUrl
+            public const int TournamentImageUrlMinLength = 5;
+            public const int TournamentImageUrlMaxLength = 500;
+
+            //Tournament Capacity
+            public const int TournamentCapacityMinRange = 8;
+            public const uint TournamentCapacityMaxRange = 128;
+
+            //Tournament Fee
+            public const int TournamentFeeMinRange = 1;
+            public const uint TournamentFeeMaxRange = uint.MaxValue;
+
         }
 
         public static class ClubConstants
