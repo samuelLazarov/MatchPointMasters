@@ -3,6 +3,6 @@
     public class TournamentQueryServiceModel
     {
         public int TotalTournamentsCount { get; set; }
-        public IEnumerable<TournamentServiceModel> Tournaments { get; set;} = new HashSet<TournamentServiceModel>();
+        public IEnumerable<TournamentServiceModel> Tournaments { get; set;} = new List<TournamentServiceModel>();
     }
 }

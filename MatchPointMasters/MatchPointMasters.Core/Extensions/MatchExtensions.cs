@@ -6,7 +6,7 @@
     {
         public static string GetInformation(this IMatchModel currentMatch)
         {
-            var matchInfo = currentMatch.PlayerOne + " / " + currentMatch.PlayerTwo;
+            var matchInfo = currentMatch.PlayerOneName + " / " + currentMatch.PlayerTwoName;
             return matchInfo;
         }
     }

@@ -1,12 +1,10 @@
 ﻿namespace MatchPointMasters.Core.Models.Player
 {
-    using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.TournamentHostConstants;
 
     public class TournamentHostServiceModel
     {
-
         public int Id { get; set; }
 
         [Required]
@@ -15,8 +13,6 @@
 
         [Required]
         public string UserId { get; set; } = string.Empty;
-
-        public IdentityUser User { get; set; } = null!;
 
     }
 }

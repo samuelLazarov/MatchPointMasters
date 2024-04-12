@@ -19,11 +19,11 @@
             return View(players);
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(string playerId)
         {
             try
             {
-                var player = await playerService.GetPlayerById(id);
+                var player = await playerService.GetPlayerById(playerId);
                 return View(player);
             }
             catch (Exception)

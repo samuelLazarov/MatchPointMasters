@@ -3,6 +3,7 @@
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Models.Player;
     using MatchPointMasters.Infrastructure.Data.Common;
+    using MatchPointMasters.Infrastructure.Data.Models.Player;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -16,24 +17,37 @@
             repository = _repository;
         }
 
-        public Task<ICollection<PlayerServiceModel>> GetAllPlayers()
+        public async Task<ICollection<PlayerQueryServiceModel>> GetAllPlayers()
         {
             throw new NotImplementedException();
         }
 
-        public Task<PlayerServiceModel> GetPlayerById(int id)
+        public async Task<PlayerServiceModel> GetPlayerById(string playerid)
+        {
+            throw new NotImplementedException();
+
+        }
+
+        public async  Task<PlayerServiceModel> GetPlayerMatches(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<PlayerServiceModel> GetPlayerMatches(int id)
+        public async Task<PlayerServiceModel> GetPlayerTournaments(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<PlayerServiceModel> GetPlayerTournaments(int id)
+        public async Task<string> PlayerFullNameAsync(string userId)
         {
-            throw new NotImplementedException();
+            string result = string.Empty;
+            var player = await repository.GetByIdAsync<Player>(userId);
+
+            if (player != null)
+            {
+                result = $"{player.FirstName} {player.LastName}";
+            }
+            return result;
         }
     }
 }

@@ -4,6 +4,7 @@
     {
         All = 0,
         Upcoming = 1,
-        HasEnded = 2
+        InProgress = 2,
+        HasEnded = 3
     }
 }

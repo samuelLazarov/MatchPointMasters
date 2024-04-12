@@ -4,8 +4,9 @@
 
     public interface IPlayerService
     {
-        Task<ICollection<PlayerServiceModel>> GetAllPlayers();
-        Task<PlayerServiceModel> GetPlayerById(int id);
+        //TODO
+        Task<ICollection<PlayerQueryServiceModel>> GetAllPlayers();
+        Task<PlayerServiceModel> GetPlayerById(string id);
         Task<PlayerServiceModel> GetPlayerMatches(int id);
         Task<PlayerServiceModel> GetPlayerTournaments(int id);
     }

@@ -1,7 +1,6 @@
 ﻿namespace MatchPointMasters.Core.Models.Player
 {
     using MatchPointMasters.Infrastructure.Data.Enums.Player;
-    using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.PlayerConstants;
@@ -26,8 +25,6 @@
 
         [Required]
         public string UserId { get; set; } = string.Empty;
-
-        public IdentityUser User { get; set; } = null!;
 
         [Required]
         public DateTime BirthDate { get; set; }
