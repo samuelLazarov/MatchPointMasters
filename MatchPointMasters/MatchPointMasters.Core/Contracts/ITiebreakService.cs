@@ -4,7 +4,16 @@
     using MatchPointMasters.Infrastructure.Data.Models.Match;
     public interface ITiebreakService
     {
-        //Tiebreak
+
+        //CRUD operations
+        Task<int> AddTiebreakAsync(TiebreakAddViewModel tiebreakForm, int setId);
+        Task<TiebreakEditViewModel> EditTiebreakGetAsync(int tiebreakId);
+        Task<int> EditTiebreakPostAsync(TiebreakEditViewModel tiebreakForm);
+        Task<TiebreakDeleteViewModel> DeleteTiebreakAsync(int tiebreakId);
+        Task<int> DeleteTiebreakConfirmedAsync(int tiebreakId);
+
+
+        //Query operations
         Task<TiebreakQueryServiceModel> AllAsync();
         Task<bool> TiebreakExistsAsync(int tiebreakId);
         Task<Tiebreak> FindTiebreakByIdAsync(int tiebreakId);

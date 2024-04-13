@@ -7,8 +7,15 @@
 
     public interface IMatchService
     {
-        
-        //Match
+
+        //CRUD operations
+        Task<int> AddMatchAsync(MatchAddViewModel matchForm);
+        Task<MatchEditViewModel> EditMatchGetAsync(int matchId);
+        Task<int> EditMatchPostAsync(MatchEditViewModel matchForm);
+        Task<MatchDeleteViewModel> DeleteMatchAsync(int matchId);
+        Task<int> DeleteMatchConfirmedAsync(int matchId);
+
+        //Query operations
         Task<MatchQueryServiceModel> AllMatchesInTournamentAsync(
             int tournamentId,
             string? matchRound = null,

@@ -17,6 +17,81 @@ namespace MatchPointMasters.Core.Services
             repository = _repository;
         }
 
+        public async Task<int> AddTiebreakAsync(TiebreakAddViewModel tiebreakForm, int setId)
+        {
+            Tiebreak tiebreak = new Tiebreak()
+            {
+                PlayerOnePoints = tiebreakForm.PlayerOnePoints,
+                PlayerTwoPoints = tiebreakForm.PlayerTwoPoints,
+                SetId = setId
+            };
+
+            await repository.AddAsync(tiebreak);
+            await repository.SaveChangesAsync();
+
+            return tiebreak.Id;
+        }
+
+        public async Task<TiebreakEditViewModel> EditTiebreakGetAsync(int tiebreakId)
+        {
+            var currentTiebreak = await repository.All<Tiebreak>()
+                .FirstOrDefaultAsync(t => t.Id == tiebreakId);
+
+            var tiebreakForm = new TiebreakEditViewModel()
+            {
+                Id = currentTiebreak.Id,
+                PlayerOnePoints = currentTiebreak.PlayerOnePoints,
+                PlayerTwoPoints = currentTiebreak.PlayerTwoPoints,
+            };
+
+            return tiebreakForm;
+        }
+
+        public async Task<int> EditTiebreakPostAsync(TiebreakEditViewModel tiebreakForm)
+        {
+            var tiebreak = await repository.All<Tiebreak>()
+                .Where(t => t.Id == tiebreakForm.Id)
+                .FirstOrDefaultAsync();
+
+            tiebreak.PlayerOnePoints = tiebreakForm.PlayerOnePoints;
+            tiebreak.PlayerTwoPoints = tiebreakForm.PlayerTwoPoints;
+            tiebreak.SetId = tiebreakForm.SetId;
+
+            await repository.SaveChangesAsync();
+
+            return tiebreak.Id;
+
+        }
+
+        public async Task<TiebreakDeleteViewModel> DeleteTiebreakAsync(int tiebreakId)
+        {
+            var tiebreak = await repository
+                .AllAsReadOnly<Tiebreak>().Where(t => t.Id == tiebreakId)
+                .FirstOrDefaultAsync();
+
+            var deleteForm = new TiebreakDeleteViewModel()
+            {
+                Id = tiebreak.Id,
+                PlayerOnePoints = tiebreak.PlayerOnePoints,
+                PlayerTwoPoints = tiebreak.PlayerTwoPoints,
+            };
+
+            return deleteForm;
+        }
+
+        public async Task<int> DeleteTiebreakConfirmedAsync(int tiebreakId)
+        {
+            var tiebreak = await repository
+                .AllAsReadOnly<Tiebreak>()
+                .Where(t => t.Id == tiebreakId)
+                .FirstOrDefaultAsync();
+
+            await repository.RemoveAsync<Tiebreak>(tiebreak);
+            await repository.SaveChangesAsync();
+
+            return tiebreak.Id;
+        }
+
         public async Task<TiebreakQueryServiceModel> AllAsync()
         {
             var tiebreaks = await repository.AllAsReadOnly<Tiebreak>()
@@ -36,10 +111,16 @@ namespace MatchPointMasters.Core.Services
             };
         }
 
-        public async Task<Tiebreak?> FindTiebreakByIdAsync(int tiebreakId)
+
+        public async Task<Tiebreak> FindTiebreakByIdAsync(int tiebreakId)
         {
-            return await repository.AllAsReadOnly<Tiebreak>()
+            var currentTiebreak = await repository.AllAsReadOnly<Tiebreak>()
                 .FirstOrDefaultAsync(t => t.Id == tiebreakId);
+            if (currentTiebreak == null)
+            {
+                throw new Exception();
+            }
+            return currentTiebreak;
         }
 
         public async Task<TiebreakDetailsViewModel> TiebreakDetailsAsync(int tiebreakId)

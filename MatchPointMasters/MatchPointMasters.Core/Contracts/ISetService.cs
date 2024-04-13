@@ -1,12 +1,18 @@
 ﻿namespace MatchPointMasters.Core.Contracts
 {
     using MatchPointMasters.Core.Models.Set;
-    using MatchPointMasters.Core.Models.Tiebreak;
     using MatchPointMasters.Infrastructure.Data.Models.Match;
 
     public interface ISetService
     {
-        //Set
+        //CRUD operations
+        Task<int> AddSetAsync(SetAddViewModel setForm, int matchId);
+        Task<SetEditViewModel> EditSetASyncGetAsync(int setId);
+        Task<int> EditSetPostAsync(SetEditViewModel setForm);
+        Task<SetDeleteViewModel> DeleteSetAsync(int setId);
+        Task<int> DeleteSetConfirmedAsync(int setId);
+
+        //Query operations
         Task<SetQueryServiceModel> AllAsync();
         Task<bool> SetExistsAsync(int setId);
         Task<Set> FindSetByIdAsync(int setId);

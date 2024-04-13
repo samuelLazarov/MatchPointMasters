@@ -4,10 +4,25 @@
     using MatchPointMasters.Core.Models.Match;
     using MatchPointMasters.Core.Models.Player;
     using MatchPointMasters.Core.Models.Tournament;
+    using MatchPointMasters.Infrastructure.Data.Models.Mappings;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
 
     public interface ITournamentService
     {
+
+        //CRUD operations
+        Task<int> AddTournamentAsync(TournamentAddViewModel tournamentForm);
+        Task<TournamentEditViewModel> EditTournamentGetAsync(int tournamentId);
+        Task<int> EditTournamentPostAsync(TournamentEditViewModel tournamentForm);
+        Task<TournamentDeleteViewModel> DeleteTournamentAsync(int tournamentId);
+        Task<int> DeleteTournamentConfirmedAsync(int tournamentId);
+        Task<bool> MatchExistsInTournamentAsync(int matchId, int tournamentId);
+        Task<TournamentMatch> AddMatchToTournamentAsync(int matchId, int tournamentId);
+        Task<TournamentMatchDeleteViewModel> RemoveMatchFromTournamentAsync(int matchId, int tournamentId);
+        Task RemoveMatchFromTournamentConfirmedAsync(int matchId, int tournamentId);
+
+
+        //Query operations
         Task<TournamentQueryServiceModel> AllAsync(
             string? searchTerm = null,
             TournamentSorting sorting = TournamentSorting.Newest,

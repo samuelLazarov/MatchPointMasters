@@ -6,7 +6,7 @@ namespace MatchPointMasters.Core.Models.Match
     public class MatchDeleteViewModel : IMatchModel
     {
         public MatchRound MatchRound { get; set; }
-        public string PlayerOneName { get; set; } = string.Empty;
-        public string PlayerTwoName { get; set; } = string.Empty;
+        public int PlayerOneId { get; set; }
+        public int PlayerTwoId { get; set; }
     }
 }

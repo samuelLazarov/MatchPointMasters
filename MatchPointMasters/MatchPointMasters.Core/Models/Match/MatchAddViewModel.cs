@@ -5,20 +5,21 @@
     using System.ComponentModel.DataAnnotations;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.MatchConstants;
-    using static MatchPointMasters.Infrastructure.Constants.DataConstants.PlayerConstants;
 
     public class MatchAddViewModel : IMatchModel
     {
+
+        [Required]
+        public int TournamentId { get; set; }
+
         [Required]
         public MatchRound MatchRound { get; set; }
 
         [Required]
-        [StringLength(PlayerNameMinLength, MinimumLength = PlayerNameMinLength, ErrorMessage = LengthErrorMessage)]
-        public string PlayerOneName { get; set; } = string.Empty;
+        public int PlayerOneId { get; set; }
 
         [Required]
-        [StringLength(PlayerNameMinLength, MinimumLength = PlayerNameMinLength, ErrorMessage = LengthErrorMessage)]
-        public string PlayerTwoName { get; set; } = string.Empty;
+        public int PlayerTwoId { get; set; }
 
         [Required]
         [Range(SetsMinRange, SetsMaxRange, ErrorMessage = RangeErrorMessage)]

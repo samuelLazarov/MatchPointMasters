@@ -5,8 +5,8 @@
     {
         public int Id { get; set; }
         public MatchRound MatchRound { get; set; }
-        public string PlayerOneName { get; set; } = string.Empty;
-        public string PlayerTwoName { get; set; } = string.Empty;
+        public int PlayerOneId { get; set; }
+        public int PlayerTwoId { get; set; }
         public int PlayerOneSetsWon { get; set; } = 0;
         public int PlayerTwoSetsWon { get; set; } = 0;
         public Winner Winner { get; set; }
