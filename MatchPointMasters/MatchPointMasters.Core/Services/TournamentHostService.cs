@@ -14,22 +14,40 @@
             repository = _repository;
         }
 
+        public async Task<bool> ExistsByTournamentHostIdAsync(int tournamentHostId)
+        {
+            return await repository
+                .AllAsReadOnly<TournamentHost>()
+                .AnyAsync(th => th.Id == tournamentHostId);
+        }
 
-        public async Task<bool> ExistsByIdAsync(string userId)
+        public async Task<bool> ExistsByUserIdAsync(string userId)
         {
             return await repository
                 .AllAsReadOnly<TournamentHost>()
                 .AnyAsync(th => th.UserId == userId);
         }
 
+        public async Task<bool> ExistsByEmailAsync(string tournamentHostEmail)
+        {
+            return await repository
+                .AllAsReadOnly<TournamentHost>()
+                .AnyAsync(u => u.User.Email.ToLower() == tournamentHostEmail.ToLower());
+        }
+
+        public async Task<TournamentHost> GetPublisherByEmailAsync(string tournamentHostEmail)
+        {
+            return await repository
+                .All<TournamentHost>()
+                .FirstOrDefaultAsync(u => u.User.Email.ToLower() == tournamentHostEmail.ToLower());
+        }
+
         public async Task<int?> GetTournamentHostIdAsync(string userId)
         {
             return (await repository
                 .AllAsReadOnly<TournamentHost>()
-                .FirstOrDefaultAsync(th => th.UserId == userId))?.Id;
-
+                .FirstOrDefaultAsync(p => p.UserId == userId))?.Id;
         }
 
-       
     }
 }

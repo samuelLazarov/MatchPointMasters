@@ -15,39 +15,91 @@
     {
 
         private readonly IRepository repository;
+        private readonly IMatchService matchService;
 
 
-        public TournamentService(IRepository _repository)
+        public TournamentService(IRepository _repository, IMatchService _matchService)
         {
             repository = _repository;
+            matchService = _matchService;
         }
 
-        public Task<int> AddTournamentAsync(TournamentAddViewModel tournamentForm)
+        public async Task<int> AddTournamentAsync(TournamentAddViewModel tournamentForm)
+        {
+            Tournament tournament = new Tournament()
+            {
+                Name = tournamentForm.Name,
+                Description = tournamentForm.Description,
+                StartDate = tournamentForm.StartDate,
+                EndDate = tournamentForm.EndDate,
+                HostClubId = tournamentForm.HostClubId,
+                TournamentBalls = tournamentForm.TournamentBalls,
+                Fee = tournamentForm.Fee,
+                Capacity = tournamentForm.Capacity,
+                ImageUrl = tournamentForm.ImageUrl
+            };
+
+            await repository.AddAsync(tournament);
+            await repository.SaveChangesAsync();
+
+            return tournament.Id;
+        }
+
+        public async Task<TournamentEditViewModel> EditTournamentGetAsync(int tournamentId)
+        {
+            var currentTournament = await repository.All<Tournament>()
+                .FirstOrDefaultAsync(t => t.Id == tournamentId);
+
+            var tournamentForm = new TournamentEditViewModel()
+            {
+                Id = currentTournament.Id,
+                Name = currentTournament.Name,
+                Description = currentTournament.Description,
+                StartDate = currentTournament.StartDate,
+                EndDate = currentTournament.EndDate,
+                HostClubId = currentTournament.HostClubId,
+                TournamentBalls = currentTournament.TournamentBalls,
+                Fee = currentTournament.Fee,
+                Capacity = currentTournament.Capacity,
+                ImageUrl = currentTournament.ImageUrl
+            };
+
+            return tournamentForm;
+        }
+
+        public async Task<int> EditTournamentPostAsync(TournamentEditViewModel tournamentForm)
+        {
+            var tournament = await repository.All<Tournament>()
+                .Where(t => t.Id == tournamentForm.Id)
+                .FirstOrDefaultAsync();
+
+            tournament.Name = tournamentForm.Name;
+            tournament.Description = tournamentForm.Description;
+            tournament.StartDate = tournamentForm.StartDate;
+            tournament.EndDate = tournamentForm.EndDate;
+            tournament.HostClubId = tournament.HostClubId;
+            tournament.TournamentBalls = tournament.TournamentBalls;
+            tournament.Fee = tournamentForm.Fee;
+            tournament.Capacity = tournamentForm.Capacity;
+            tournament.ImageUrl = tournamentForm.ImageUrl;
+               
+            await repository.SaveChangesAsync();
+
+            return tournament.Id;
+
+        }
+
+        public async Task<TournamentDeleteViewModel> DeleteTournamentAsync(int tournamentId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TournamentEditViewModel> EditTournamentGetAsync(int tournamentId)
+        public async Task<int> DeleteTournamentConfirmedAsync(int tournamentId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> EditTournamentPostAsync(TournamentEditViewModel tournamentForm)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<TournamentDeleteViewModel> DeleteTournamentAsync(int tournamentId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> DeleteTournamentConfirmedAsync(int tournamentId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> MatchExistsInTournamentAsync(int matchId, int tournamentId)
+        public async Task<bool> MatchExistsInTournamentAsync(int matchId, int tournamentId)
         {
             throw new NotImplementedException();
         }
@@ -115,7 +167,7 @@
                 {
                     Id = t.Id,
                     Name = t.Name,
-                    HostClub = t.HostClub.Name,
+                    HostClubId = t.HostClubId,
                     Description = t.Description,
                     StartDate = t.StartDate,
                     EndDate = t.EndDate,
@@ -155,7 +207,7 @@
                 Id = currentTournament.Id,
                 Name = currentTournament.Name,
                 Description = currentTournament.Description,
-                HostClub = currentTournament.HostClub.Name,
+                HostClubId = currentTournament.HostClubId,
                 StartDate = currentTournament.StartDate,
                 EndDate = currentTournament.EndDate,
                 Capacity = currentTournament.Capacity,

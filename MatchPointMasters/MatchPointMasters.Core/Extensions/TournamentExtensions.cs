@@ -6,8 +6,7 @@
     {
         public static string GetInformation(this ITournamentModel currentTournament)
         {
-            var tournamentInfo = currentTournament.Name + " - " + currentTournament.HostClub;
-            return tournamentInfo;
+            return string.Empty;
         }
 
     }

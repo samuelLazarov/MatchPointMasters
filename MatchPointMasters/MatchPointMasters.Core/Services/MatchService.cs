@@ -2,10 +2,15 @@
 {
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Enumerations;
+    using MatchPointMasters.Core.Extensions;
     using MatchPointMasters.Core.Models.Match;
     using MatchPointMasters.Core.Models.Set;
     using MatchPointMasters.Infrastructure.Data.Common;
+    using MatchPointMasters.Infrastructure.Data.Models.Match;
+    using MatchPointMasters.Infrastructure.Data.Models.Tournament;
     using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Match = Infrastructure.Data.Models.Match.Match;
 
@@ -128,21 +133,50 @@
             if (searchTerm != null)
             {
                 string normalizedSearchTerm = searchTerm.ToLower();
-                
-                
+                matchesToShow = matchesToShow
+                    .Where(m => normalizedSearchTerm.Contains(m.PlayerOneId.ToString().ToLower())
+                    || normalizedSearchTerm.Contains(m.PlayerTwoId.ToString().ToLower())
+                    
+                    || m.PlayerOneId.ToString().ToLower().Contains(normalizedSearchTerm)
+                    || m.PlayerTwoId.ToString().ToLower().Contains(normalizedSearchTerm)
+                    );
             }
+
+            matchesToShow = status switch
+            {
+                MatchStatus.HasEnded => matchesToShow.OrderBy(m => m.Id),
+                MatchStatus.InProgress => matchesToShow.OrderBy(m => m.Id),
+                MatchStatus.Upcoming => matchesToShow.OrderBy(m => m.Id),
+                _ => matchesToShow.OrderByDescending(m => m.Id)
+            };
+
+            var matches = await matchesToShow
+                .Skip((currentPage -1) * matchesPerPage)
+                .Take(matchesPerPage)
+                .ProjectToMatchServiceModel()
+                .ToListAsync();
+
+            int totalMatches = await matchesToShow.CountAsync();
 
             return new MatchQueryServiceModel()
             {
-
+                Matches = matches,
+                TotalMatchesCount = totalMatches
             };
         }
 
-
-
-        public Task<SetQueryServiceModel> GetAllSetsInMatchAsync(int tourId)
+        public async Task<SetQueryServiceModel> GetAllSetsInMatchAsync(int matchId)
         {
-            throw new NotImplementedException();
+            var setsInMatch = await repository.AllAsReadOnly<Set>()
+                .Where(s => s.MatchId == matchId).ToListAsync();
+
+            int totalSets = setsInMatch.Count();
+
+            return new SetQueryServiceModel()
+            {
+                TotalSetsCount = totalSets,
+                Sets = (IEnumerable<SetServiceModel>)setsInMatch
+            };
         }
 
         public async Task<MatchDetailsViewModel> MatchDetailsAsync(int matchId)

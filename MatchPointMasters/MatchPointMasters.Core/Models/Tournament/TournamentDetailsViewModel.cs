@@ -8,7 +8,7 @@ namespace MatchPointMasters.Core.Models.Tournament
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string HostClub { get; set; } = string.Empty;
+        public int HostClubId { get; set; }
         public string Description { get; set; } = string.Empty;
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

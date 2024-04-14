@@ -6,14 +6,15 @@
     using MatchPointMasters.Core.Models.Tiebreak;
     using MatchPointMasters.Core.Models.Tournament;
     using MatchPointMasters.Infrastructure.Data.Models.Mappings;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
 
     public interface ITournamentHostService
     {
-        Task<bool> ExistsByIdAsync(string userId);
-        Task<int?> GetTournamentHostIdAsync(string userId);
-
-      
-
+        Task<bool> ExistsByTournamentHostIdAsync(int userId);
+        Task<bool> ExistsByUserIdAsync(string userId);
+        Task<bool> ExistsByEmailAsync(string publisherEmail);
+        Task<TournamentHost> GetPublisherByEmailAsync(string publisherEmail);
+        Task<int?> GetTournamentHostIdAsync(string UserId);
 
     }
 }

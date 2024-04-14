@@ -3,7 +3,7 @@
     public interface ITournamentModel
     {
         public string Name { get; set; }
-        public string HostClub { get; set; }
+        public int HostClubId { get; set; }
        
     }
 }

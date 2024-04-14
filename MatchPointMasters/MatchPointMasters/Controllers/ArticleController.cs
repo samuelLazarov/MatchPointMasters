@@ -59,7 +59,7 @@ namespace MatchPointMasters.Controllers
 		[MustBeATournamentHost]
 		public async Task<IActionResult> Add()
 		{
-			if (await tournamentHostService.ExistsByIdAsync(User.Id()) == false)
+			if (await tournamentHostService.ExistsByUserIdAsync(User.Id()) == false)
 			{
 				return Unauthorized();
 			}
@@ -73,7 +73,7 @@ namespace MatchPointMasters.Controllers
 		[MustBeATournamentHost]
 		public async Task<IActionResult> Add(ArticleAddViewModel articleForm)
 		{
-			if (await tournamentHostService.ExistsByIdAsync(User.Id()) == false)
+			if (await tournamentHostService.ExistsByUserIdAsync(User.Id()) == false)
 			{
 				return Unauthorized();
 			}

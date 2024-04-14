@@ -24,7 +24,7 @@
                 <a asp-controller="Article" asp-action="All" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Обратно към Всички Статии</a>
             </div>
 
-            @if (await tournamentHostService.ExistsByIdAsync(User.Id()))
+            @if (await tournamentHostService.ExistsByUserIdAsync(User.Id()))
             {
                     <hr />
                     <div class="d-flex justify-content-center mt-1">

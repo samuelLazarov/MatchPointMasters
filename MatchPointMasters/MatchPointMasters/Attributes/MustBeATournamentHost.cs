@@ -20,7 +20,7 @@ namespace MatchPointMasters.Attributes
 				context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
 			}
 
-			if (tournamentHostService != null && tournamentHostService.ExistsByIdAsync(context.HttpContext.User.Id()).Result == false)
+			if (tournamentHostService != null && tournamentHostService.ExistsByUserIdAsync(context.HttpContext.User.Id()).Result == false)
 			{
 				context.Result = new StatusCodeResult(StatusCodes.Status401Unauthorized);
 			}

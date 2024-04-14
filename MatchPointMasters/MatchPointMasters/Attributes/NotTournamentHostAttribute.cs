@@ -17,7 +17,7 @@
 				context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
 			}
 
-			if (tournamentHostService != null && tournamentHostService.ExistsByIdAsync(context.HttpContext.User.Id()).Result)
+			if (tournamentHostService != null && tournamentHostService.ExistsByUserIdAsync(context.HttpContext.User.Id()).Result)
 			{
 				context.Result = new StatusCodeResult(StatusCodes.Status400BadRequest);
 			}
