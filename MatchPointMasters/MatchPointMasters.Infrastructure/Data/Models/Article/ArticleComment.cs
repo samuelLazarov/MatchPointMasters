@@ -6,6 +6,7 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Article
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.ArticleCommentConstants;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
 
     [Comment("Articles can be created by Tournament Hosts and commented by Players")]
     public class ArticleComment
@@ -36,6 +37,6 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Article
 
         [ForeignKey(nameof(UserId))]
         [Comment("The current User")]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
     }
 }

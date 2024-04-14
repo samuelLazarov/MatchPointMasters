@@ -6,6 +6,7 @@
     using MatchPointMasters.Core.Models.Player;
     using MatchPointMasters.Core.Models.Tournament;
     using MatchPointMasters.Infrastructure.Data.Common;
+    using MatchPointMasters.Infrastructure.Data.Models.Mappings;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
     using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
@@ -19,6 +20,51 @@
         public TournamentService(IRepository _repository)
         {
             repository = _repository;
+        }
+
+        public Task<int> AddTournamentAsync(TournamentAddViewModel tournamentForm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TournamentEditViewModel> EditTournamentGetAsync(int tournamentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> EditTournamentPostAsync(TournamentEditViewModel tournamentForm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TournamentDeleteViewModel> DeleteTournamentAsync(int tournamentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> DeleteTournamentConfirmedAsync(int tournamentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> MatchExistsInTournamentAsync(int matchId, int tournamentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TournamentMatch> AddMatchToTournamentAsync(int matchId, int tournamentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TournamentMatchDeleteViewModel> RemoveMatchFromTournamentAsync(int matchId, int tournamentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveMatchFromTournamentConfirmedAsync(int matchId, int tournamentId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<TournamentQueryServiceModel> AllAsync(
@@ -134,5 +180,7 @@
         }
 
        
+
+        
     }
 }

@@ -6,6 +6,17 @@
         public const string LengthErrorMessage = "{0} must be between {2} and {1} characters long!";
         public const string RangeErrorMessage = "{0} must be a number between {1} and {2}!";
 
+
+
+        public static class ApplicationUserConstants
+        {
+            public const int ApplicationUserFirstNameMinLength = 1;
+            public const int ApplicationUserFirstNameMaxLength = 30;
+
+            public const int ApplicationUserLastNameMinLength = 1;
+            public const int ApplicationUserLastNameMaxLength = 30;
+        }
+
         public static class TournamentConstants
         {
             public const string DateTimeTournamentFormat = "dd/MM/yyyy HH:mm";
@@ -90,6 +101,9 @@
             //Phone
             public const int HostPhoneMinLength = 7;
             public const int HostPhoneMaxLength = 20;
+
+            //Email
+            public const string HostEmailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
         }
 
         public static class ArticleConstants

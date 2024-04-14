@@ -4,6 +4,7 @@
     using MatchPointMasters.Core.Models.Player;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Player;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -41,7 +42,7 @@
         public async Task<string> PlayerFullNameAsync(string userId)
         {
             string result = string.Empty;
-            var player = await repository.GetByIdAsync<Player>(userId);
+            var player = await repository.GetByIdAsync<ApplicationUser>(userId);
 
             if (player != null)
             {

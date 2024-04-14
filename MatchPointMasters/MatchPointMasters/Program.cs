@@ -4,15 +4,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MatchPointMasters.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
+using MatchPointMasters.Infrastructure.Data.Models.Roles;
+using MatchPointMasters.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("MatchPointMastersDbContextConnection") ?? throw new InvalidOperationException("Connection string 'MatchPointMastersDbContextConnection' not found.");
 
 builder.Services.AddDbContext<MatchPointMastersDbContext>(options =>
     options.UseSqlServer(connectionString));
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<MatchPointMastersDbContext>();
 
 builder.Services.AddApplicationDbContext(builder.Configuration);
 builder.Services.AddApplicationIdentity(builder.Configuration);
@@ -51,6 +50,11 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+        );
+    
+    endpoints.MapControllerRoute(
         name: "Player Details",
         pattern: "/Player/Details/{id}/{information}",
         defaults: new { Controller = "Player", Action = "Details" }
@@ -79,4 +83,5 @@ app.UseEndpoints(endpoints =>
 
 });
 
+await app.CreateAdminRoleAsync();
 await app.RunAsync();

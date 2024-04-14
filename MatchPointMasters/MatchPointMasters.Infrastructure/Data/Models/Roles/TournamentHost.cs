@@ -25,7 +25,7 @@
 
         [ForeignKey(nameof(UserId))]
         [Comment("The current User")]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         public ICollection<Tournament> Tournaments { get; set; } = new List<Tournament>();
     }

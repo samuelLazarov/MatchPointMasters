@@ -12,6 +12,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.ArticleConstants;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.PlayerConstants;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.TournamentConstants;
+    using static MatchPointMasters.Infrastructure.Constants.CustomClaims;
 
 
     internal class DataSeed
@@ -31,17 +32,31 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             SeedArticles();
         }
 
-
         //Users
-        public IdentityUser HostUser { get; set; } = null!;
-        public IdentityUser Player1User { get; set; } = null!;
-        public IdentityUser Player2User { get; set; } = null!;
-        public IdentityUser Player3User { get; set; } = null!;
-        public IdentityUser Player4User { get; set; } = null!;
-        public IdentityUser Player5User { get; set; } = null!;
-        public IdentityUser Player6User { get; set; } = null!;
-        public IdentityUser Player7User { get; set; } = null!;
-        public IdentityUser Player8User { get; set; } = null!;
+        public ApplicationUser AdminUser { get; set; }
+        public ApplicationUser HostUser { get; set; } = null!;
+        public ApplicationUser Player1User { get; set; } = null!;
+        public ApplicationUser Player2User { get; set; } = null!;
+        public ApplicationUser Player3User { get; set; } = null!;
+        public ApplicationUser Player4User { get; set; } = null!;
+        public ApplicationUser Player5User { get; set; } = null!;
+        public ApplicationUser Player6User { get; set; } = null!;
+        public ApplicationUser Player7User { get; set; } = null!;
+        public ApplicationUser Player8User { get; set; } = null!;
+        public ApplicationUser GuestUser { get; set; } = null!;
+
+        //Claims
+        public IdentityUserClaim<string> AdminUserClaim { get; set; }
+        public IdentityUserClaim<string> HostUserClaim { get; set; }
+        public IdentityUserClaim<string> Player1UserClaim { get; set; }
+        public IdentityUserClaim<string> Player2UserClaim { get; set; }
+        public IdentityUserClaim<string> Player3UserClaim { get; set; }
+        public IdentityUserClaim<string> Player4UserClaim { get; set; }
+        public IdentityUserClaim<string> Player5UserClaim { get; set; }
+        public IdentityUserClaim<string> Player6UserClaim { get; set; }
+        public IdentityUserClaim<string> Player7UserClaim { get; set; }
+        public IdentityUserClaim<string> Player8UserClaim { get; set; }
+        public IdentityUserClaim<string> GuestUserClaim { get; set; }
 
         //Tennis clubs
         public Club TkNikaSarafovo { get; set; } = null!;
@@ -54,6 +69,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
         public Tournament VSSportOpen { get; set; } = null!;
         public Tournament LeaderOpen { get; set; } = null!;
 
+        //Roles
         //Tournament host
         public TournamentHost TournamentHost { get; set; } = null!;
 
@@ -98,107 +114,238 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
         private void SeedUsers()
         {
-            var hasher = new PasswordHasher<IdentityUser>();
+            var hasher = new PasswordHasher<ApplicationUser>();
 
-            HostUser = new IdentityUser()
+            AdminUser = new ApplicationUser()
+            {
+                Id = "c2f14bf7-ffdd-47a4-90b3-f2309486fae9",
+                UserName = "admin@gmail.com",
+                NormalizedUserName = "ADMIN@GMAIL.COM",
+                Email = "admin@gmail.com",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
+                FirstName = "Admin",
+                LastName = "Adminov"
+            };
+            
+            AdminUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 1,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Admin Adminov",
+                UserId = "c2f14bf7-ffdd-47a4-90b3-f2309486fae9"
+            };
+
+            AdminUser.PasswordHash = hasher.HashPassword(AdminUser, "adminpass");
+
+            HostUser = new ApplicationUser()
             {
                 Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                 UserName = "Ivan_Pandeliev",
                 NormalizedUserName = "ivan_pandeliev",
                 Email = "hostuser@gmail.com",
-                NormalizedEmail = "hostuser@gmail.com"
+                NormalizedEmail = "hostuser@gmail.com",
+                FirstName = "Ivan",
+                LastName = "Pandeliev"
+            };
+
+            HostUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 2,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Ivan Pandeliev",
+                UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
             };
 
             HostUser.PasswordHash = hasher.HashPassword(HostUser, "hostpass");
 
-            Player1User = new IdentityUser()
+            Player1User = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d83950p1",
                 UserName = "Samuel_Lazarov",
                 NormalizedUserName = "samuel_lazarov",
                 Email = "player1@gmail.com",
-                NormalizedEmail = "player1@gmail.com"
+                NormalizedEmail = "player1@gmail.com",
+                FirstName = "Samuel",
+                LastName = "Lazarov"
+            };
+
+            Player1UserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 3,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Samuel Lazarov",
+                UserId = "dea12856-c198-4129-b3f3-b893d83950p1"
             };
 
             Player1User.PasswordHash = hasher.HashPassword(Player1User, "player1pass");
 
-            Player2User = new IdentityUser()
+            Player2User = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d83950p2",
                 UserName = "Sarkis_Haralampiev",
                 NormalizedUserName = "sarkis_haralampiev",
                 Email = "player2@gmail.com",
-                NormalizedEmail = "player2@gmail.com"
+                NormalizedEmail = "player2@gmail.com",
+                FirstName = "Sarkis",
+                LastName = "Haralampiev"
+
+            };
+
+            Player2UserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 4,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Sarkis Haralampiev",
+                UserId = "dea12856-c198-4129-b3f3-b893d83950p2"
             };
 
             Player2User.PasswordHash = hasher.HashPassword(Player2User, "player2pass");
 
-            Player3User = new IdentityUser()
+            Player3User = new ApplicationUser()
             {
                 Id = "f98e572e-f64b-40f5-a37f-783d2d1ff0p3",
                 UserName = "Ivan_Pritargov",
                 NormalizedUserName = "ivan_pritargov",
                 Email = "player3@gmail.com",
-                NormalizedEmail = "player3@gmail.com"
+                NormalizedEmail = "player3@gmail.com",
+                FirstName = "Ivan",
+                LastName = "Pritargov"
+            };
+
+            Player3UserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 5,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Ivan Pritargov",
+                UserId = "f98e572e-f64b-40f5-a37f-783d2d1ff0p3"
             };
 
             Player3User.PasswordHash = hasher.HashPassword(Player3User, "player3pass");
 
-            Player4User = new IdentityUser()
+            Player4User = new ApplicationUser()
             {
                 Id = "4a08e50c-9f8d-4ac7-bbc1-05a7f0f146p4",
                 UserName = "Daniil_Kurian",
                 NormalizedUserName = "daniil_kurian",
                 Email = "player4@gmail.com",
-                NormalizedEmail = "player4@gmail.com"
+                NormalizedEmail = "player4@gmail.com",
+                FirstName = "Daniil",
+                LastName = "Kurian"
+            };
+
+            Player4UserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 6,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Daniil Kurian",
+                UserId = "4a08e50c-9f8d-4ac7-bbc1-05a7f0f146p4"
             };
 
             Player4User.PasswordHash = hasher.HashPassword(Player4User, "player4pass");
 
-            Player5User = new IdentityUser()
+            Player5User = new ApplicationUser()
             {
                 Id = "adb4186a-f51d-4969-aa0f-938a524128p5",
                 UserName = "Rado_Vladimirov",
                 NormalizedUserName = "rado_vladimirov",
                 Email = "player5@gmail.com",
-                NormalizedEmail = "player5@gmail.com"
+                NormalizedEmail = "player5@gmail.com",
+                FirstName = "Rado",
+                LastName = "Vladimirov"
+            };
+
+            Player5UserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 7,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Rado Vladimirov",
+                UserId = "adb4186a-f51d-4969-aa0f-938a524128p5"
             };
 
             Player5User.PasswordHash = hasher.HashPassword(Player5User, "player5pass");
 
-            Player6User = new IdentityUser()
+            Player6User = new ApplicationUser()
             {
                 Id = "4319f732-1f7d-44e3-8b4b-7d698f7c44p6",
                 UserName = "Dimitar_Berdankov",
                 NormalizedUserName = "dimitar_berdankov",
                 Email = "player6@gmail.com",
-                NormalizedEmail = "player6@gmail.com"
+                NormalizedEmail = "player6@gmail.com",
+                FirstName = "Dimitar",
+                LastName = "Berdankov"
+            };
+
+            Player6UserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 8,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Dimitar Berdankov",
+                UserId = "4319f732-1f7d-44e3-8b4b-7d698f7c44p6"
             };
 
             Player6User.PasswordHash = hasher.HashPassword(Player6User, "player6pass");
 
-            Player7User = new IdentityUser()
+            Player7User = new ApplicationUser()
             {
                 Id = "9b9265e6-61b2-4b6f-af23-1e1af744b1p7",
                 UserName = "Dimitar_Randev",
                 NormalizedUserName = "dimitar_randev",
                 Email = "player7@gmail.com",
-                NormalizedEmail = "player7@gmail.com"
+                NormalizedEmail = "player7@gmail.com",
+                FirstName = "Dimitar",
+                LastName = "Randev"
+            };
+
+            Player7UserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 9,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Dimitar Randev",
+                UserId = "9b9265e6-61b2-4b6f-af23-1e1af744b1p7"
             };
 
             Player7User.PasswordHash = hasher.HashPassword(Player7User, "player7pass");
 
-            Player8User = new IdentityUser()
+            Player8User = new ApplicationUser()
             {
                 Id = "c45b149d-4c95-4742-b848-739af7b0bfp8",
                 UserName = "Rosen_Markov",
                 NormalizedUserName = "rosen_markov",
                 Email = "player8@gmail.com",
-                NormalizedEmail = "player8@gmail.com"
+                NormalizedEmail = "player8@gmail.com",
+                FirstName = "Rosen",
+                LastName = "Markov"
+            };
+
+            Player8UserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 10,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Rosen Markov",
+                UserId = "c45b149d-4c95-4742-b848-739af7b0bfp8"
             };
 
             Player8User.PasswordHash = hasher.HashPassword(Player8User, "player8pass");
 
+            GuestUser = new ApplicationUser()
+            {
+                Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                UserName = "guest@gmail.com",
+                NormalizedUserName = "GUEST@GMAIL.COM",
+                Email = "guest@gmail.com",
+                NormalizedEmail = "GUEST@GMAIL.COM",
+                FirstName = "Guest",
+                LastName = "Guestov"
+            };
+
+            GuestUserClaim = new IdentityUserClaim<string>()
+            {
+                Id = 11,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Guest Guestov",
+                UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
+            };
+            GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "guestpass");
         }
 
         private void SeedClubs()
@@ -310,8 +457,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player1 = new Player()
             {
                 Id = 1,
-                FirstName = "Samuel",
-                LastName = "Lazarov",
                 PhoneNumber = "0898836929",
                 UserId = "dea12856-c198-4129-b3f3-b893d83950p1",
                 BirthDate = DateTime.ParseExact("29/08/1989", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
@@ -330,8 +475,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player2 = new Player()
             {
                 Id = 2,
-                FirstName = "Sarkis",
-                LastName = "Haralampiev",
                 PhoneNumber = "0888121314",
                 UserId = "dea12856-c198-4129-b3f3-b893d83950p2",
                 BirthDate = DateTime.ParseExact("24/10/1992", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
@@ -350,8 +493,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player3 = new Player()
             {
                 Id = 3,
-                FirstName = "Ivan",
-                LastName = "Pritargov",
                 PhoneNumber = "0884989898",
                 UserId = "f98e572e-f64b-40f5-a37f-783d2d1ff0p3",
                 BirthDate = DateTime.ParseExact("24/10/1984", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
@@ -370,8 +511,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player4 = new Player()
             {
                 Id = 4,
-                FirstName = "Daniil",
-                LastName = "Kurian",
                 PhoneNumber = "0888777666",
                 UserId = "4a08e50c-9f8d-4ac7-bbc1-05a7f0f146p4",
                 BirthDate = DateTime.ParseExact("13/10/1988", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
@@ -390,8 +529,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player5 = new Player()
             {
                 Id = 5,
-                FirstName = "Rado",
-                LastName = "Vladimirov",
                 PhoneNumber = "0888777666",
                 UserId = "adb4186a-f51d-4969-aa0f-938a524128p5",
                 BirthDate = DateTime.ParseExact("18/05/1990", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
@@ -410,8 +547,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player6 = new Player()
             {
                 Id = 6,
-                FirstName = "Dimitar",
-                LastName = "Berdankov",
                 PhoneNumber = "0877111333",
                 UserId = "4319f732-1f7d-44e3-8b4b-7d698f7c44p6",
                 BirthDate = DateTime.ParseExact("27/02/2006", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
@@ -430,8 +565,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player7 = new Player()
             {
                 Id = 7,
-                FirstName = "Dimitar",
-                LastName = "Randev",
                 PhoneNumber = "0888777666",
                 UserId = "9b9265e6-61b2-4b6f-af23-1e1af744b1p7",
                 BirthDate = DateTime.ParseExact("14/11/1974", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),
@@ -450,8 +583,6 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player8 = new Player()
             {
                 Id = 8,
-                FirstName = "Rosen",
-                LastName = "Markov",
                 PhoneNumber = "0892555333",
                 UserId = "c45b149d-4c95-4742-b848-739af7b0bfp8",
                 BirthDate = DateTime.ParseExact("25/07/1992", DateTimeBirthdayFormat, CultureInfo.InvariantCulture, DateTimeStyles.None),

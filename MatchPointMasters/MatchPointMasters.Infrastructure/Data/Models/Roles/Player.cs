@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace MatchPointMasters.Infrastructure.Data.Models.Player
 {
     using MatchPointMasters.Infrastructure.Data.Models.Mappings;
-    using Microsoft.AspNetCore.Identity;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations.Schema;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.PlayerConstants;
@@ -16,16 +16,6 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Player
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(PlayerNameMaxLength)]
-        [Comment("The current Player's First Name")]
-        public string FirstName { get; set; } = string.Empty;
-
-        [Required]
-        [MaxLength(PlayerNameMaxLength)]
-        [Comment("The current Player's Last Name")]
-        public string LastName { get; set; } = string.Empty;
-
-        [Required]
         [MaxLength(PlayerPhoneMaxLength)]
         [Comment("Player's phone")]
         public string PhoneNumber { get; set; } = string.Empty;
@@ -35,7 +25,7 @@ namespace MatchPointMasters.Infrastructure.Data.Models.Player
         public string UserId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         [Required]
         public DateTime BirthDate { get; set; }

@@ -5,12 +5,14 @@ namespace MatchPointMasters.Infrastructure.Data
     using MatchPointMasters.Infrastructure.Data.Models.Mappings;
     using MatchPointMasters.Infrastructure.Data.Models.Match;
     using MatchPointMasters.Infrastructure.Data.Models.Player;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
     using MatchPointMasters.Infrastructure.Data.SeedDb.Configuration;
+    using MatchPointMasters.Infrastructure.Data.SeedDb.Configurations;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class MatchPointMastersDbContext : IdentityDbContext
+    public class MatchPointMastersDbContext : IdentityDbContext<ApplicationUser>
     {
         public MatchPointMastersDbContext(DbContextOptions<MatchPointMastersDbContext> options)
             : base(options)
@@ -19,6 +21,7 @@ namespace MatchPointMasters.Infrastructure.Data
         }
 
         public DbSet<Tournament> Tournaments { get; set; } = null!;
+        public DbSet<TournamentHost> TournamentHosts { get; set; } = null!;
         public DbSet<Player> Players { get; set; } = null!;
         public DbSet<Match> Matches { get; set; } = null!;
         public DbSet<Set> Sets { get; set; } = null!;
@@ -111,6 +114,7 @@ namespace MatchPointMasters.Infrastructure.Data
 
             //Configuration(Data Seeding)
             builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UserClaimsConfiguration());
             builder.ApplyConfiguration(new TournamentHostConfiguration());
             builder.ApplyConfiguration(new TournamentConfiguration());
             builder.ApplyConfiguration(new ClubConfiguration());

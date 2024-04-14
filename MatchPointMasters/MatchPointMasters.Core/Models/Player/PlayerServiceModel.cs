@@ -12,18 +12,6 @@
         public int Id { get; set; }
 
         [Required]
-        [StringLength(PlayerNameMaxLength, MinimumLength = PlayerNameMinLength, ErrorMessage = LengthErrorMessage)]
-        public string FirstName { get; set; } = string.Empty;
-
-        [Required]
-        [StringLength(PlayerNameMaxLength, MinimumLength = PlayerNameMinLength, ErrorMessage = LengthErrorMessage)]
-        public string LastName { get; set; } = string.Empty;
-
-        [Required]
-        [MaxLength(PlayerPhoneMaxLength)]
-        public string PhoneNumber { get; set; } = string.Empty;
-
-        [Required]
         public string UserId { get; set; } = string.Empty;
 
         [Required]

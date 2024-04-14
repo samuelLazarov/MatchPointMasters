@@ -1,5 +1,6 @@
 ﻿namespace MatchPointMasters.Infrastructure.Data.Models.Article
 {
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
@@ -19,7 +20,7 @@
 
         [ForeignKey(nameof(HostUserId))]
         [Comment("The current article's author")]
-        public IdentityUser HostUser { get; set; } = null!;
+        public ApplicationUser HostUser { get; set; } = null!;
 
         [Required]
         [MaxLength(ArticleContentMaxLength)]
