@@ -3,6 +3,7 @@
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Enumerations;
     using MatchPointMasters.Core.Models.Admin;
+    using MatchPointMasters.Core.Models.Admin.QueryModels;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using Microsoft.AspNetCore.Identity;

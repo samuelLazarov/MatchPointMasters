@@ -1,7 +1,7 @@
 ﻿namespace MatchPointMasters.Core.Services
 {
     using MatchPointMasters.Core.Contracts;
-    using MatchPointMasters.Core.Models.Admin;
+    using MatchPointMasters.Core.Models.Admin.ViewModels;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Roles;
 

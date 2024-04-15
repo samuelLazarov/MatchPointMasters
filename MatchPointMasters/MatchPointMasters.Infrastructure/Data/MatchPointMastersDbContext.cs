@@ -123,7 +123,7 @@ namespace MatchPointMasters.Infrastructure.Data
             builder.ApplyConfiguration(new SetConfiguration());
             builder.ApplyConfiguration(new TiebreakConfiguration());
             builder.ApplyConfiguration(new ArticleConfiguration());
-            
+
 
             base.OnModelCreating(builder);
         }

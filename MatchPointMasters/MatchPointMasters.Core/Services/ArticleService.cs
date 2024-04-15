@@ -1,11 +1,12 @@
 ﻿namespace MatchPointMasters.Core.Services
 {
-	using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Enumerations;
-    using MatchPointMasters.Core.Models.Article;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Article;
+    using MatchPointMasters.Core.Models.Article.QueryModels;
+    using MatchPointMasters.Core.Models.Article.ViewModels;
 
     public class ArticleService : IArticleService
     {

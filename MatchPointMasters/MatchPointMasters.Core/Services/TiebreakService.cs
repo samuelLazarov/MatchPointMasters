@@ -3,6 +3,8 @@ namespace MatchPointMasters.Core.Services
 {
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Models.Tiebreak;
+    using MatchPointMasters.Core.Models.Tiebreak.QueryModels;
+    using MatchPointMasters.Core.Models.Tiebreak.ViewModels;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Match;
     using Microsoft.EntityFrameworkCore;

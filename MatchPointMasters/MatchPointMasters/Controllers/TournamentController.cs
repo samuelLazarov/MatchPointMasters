@@ -6,7 +6,7 @@ namespace MatchPointMasters.Controllers
     using Microsoft.AspNetCore.Mvc;
     using MatchPointMasters.Attributes;
     using MatchPointMasters.Core.Extensions;
-    using MatchPointMasters.Core.Models.Tournament;
+    using MatchPointMasters.Core.Models.Tournament.QueryModels;
 
     public class TournamentController : BaseController
     {

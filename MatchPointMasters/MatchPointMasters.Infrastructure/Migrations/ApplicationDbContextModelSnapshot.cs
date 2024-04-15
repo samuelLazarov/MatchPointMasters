@@ -17,7 +17,7 @@ namespace MatchPointMasters.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.22")
+                .HasAnnotation("ProductVersion", "6.0.28")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -116,13 +116,13 @@ namespace MatchPointMasters.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("The current Article's Identifier");
 
-                    b.Property<string>("CommentDescription")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(8000)
                         .HasColumnType("nvarchar(max)")
                         .HasComment("The current Article Comment's Description");
 
-                    b.Property<string>("CommentTitle")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
@@ -483,12 +483,6 @@ namespace MatchPointMasters.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Player's dominant hand");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasComment("The current Player's First Name");
-
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -496,12 +490,6 @@ namespace MatchPointMasters.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasComment("The current Player's Last Name");
 
                     b.Property<int>("Losses")
                         .HasColumnType("int")
@@ -547,10 +535,8 @@ namespace MatchPointMasters.Infrastructure.Migrations
                             Backhand = 0,
                             BirthDate = new DateTime(1989, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DominantHand = 0,
-                            FirstName = "Samuel",
                             Gender = 0,
                             ImageUrl = "https://division.albatros-tennis.com/products/202.jpg",
-                            LastName = "Lazarov",
                             Losses = 3,
                             PhoneNumber = "0898836929",
                             PlayingStyle = 2,
@@ -565,10 +551,8 @@ namespace MatchPointMasters.Infrastructure.Migrations
                             Backhand = 1,
                             BirthDate = new DateTime(1992, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DominantHand = 0,
-                            FirstName = "Sarkis",
                             Gender = 0,
                             ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
-                            LastName = "Haralampiev",
                             Losses = 2,
                             PhoneNumber = "0888121314",
                             PlayingStyle = 2,
@@ -583,10 +567,8 @@ namespace MatchPointMasters.Infrastructure.Migrations
                             Backhand = 1,
                             BirthDate = new DateTime(1984, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DominantHand = 0,
-                            FirstName = "Ivan",
                             Gender = 0,
                             ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
-                            LastName = "Pritargov",
                             Losses = 6,
                             PhoneNumber = "0884989898",
                             PlayingStyle = 0,
@@ -601,10 +583,8 @@ namespace MatchPointMasters.Infrastructure.Migrations
                             Backhand = 1,
                             BirthDate = new DateTime(1988, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DominantHand = 0,
-                            FirstName = "Daniil",
                             Gender = 0,
                             ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
-                            LastName = "Kurian",
                             Losses = 10,
                             PhoneNumber = "0888777666",
                             PlayingStyle = 1,
@@ -619,10 +599,8 @@ namespace MatchPointMasters.Infrastructure.Migrations
                             Backhand = 0,
                             BirthDate = new DateTime(1990, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DominantHand = 0,
-                            FirstName = "Rado",
                             Gender = 0,
                             ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
-                            LastName = "Vladimirov",
                             Losses = 3,
                             PhoneNumber = "0888777666",
                             PlayingStyle = 2,
@@ -637,10 +615,8 @@ namespace MatchPointMasters.Infrastructure.Migrations
                             Backhand = 1,
                             BirthDate = new DateTime(2006, 2, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DominantHand = 0,
-                            FirstName = "Dimitar",
                             Gender = 0,
                             ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
-                            LastName = "Berdankov",
                             Losses = 5,
                             PhoneNumber = "0877111333",
                             PlayingStyle = 0,
@@ -655,10 +631,8 @@ namespace MatchPointMasters.Infrastructure.Migrations
                             Backhand = 0,
                             BirthDate = new DateTime(1974, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DominantHand = 0,
-                            FirstName = "Dimitar",
                             Gender = 0,
                             ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
-                            LastName = "Randev",
                             Losses = 43,
                             PhoneNumber = "0888777666",
                             PlayingStyle = 1,
@@ -673,10 +647,8 @@ namespace MatchPointMasters.Infrastructure.Migrations
                             Backhand = 1,
                             BirthDate = new DateTime(1992, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DominantHand = 1,
-                            FirstName = "Rosen",
                             Gender = 0,
                             ImageUrl = "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg",
-                            LastName = "Markov",
                             Losses = 13,
                             PhoneNumber = "0892555333",
                             PlayingStyle = 0,
@@ -684,6 +656,281 @@ namespace MatchPointMasters.Infrastructure.Migrations
                             TournamentWins = 0,
                             UserId = "c45b149d-4c95-4742-b848-739af7b0bfp8",
                             Wins = 22
+                        });
+                });
+
+            modelBuilder.Entity("MatchPointMasters.Infrastructure.Data.Models.Roles.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c2f14bf7-ffdd-47a4-90b3-f2309486fae9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "148ffabf-8efb-4c20-a3e3-c669be1811aa",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "Adminov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH1jbq7AyLl7kL/iX/DM4S3FhMdy/l0d6V/ghrJJAUETkBgN0v6T0AXybCT+ZZLGPw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b4d5c071-49b6-4626-8ceb-d1fb6bd844d3",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1ef25861-c1f6-4a35-a34e-e93f865721a8",
+                            Email = "hostuser@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Ivan",
+                            LastName = "Pandeliev",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "hostuser@gmail.com",
+                            NormalizedUserName = "ivan_pandeliev",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPdd0o5CBvQgIius/iN60pR5/STJSpGLoHo1Xltpfq14+ok26SdWtcezXaXFvga/1A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "02dbd689-5cbb-41f8-8a17-ad9b0cb18ee6",
+                            TwoFactorEnabled = false,
+                            UserName = "Ivan_Pandeliev"
+                        },
+                        new
+                        {
+                            Id = "dea12856-c198-4129-b3f3-b893d83950p1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b3f06ae2-5e32-46c5-a707-8b4cc63cf813",
+                            Email = "player1@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Samuel",
+                            LastName = "Lazarov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "player1@gmail.com",
+                            NormalizedUserName = "samuel_lazarov",
+                            PasswordHash = "AQAAAAEAACcQAAAAENdXJTUdffinY1b70Jco7fLDWhrjIaFvDJ/4ZbbKAhhzU2ABTn3VZYBhGs3MQ0ctCQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7faeb975-8800-4824-aa2f-851ef9d594fb",
+                            TwoFactorEnabled = false,
+                            UserName = "Samuel_Lazarov"
+                        },
+                        new
+                        {
+                            Id = "dea12856-c198-4129-b3f3-b893d83950p2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "31dce8ef-9e5b-464d-8fd9-28ee4b6c1dbd",
+                            Email = "player2@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Sarkis",
+                            LastName = "Haralampiev",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "player2@gmail.com",
+                            NormalizedUserName = "sarkis_haralampiev",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMuEGJTDbexjY7yQnhoDN3FCr/XAHKlhrlHwuQnu4LmMb83sE7aWYLYB/UlDoH0x1g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5c60888d-c96c-43cd-b607-369de29f36bd",
+                            TwoFactorEnabled = false,
+                            UserName = "Sarkis_Haralampiev"
+                        },
+                        new
+                        {
+                            Id = "f98e572e-f64b-40f5-a37f-783d2d1ff0p3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4a061810-8a1f-4adc-ac94-da29ebd2da2a",
+                            Email = "player3@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Ivan",
+                            LastName = "Pritargov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "player3@gmail.com",
+                            NormalizedUserName = "ivan_pritargov",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL29pEEPbcv8hInhk1LWUGUZ1rf6hyOd2vUCz3XJDfjx1xHownbWl5vsHD6oeXkhRQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "777ae7c0-5b58-47b4-a295-ee06e368a2d9",
+                            TwoFactorEnabled = false,
+                            UserName = "Ivan_Pritargov"
+                        },
+                        new
+                        {
+                            Id = "4a08e50c-9f8d-4ac7-bbc1-05a7f0f146p4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3ced6b21-11c3-41f3-a38f-7c5d1860556c",
+                            Email = "player4@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Daniil",
+                            LastName = "Kurian",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "player4@gmail.com",
+                            NormalizedUserName = "daniil_kurian",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOtDPpI296YR7RqpdPmlEu+EfLNaM18gPapK4uuYJjLGgKpdB96PM/dy72VnnI2LzA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "d40e6cf5-1b01-4562-bafb-a2f0621e6fcb",
+                            TwoFactorEnabled = false,
+                            UserName = "Daniil_Kurian"
+                        },
+                        new
+                        {
+                            Id = "adb4186a-f51d-4969-aa0f-938a524128p5",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "33fc4602-d4db-4c43-9d79-2e63be15c48e",
+                            Email = "player5@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Rado",
+                            LastName = "Vladimirov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "player5@gmail.com",
+                            NormalizedUserName = "rado_vladimirov",
+                            PasswordHash = "AQAAAAEAACcQAAAAELULDdtvHITmIbTXemJJ94bB9Kt9gQbfJzR7ZSTSJZpalX/p3a5kwt9UlPl2WRcgkg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "74cf2090-94c6-49f5-8629-6935d22435ab",
+                            TwoFactorEnabled = false,
+                            UserName = "Rado_Vladimirov"
+                        },
+                        new
+                        {
+                            Id = "4319f732-1f7d-44e3-8b4b-7d698f7c44p6",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "92d179ff-309c-4873-a96a-5ba815c3b44e",
+                            Email = "player6@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Dimitar",
+                            LastName = "Berdankov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "player6@gmail.com",
+                            NormalizedUserName = "dimitar_berdankov",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAIyodA/NXssH/lIkblUadWLE661EShQRle2oK7RizJkVDj9HhqKcODqzmPzIqceLQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7ae48a19-0834-427c-a482-9bc3bc9e2d17",
+                            TwoFactorEnabled = false,
+                            UserName = "Dimitar_Berdankov"
+                        },
+                        new
+                        {
+                            Id = "9b9265e6-61b2-4b6f-af23-1e1af744b1p7",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1f73ea95-6177-4b41-9293-586f6a3daedb",
+                            Email = "player7@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Dimitar",
+                            LastName = "Randev",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "player7@gmail.com",
+                            NormalizedUserName = "dimitar_randev",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJs5UF2AV7xmhfTlh/h5089V9dJ+1zDTOGyFUZp6Iq/v6Dwz6rnrb17UfZu+SwrEqg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "bd82143d-5b5f-4d5e-a539-b5b422523b35",
+                            TwoFactorEnabled = false,
+                            UserName = "Dimitar_Randev"
+                        },
+                        new
+                        {
+                            Id = "c45b149d-4c95-4742-b848-739af7b0bfp8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d07fbf0b-ff18-4873-ac2d-5cb45a06018c",
+                            Email = "player8@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Rosen",
+                            LastName = "Markov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "player8@gmail.com",
+                            NormalizedUserName = "rosen_markov",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBWRsNSBLyJs69lOFbw0kmTr7918UlgM9t+ZzRuSibWTvDGThNTSXNAFr+yceQKTuA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "81f53e14-a456-471d-9095-ec773a085657",
+                            TwoFactorEnabled = false,
+                            UserName = "Rosen_Markov"
+                        },
+                        new
+                        {
+                            Id = "C9836E2F-52AD-4A3E-A92C-54CCE72D4C12",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2a6b8704-8bc1-4305-8382-085b036534a7",
+                            Email = "guest@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Guest",
+                            LastName = "Guestov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "GUEST@GMAIL.COM",
+                            NormalizedUserName = "GUEST@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKymE2RZVhaFrzYHoV+4wfPkIZETwCgSuaGVW0uk8kU0rsWi3m3LILZDXkM/CFm4/A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e359d53e-a4a4-4df1-a8d7-30e9b06e9c21",
+                            TwoFactorEnabled = false,
+                            UserName = "guest@gmail.com"
                         });
                 });
 
@@ -711,7 +958,7 @@ namespace MatchPointMasters.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TournamentHost");
+                    b.ToTable("TournamentHosts");
 
                     b.HasComment("A user who will host a tournament");
 
@@ -814,6 +1061,10 @@ namespace MatchPointMasters.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int")
+                        .HasComment("Tournament's total capacity");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
@@ -832,6 +1083,12 @@ namespace MatchPointMasters.Infrastructure.Migrations
                     b.Property<int>("HostClubId")
                         .HasColumnType("int")
                         .HasComment("Host club's Identifier");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
+                        .HasComment("The current Event's Image Url");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -862,10 +1119,12 @@ namespace MatchPointMasters.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
+                            Capacity = 8,
                             Description = "През 2024г. в памет на Захари Джевизов - Зашо отново се организира ежегоден тенис турнир за аматьори, любители и ветерани спрели участие преди 2000г. и не получаващи пари чрез тенис. Начало в 09.00 ч. на 27/04/2024г. до 28/04/2024г. на тенис кортове ”Стад”- Пловдив.",
                             EndDate = new DateTime(2024, 4, 28, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             Fee = 30.00m,
                             HostClubId = 2,
+                            ImageUrl = "https://t3.ftcdn.net/jpg/03/13/24/94/360_F_313249442_rVaztYCo9u5FOKtxWWGtKgw38AVvt7Qb.jpg",
                             Name = "Тенис турнир \"ЗАШО\" 2024",
                             StartDate = new DateTime(2024, 4, 27, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentBalls = 0,
@@ -874,10 +1133,12 @@ namespace MatchPointMasters.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
+                            Capacity = 8,
                             Description = "Един от най-мащабните тенис турнири за аматьори и любители в България - VSSport Open се завръща. Надпреварата ще се проведе за четвърта поредна година на кортовете на ТК \"Ника\" в бургаския квартал Сарафово. Най-добрите аматьорски състезатели в България и любители от цялата страна ще се включат в битката за титлите в двата формата. Тази година мероприятието ще се проведе между 12 и 14 май, като участниците ще бъдат разделени в два формата. ",
                             EndDate = new DateTime(2024, 5, 14, 20, 0, 0, 0, DateTimeKind.Unspecified),
                             Fee = 50.00m,
                             HostClubId = 1,
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8fpiUYEQEoUFiJwYQJ8382V2wnmam4k1233V8qVD4mg&s",
                             Name = "Тенис турнир \"VS-Sport\" 2024",
                             StartDate = new DateTime(2024, 5, 12, 8, 30, 0, 0, DateTimeKind.Unspecified),
                             TournamentBalls = 1,
@@ -886,10 +1147,12 @@ namespace MatchPointMasters.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
+                            Capacity = 8,
                             Description = "Имаме удоволствието да ви поканим на ежегодния тенис турнир за любители Leader Open 2024. Събитието ще се проведе в рамките на два дни – 21 и 22 Септември на кортовете на Тенис Клуб „Авеню“ гр. Бургас. Турнирът включва два вида игри: мъже сингъл и мъже двойки. Записването за двойки ще бъде в събота, 21 Септември през деня на място или по телефона до 16:00ч. Крайна дата за регистрация и плащане за турнира е 17 Септември. Ако имате въпроси свързани с турнира, моля пишете ни на office@leader96.com ",
                             EndDate = new DateTime(2024, 9, 22, 20, 0, 0, 0, DateTimeKind.Unspecified),
                             Fee = 40.00m,
                             HostClubId = 3,
+                            ImageUrl = "https://leader96.com/wp-content/uploads/2021/10/leader96_post_1-1000x550.jpg",
                             Name = "Тенис турнир \"Leader Open\" 2024",
                             StartDate = new DateTime(2024, 9, 21, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             TournamentBalls = 2,
@@ -949,217 +1212,6 @@ namespace MatchPointMasters.Infrastructure.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "2a46645e-ca0a-451c-b416-7774e80db609",
-                            Email = "hostuser@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "hostuser@gmail.com",
-                            NormalizedUserName = "ivan_pandeliev",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH0ZXSgVMdm5FIvHE97GwZBk5jVf6K2PJXMSGjyBT0R4YHp5TK0KPu3NOAtZQ/0UNQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "1f95c11a-bef5-49eb-b906-f1ce5a7e31fb",
-                            TwoFactorEnabled = false,
-                            UserName = "Ivan_Pandeliev"
-                        },
-                        new
-                        {
-                            Id = "dea12856-c198-4129-b3f3-b893d83950p1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f59fd059-8d87-41d7-b3b9-179fe1a5cde1",
-                            Email = "player1@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "player1@gmail.com",
-                            NormalizedUserName = "samuel_lazarov",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDuq3B5OcurAgXr09fVOtEP4AXJXbOcTcW2XFpaxht3OTqguE3bI1bZ0MwQorUbWOg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7efa0808-c993-4e80-b636-5b366b6c112d",
-                            TwoFactorEnabled = false,
-                            UserName = "Samuel_Lazarov"
-                        },
-                        new
-                        {
-                            Id = "dea12856-c198-4129-b3f3-b893d83950p2",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c3d16c91-bd55-4177-9767-dd1e9e609996",
-                            Email = "player2@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "player2@gmail.com",
-                            NormalizedUserName = "sarkis_haralampiev",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDcw31i/eHjZDN42OY6jF/rczlV5pAXJSTZAH2ZYY70vNK022rgqoJEAIXo/zaVjTg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "0292d4e5-68ec-4cc5-9117-e20f2dc1284e",
-                            TwoFactorEnabled = false,
-                            UserName = "Sarkis_Haralampiev"
-                        },
-                        new
-                        {
-                            Id = "f98e572e-f64b-40f5-a37f-783d2d1ff0p3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "01c4a405-fe31-4f3a-a766-ef79ed5f6ced",
-                            Email = "player3@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "player3@gmail.com",
-                            NormalizedUserName = "ivan_pritargov",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFF3altZJJbJu7LeMDX7MZwVj4S3k2c9iZfhJocps0uxZECR0jaR121YLr6XD0Owlg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "4d3e0d45-1906-4f64-8184-844e176a9d90",
-                            TwoFactorEnabled = false,
-                            UserName = "Ivan_Pritargov"
-                        },
-                        new
-                        {
-                            Id = "4a08e50c-9f8d-4ac7-bbc1-05a7f0f146p4",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c21b3701-7178-4553-84d9-2b2c3d75333c",
-                            Email = "player4@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "player4@gmail.com",
-                            NormalizedUserName = "daniil_kurian",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIIWHHS373KSt10N5565AeWC9qaguS6mt6B2yIqwFCAhE3HmmAYkXFTCMpi8pTcQzg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "e2a7401a-e2e9-4d41-a5dc-c50d5c9f0349",
-                            TwoFactorEnabled = false,
-                            UserName = "Daniil_Kurian"
-                        },
-                        new
-                        {
-                            Id = "adb4186a-f51d-4969-aa0f-938a524128p5",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "16850aae-1362-4267-b085-5d8a10b19483",
-                            Email = "player5@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "player5@gmail.com",
-                            NormalizedUserName = "rado_vladimirov",
-                            PasswordHash = "AQAAAAEAACcQAAAAENZukN3EYBb4AYEIIGcXQQ8txeW1j2RyIIAQm2OFpW6UVQlSQ8j7N/IgjKHovN9qlQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "fabfabea-b69e-4d29-8d03-91db56e8a245",
-                            TwoFactorEnabled = false,
-                            UserName = "Rado_Vladimirov"
-                        },
-                        new
-                        {
-                            Id = "4319f732-1f7d-44e3-8b4b-7d698f7c44p6",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f9962053-5cd8-4a3e-b589-8f1750305634",
-                            Email = "player6@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "player6@gmail.com",
-                            NormalizedUserName = "dimitar_berdankov",
-                            PasswordHash = "AQAAAAEAACcQAAAAECK1Mn2ZPXCEFtRzmDWHJw8lDC6gRjAz0WO/j5TwZ+L4XAZwGdoMhNceUeUHf4/FOg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "0791bc05-6d0a-40d7-bd3d-985d027ef8d3",
-                            TwoFactorEnabled = false,
-                            UserName = "Dimitar_Berdankov"
-                        },
-                        new
-                        {
-                            Id = "9b9265e6-61b2-4b6f-af23-1e1af744b1p7",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "e0a5a91c-94a5-49f9-81ed-0ff5222014d4",
-                            Email = "player7@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "player7@gmail.com",
-                            NormalizedUserName = "dimitar_randev",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBiCuP+ADOnP3cz2+B7JeSeI2zfMDxvlqIP9z0xhfkmxxC9hfUcTJphbdTzNyLILvA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7bd9db09-0b2a-41ea-b869-ddb1c1d5554f",
-                            TwoFactorEnabled = false,
-                            UserName = "Dimitar_Randev"
-                        },
-                        new
-                        {
-                            Id = "c45b149d-4c95-4742-b848-739af7b0bfp8",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "3f89e7b4-a7e6-443d-8e4e-e2f35bb22818",
-                            Email = "player8@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "player8@gmail.com",
-                            NormalizedUserName = "rosen_markov",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJbR0HV9ILU8XgtNfkIZtabOMgx2BdiWawWq70lX1I+E6h8ucxDsDt82fiu7QkqrWw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "96e22a7d-7fd6-4c71-bd23-17623e84be7a",
-                            TwoFactorEnabled = false,
-                            UserName = "Rosen_Markov"
-                        });
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -1183,6 +1235,85 @@ namespace MatchPointMasters.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Admin Adminov",
+                            UserId = "c2f14bf7-ffdd-47a4-90b3-f2309486fae9"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Ivan Pandeliev",
+                            UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Samuel Lazarov",
+                            UserId = "dea12856-c198-4129-b3f3-b893d83950p1"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Sarkis Haralampiev",
+                            UserId = "dea12856-c198-4129-b3f3-b893d83950p2"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Ivan Pritargov",
+                            UserId = "f98e572e-f64b-40f5-a37f-783d2d1ff0p3"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Daniil Kurian",
+                            UserId = "4a08e50c-9f8d-4ac7-bbc1-05a7f0f146p4"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Rado Vladimirov",
+                            UserId = "adb4186a-f51d-4969-aa0f-938a524128p5"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Dimitar Berdankov",
+                            UserId = "4319f732-1f7d-44e3-8b4b-7d698f7c44p6"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Dimitar Randev",
+                            UserId = "9b9265e6-61b2-4b6f-af23-1e1af744b1p7"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Rosen Markov",
+                            UserId = "c45b149d-4c95-4742-b848-739af7b0bfp8"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ClaimType = "user:fullname",
+                            ClaimValue = "Guest Guestov",
+                            UserId = "C9836E2F-52AD-4A3E-A92C-54CCE72D4C12"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -1247,7 +1378,7 @@ namespace MatchPointMasters.Infrastructure.Migrations
 
             modelBuilder.Entity("MatchPointMasters.Infrastructure.Data.Models.Article.Article", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "HostUser")
+                    b.HasOne("MatchPointMasters.Infrastructure.Data.Models.Roles.ApplicationUser", "HostUser")
                         .WithMany()
                         .HasForeignKey("HostUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1264,7 +1395,7 @@ namespace MatchPointMasters.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                    b.HasOne("MatchPointMasters.Infrastructure.Data.Models.Roles.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1383,7 +1514,7 @@ namespace MatchPointMasters.Infrastructure.Migrations
 
             modelBuilder.Entity("MatchPointMasters.Infrastructure.Data.Models.Player.Player", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                    b.HasOne("MatchPointMasters.Infrastructure.Data.Models.Roles.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1394,7 +1525,7 @@ namespace MatchPointMasters.Infrastructure.Migrations
 
             modelBuilder.Entity("MatchPointMasters.Infrastructure.Data.Models.Roles.TournamentHost", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                    b.HasOne("MatchPointMasters.Infrastructure.Data.Models.Roles.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1433,7 +1564,7 @@ namespace MatchPointMasters.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MatchPointMasters.Infrastructure.Data.Models.Roles.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1442,7 +1573,7 @@ namespace MatchPointMasters.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MatchPointMasters.Infrastructure.Data.Models.Roles.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1457,7 +1588,7 @@ namespace MatchPointMasters.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MatchPointMasters.Infrastructure.Data.Models.Roles.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1466,7 +1597,7 @@ namespace MatchPointMasters.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MatchPointMasters.Infrastructure.Data.Models.Roles.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

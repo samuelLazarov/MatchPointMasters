@@ -1,13 +1,15 @@
 ﻿
 namespace MatchPointMasters.Controllers
 {
-	using MatchPointMasters.Core.Contracts;
-	using MatchPointMasters.Core.Models.Article;
-	using MatchPointMasters.Extensions;
-	using Microsoft.AspNetCore.Authorization;
-	using Microsoft.AspNetCore.Mvc;
-	using MatchPointMasters.Core.Extensions;
-	using MatchPointMasters.Attributes;
+    using MatchPointMasters.Core.Contracts;
+    using MatchPointMasters.Extensions;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using MatchPointMasters.Core.Extensions;
+    using MatchPointMasters.Attributes;
+    using MatchPointMasters.Core.Models.Article.QueryModels;
+    using MatchPointMasters.Core.Models.Article.ViewModels;
+
     public class ArticleController : BaseController
     {
 

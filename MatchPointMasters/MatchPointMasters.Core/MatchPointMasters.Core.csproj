@@ -10,4 +10,8 @@
     <ProjectReference Include="..\MatchPointMasters.Infrastructure\MatchPointMasters.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Roles\ViewModels\" />
+  </ItemGroup>
+
 </Project>

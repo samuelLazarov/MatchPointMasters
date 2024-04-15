@@ -10,7 +10,19 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb.Configurations
         {
             var data = new DataSeed();
 
-            builder.HasData(data. AdminUserClaim, data.HostUserClaim, data.Player1UserClaim, data.GuestUserClaim);
+            builder.HasData(
+                data.AdminUserClaim, 
+                data.HostUserClaim, 
+                data.Player1UserClaim,
+                data.Player2UserClaim,
+                data.Player3UserClaim,
+                data.Player4UserClaim,
+                data.Player5UserClaim,
+                data.Player6UserClaim,
+                data.Player7UserClaim,
+                data.Player8UserClaim,
+                data.GuestUserClaim
+                );
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using MatchPointMasters.Core.Models.Match;
+﻿using MatchPointMasters.Core.Models.Match.QueryModels;
 using MatchPointMasters.Infrastructure.Data.Models.Match;
 
 namespace MatchPointMasters.Core.Extensions

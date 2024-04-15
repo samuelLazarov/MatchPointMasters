@@ -1,6 +1,7 @@
 ﻿namespace MatchPointMasters.Core.Contracts
 {
-    using MatchPointMasters.Core.Models.Admin;
+    using MatchPointMasters.Core.Models.Admin.ViewModels;
+
     public interface IAdminService
     {
         Task<int> AddTournamentHostAsync(UserViewModel form);

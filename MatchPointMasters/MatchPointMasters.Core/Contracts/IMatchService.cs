@@ -1,8 +1,9 @@
 ﻿namespace MatchPointMasters.Core.Contracts
 {
     using MatchPointMasters.Core.Enumerations;
-    using MatchPointMasters.Core.Models.Match;
-    using MatchPointMasters.Core.Models.Set;
+    using MatchPointMasters.Core.Models.Match.QueryModels;
+    using MatchPointMasters.Core.Models.Match.ViewModels;
+    using MatchPointMasters.Core.Models.Set.QueryModels;
     using MatchPointMasters.Infrastructure.Data.Models.Match;
 
     public interface IMatchService

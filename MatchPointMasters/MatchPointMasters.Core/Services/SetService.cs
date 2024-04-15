@@ -3,6 +3,8 @@ namespace MatchPointMasters.Core.Services
 {
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Models.Set;
+    using MatchPointMasters.Core.Models.Set.QueryModels;
+    using MatchPointMasters.Core.Models.Set.ViewModels;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Match;
     using Microsoft.EntityFrameworkCore;
@@ -44,7 +46,7 @@ namespace MatchPointMasters.Core.Services
                 Id = currentSet.Id,
                 MatchId = currentSet.MatchId,
                 PlayerOneGamesWon = currentSet.PlayerOneGamesWon,
-                PlayerTwoGamesWon= currentSet.PlayerTwoGamesWon,
+                PlayerTwoGamesWon = currentSet.PlayerTwoGamesWon,
                 HasTiebreak = currentSet.HasTiebreak,
                 TiebreakId = currentSet.TiebreakId,
             };
@@ -98,7 +100,7 @@ namespace MatchPointMasters.Core.Services
 
             return set.Id;
         }
-        
+
 
         public async Task<SetQueryServiceModel> AllAsync()
         {

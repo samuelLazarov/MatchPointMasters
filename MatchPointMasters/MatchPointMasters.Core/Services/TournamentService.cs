@@ -2,9 +2,11 @@
 {
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Enumerations;
-    using MatchPointMasters.Core.Models.Match;
-    using MatchPointMasters.Core.Models.Player;
+    using MatchPointMasters.Core.Models.Match.QueryModels;
+    using MatchPointMasters.Core.Models.Roles.QueryModels;
     using MatchPointMasters.Core.Models.Tournament;
+    using MatchPointMasters.Core.Models.Tournament.QueryModels;
+    using MatchPointMasters.Core.Models.Tournament.ViewModels;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Mappings;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;

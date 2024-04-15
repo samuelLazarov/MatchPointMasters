@@ -329,7 +329,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
 
             GuestUser = new ApplicationUser()
             {
-                Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                Id = "C9836E2F-52AD-4A3E-A92C-54CCE72D4C12",
                 UserName = "guest@gmail.com",
                 NormalizedUserName = "GUEST@GMAIL.COM",
                 Email = "guest@gmail.com",
@@ -343,7 +343,7 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
                 Id = 11,
                 ClaimType = UserFullNameClaim,
                 ClaimValue = "Guest Guestov",
-                UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
+                UserId = "C9836E2F-52AD-4A3E-A92C-54CCE72D4C12"
             };
             GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "guestpass");
         }

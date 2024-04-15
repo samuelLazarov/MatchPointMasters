@@ -1,9 +1,8 @@
 ﻿namespace MatchPointMasters.Core.Services
 {
     using MatchPointMasters.Core.Contracts;
-    using MatchPointMasters.Core.Models.Player;
+    using MatchPointMasters.Core.Models.Roles.QueryModels;
     using MatchPointMasters.Infrastructure.Data.Common;
-    using MatchPointMasters.Infrastructure.Data.Models.Player;
     using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -16,6 +15,16 @@
         public PlayerService(IRepository _repository)
         {
             repository = _repository;
+        }
+
+        public Task<int> CreateAsync(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ExistsByIdAsync(string userId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<ICollection<PlayerQueryServiceModel>> GetAllPlayers()
@@ -49,6 +58,16 @@
                 result = $"{player.FirstName} {player.LastName}";
             }
             return result;
+        }
+
+        public Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<PlayerQueryServiceModel> IPlayerService.GetAllPlayers()
+        {
+            throw new NotImplementedException();
         }
     }
 }

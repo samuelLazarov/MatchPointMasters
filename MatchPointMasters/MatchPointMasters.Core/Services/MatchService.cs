@@ -3,11 +3,11 @@
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Enumerations;
     using MatchPointMasters.Core.Extensions;
-    using MatchPointMasters.Core.Models.Match;
-    using MatchPointMasters.Core.Models.Set;
+    using MatchPointMasters.Core.Models.Match.QueryModels;
+    using MatchPointMasters.Core.Models.Match.ViewModels;
+    using MatchPointMasters.Core.Models.Set.QueryModels;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Match;
-    using MatchPointMasters.Infrastructure.Data.Models.Tournament;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
@@ -34,6 +34,7 @@
                 PlayerOneSetsWon = matchForm.PlayerOneSetsWon,
                 PlayerTwoSetsWon = matchForm.PlayerTwoSetsWon,
                 Winner = matchForm.Winner,
+                
             };
 
             await repository.AddAsync(match);

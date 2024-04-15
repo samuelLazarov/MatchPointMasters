@@ -12,6 +12,7 @@
             var data = new DataSeed();
             builder.HasData(new ApplicationUser[]
             {
+                data.AdminUser,
                 data.HostUser,
                 data.Player1User,
                 data.Player2User,
