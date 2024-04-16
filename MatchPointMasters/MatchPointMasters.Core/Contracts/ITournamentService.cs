@@ -31,7 +31,7 @@
             int currentPage = 1,
             int tournamentsPerPage = 4
             );
-        Task<bool> TournamentExistsAsync(int tournamentId);
+        Task<bool> TournamentExistsByIdAsync(int tournamentId);
         Task<Tournament> FindTournamentByIdAsync(int tournamentId);
         Task<TournamentDetailsViewModel> DetailsAsync(int tournamentId);
         Task<PlayerQueryServiceModel> GetAllPlayersInTournamentAsync(int tournamentId);

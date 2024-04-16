@@ -1,5 +1,56 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model AllTournamentsQueryModel
+@inject ITournamentHostService tournamentHostService
+
 @{
+    ViewBag.Title = "Всички турнири";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+@if (await tournamentHostService.ExistsByUserIdAsync(User.Id()))
+{
+        <div class="text-center mb-4">
+            <a asp-controller="Article" asp-action="Add" class="btn btn-primary btn-lg">Добави Турнир</a>
+        </div>
+}
+
+<form method="get">
+    <div class="row justify-content-center align-items-end">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="SearchTerm"></label>
+                <input asp-for="SearchTerm" class="form-control" placeholder="Търси...">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="Sorting"></label>
+                <select asp-for="Sorting" class="form-control">
+                    <option value="0">Най-скоро добавени</option>
+                    <option value="1">Най-късно добавени</option>
+                    <option value="2">Най-големи</option>
+                    <option value="3">Най-малки</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <input type="submit" value="Търси" class="btn btn-success w-100" />
+        </div>
+    </div>
+</form>
+
+@if (!Model.Tournaments.Any())
+{
+        <h2 class="text-center mt-5">Няма намерени турнири!</h2>
+}
+else
+{
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-5">
+        @foreach (var tournament in Model.Tournaments)
+        {
+                    <partial name="_TournamentPartial" model="@tournament" />
+        }
+        </div>
+    <partial name="_TournamentPagesPartial" model="@Model" />
 }

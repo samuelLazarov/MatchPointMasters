@@ -4,7 +4,9 @@ namespace MatchPointMasters.Core.Models.Tournament.ViewModels
 {
     public class TournamentDeleteViewModel : ITournamentModel
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int HostClubId { get; set; }
+        public string HostClub { get; set; } = string.Empty;
+        public string ImageUrl { get; set; } = string.Empty;
     }
 }

@@ -1,9 +1,10 @@
 ﻿namespace MatchPointMasters.Core.Models.Article.QueryModels
 {
+    using MatchPointMasters.Core.Contracts;
     using System.ComponentModel.DataAnnotations;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.ArticleConstants;
-    public class ArticleServiceModel
+    public class ArticleServiceModel : IArticleModel
     {
         public int Id { get; set; }
 

@@ -16,10 +16,10 @@
         public MatchRound MatchRound { get; set; }
 
         [Required]
-        public int PlayerOneId { get; set; }
+        public string PlayerOneName { get; set; } = string.Empty;
 
         [Required]
-        public int PlayerTwoId { get; set; }
+        public string PlayerTwoName { get; set; } = string.Empty;
 
         [Required]
         [Range(SetsMinRange, SetsMaxRange, ErrorMessage = RangeErrorMessage)]
@@ -29,6 +29,6 @@
         [Range(SetsMinRange, SetsMaxRange, ErrorMessage = RangeErrorMessage)]
         public int PlayerTwoSetsWon { get; set; } = 0;
 
-        public Winner Winner { get; set; }
+        public Winner? Winner { get; set; }
     }
 }

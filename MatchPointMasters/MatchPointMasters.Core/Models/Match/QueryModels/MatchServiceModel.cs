@@ -17,10 +17,10 @@
         public MatchRound MatchRound { get; set; }
 
         [Required]
-        public int PlayerOneId { get; set; }
+        public string PlayerOneName { get; set; } = string.Empty;
 
         [Required]
-        public int PlayerTwoId { get; set; }
+        public string PlayerTwoName { get; set; } = string.Empty; 
 
         [Required]
         [Range(SetsMinRange, SetsMaxRange, ErrorMessage = RangeErrorMessage)]

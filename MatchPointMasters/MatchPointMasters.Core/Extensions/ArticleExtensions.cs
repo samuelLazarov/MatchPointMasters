@@ -4,9 +4,9 @@
 
 	public static class ArticleExtensions
 	{
-		public static string GetArticleInformation(this IArticleModel article)
+		public static string GetInformation(this IArticleModel article)
 		{
-			return article.Title;
+			return article.Title.Replace(" ", "-");
 		}
 	}
 }

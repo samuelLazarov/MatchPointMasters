@@ -49,7 +49,7 @@ namespace MatchPointMasters.Controllers
 
 			var currentArticle = await articleService.DetailsAsync(id);
 
-			if (information != currentArticle.GetArticleInformation())
+			if (information != currentArticle.GetInformation())
 			{
 				return BadRequest();
 			}
@@ -117,7 +117,7 @@ namespace MatchPointMasters.Controllers
 
 			int id = articleForm.Id;
 			await articleService.EditPostAsync(articleForm);
-			return RedirectToAction(nameof(Details), new { id, information = articleForm.GetArticleInformation() });
+			return RedirectToAction(nameof(Details), new { id, information = articleForm.GetInformation() });
 		}
 
 		[HttpGet]
@@ -167,7 +167,7 @@ namespace MatchPointMasters.Controllers
 			model.ArticleComments = allArticleComments.ArticleComments;
 			model.ArticleId = id;
 			model.ArticleTitle = article.Title;
-			model.ArticleInfo = articleInfo.GetArticleInformation();
+			model.ArticleInfo = articleInfo.GetInformation();
 
 			return View(model);
 		}

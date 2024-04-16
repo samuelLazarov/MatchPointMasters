@@ -1,5 +1,66 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model TournamentEditViewModel
+
 @{
+    ViewBag.Title = "Редактирай Турнир";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-action="EditTournament" method="post">
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label-add-edit"><bold>Име на турнира</bold></label>
+                <input asp-for="@Model.Name" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.HostClubId" class="form-label-add-edit"><bold>Тенис-клуб</bold></label>
+                <input asp-for="@Model.HostClubId" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.HostClubId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Description" class="form-label-add-edit"><bold>Описание</bold></label>
+                <textarea asp-for="@Model.Description" class="form-control" aria-required="true" rows="5"></textarea>
+                <span asp-validation-for="@Model.Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.StartDate" class="form-label-add-edit"><bold>Дата и Час на Започване</bold></label>
+                <input asp-for="@Model.StartDate" class="form-control" aria-required="true" value="@Model.StartDate.ToString("yyyy-MM-ddTHH:mm")" />
+                <span asp-validation-for="@Model.StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="@Model.EndDate" class="form-label-add-edit"><bold>Дата и Час на Приключване</bold></label>
+                <input asp-for="@Model.EndDate" class="form-control" aria-required="true" value="@Model.EndDate.ToString("yyyy-MM-ddTHH:mm")" />
+                <span asp-validation-for="@Model.EndDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="@Model.Capacity" class="form-label-add-edit"><bold>Максимален брой участници</bold></label>
+                <input asp-for="@Model.Capacity" class="form-control" />
+                <span asp-validation-for="@Model.Capacity" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Fee" class="form-label-add-edit"><bold>Такса за участие</bold></label>
+                <input asp-for="@Model.Fee" class="form-control" />
+                <span asp-validation-for="@Model.Fee" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="@Model.ImageUrl" class="form-label-add-edit"><bold>Снимка (Линк)</bold></label>
+                <input asp-for="@Model.ImageUrl" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Редактирай" />
+                <a asp-controller="Event" asp-action="Details" asp-route-information="@Model.GetInformation()" asp-route-id="@Model.Id" class="btn btn-secondary mb-1 w-100 p-3 fw-bold">Обратно</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

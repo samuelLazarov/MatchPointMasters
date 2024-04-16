@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using MatchPointMasters.Components
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,14 +18,28 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Match Point Masters</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Match^Point^Masters</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-@*                     @await Component.InvokeAsync(nameof(MainMenuComponent))
- *@                    <partial name="_LoginPartial" />
+                    @await Component.InvokeAsync(nameof(MainMenuComponent))
+                    <ul class="navbar-nav">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Match" asp-action="All" asp-route-id="@UserManager.GetUserId(User)">Моите мачове</a>
+                            </li>
+                        }
+                        @if (User.IsAdmin())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="All" title="Admin">Действия</a>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
@@ -32,7 +52,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Today.Year - MatchPointMasters League for tennis enthusiasts :)
+            &copy; @DateTime.UtcNow.Year - MatchPointMasters League for tennis enthusiasts :)
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

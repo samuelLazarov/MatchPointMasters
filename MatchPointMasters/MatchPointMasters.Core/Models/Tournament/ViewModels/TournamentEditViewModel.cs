@@ -19,7 +19,7 @@ namespace MatchPointMasters.Core.Models.Tournament.ViewModels
 
         [Required]
         [StringLength(ClubNameMaxLength, MinimumLength = ClubNameMinLength, ErrorMessage = LengthErrorMessage)]
-        public int HostClubId { get; set; }
+        public string HostClub { get; set; } = string.Empty;
 
         [Required]
         [StringLength(TournamentDescriptionMaxLength, MinimumLength = TournamentDescriptionMinLength, ErrorMessage = LengthErrorMessage)]

@@ -1,22 +1,19 @@
-﻿﻿@using MatchPointMasters.Components
-@using MatchPointMasters.Infrastructure.Data.Models.Roles;
-@using Microsoft.AspNetCore.Identity
-@inject UserManager<ApplicationUser> UserManager
+﻿@inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav flex-grow-1">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="All">Книги</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Matches" asp-action="All">Мачове</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="BookStore" asp-action="All">Книжарници</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Club" asp-action="All">Тенис-Клубове</a>
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="All">Статии</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="All">Събития</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Tournament" asp-action="All">Турнири</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Mine" asp-route-id="@UserManager.GetUserId(User)">Моите Книги</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Tournament" asp-action="Mine" asp-route-id="@UserManager.GetUserId(User)">Моите Турнири</a>
     </li>
 </ul>

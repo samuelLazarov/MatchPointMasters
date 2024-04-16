@@ -12,12 +12,14 @@ namespace MatchPointMasters.Core.Extensions
                 Id = m.Id,
                 TournamentId = m.TournamentId,
                 MatchRound = m.MatchRound,
-                PlayerOneId = m.PlayerOneId,
-                PlayerTwoId = m.PlayerTwoId,
+                PlayerOneName = m.PlayerOne.Id.ToString(),
+                PlayerTwoName = m.PlayerTwo.Id.ToString(),
                 PlayerOneSetsWon = m.PlayerOneSetsWon,
                 PlayerTwoSetsWon = m.PlayerTwoSetsWon,
                 Winner = m.Winner
             });
+
+            
         }
     }
 }

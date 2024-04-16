@@ -189,7 +189,7 @@
             };
         }
 
-        public async Task<bool> TournamentExistsAsync(int tournamentId)
+        public async Task<bool> TournamentExistsByIdAsync(int tournamentId)
         {
             return await repository.AllAsReadOnly<Tournament>()
                 .AnyAsync(t => t.Id == tournamentId);
@@ -209,7 +209,7 @@
                 Id = currentTournament.Id,
                 Name = currentTournament.Name,
                 Description = currentTournament.Description,
-                HostClubId = currentTournament.HostClubId,
+                HostClub = currentTournament.HostClub.Name,
                 StartDate = currentTournament.StartDate,
                 EndDate = currentTournament.EndDate,
                 Capacity = currentTournament.Capacity,

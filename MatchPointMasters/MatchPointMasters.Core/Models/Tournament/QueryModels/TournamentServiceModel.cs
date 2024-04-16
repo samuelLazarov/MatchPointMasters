@@ -19,7 +19,7 @@
 
         [Required]
         [StringLength(ClubNameMaxLength, MinimumLength = ClubNameMinLength, ErrorMessage = LengthErrorMessage)]
-        public int HostClubId { get; set; }
+        public string HostClub { get; set; }
 
         [Required]
         [StringLength(TournamentDescriptionMaxLength, MinimumLength = TournamentDescriptionMinLength, ErrorMessage = LengthErrorMessage)]

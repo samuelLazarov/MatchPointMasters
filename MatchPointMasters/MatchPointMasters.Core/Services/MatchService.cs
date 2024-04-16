@@ -29,8 +29,8 @@
             {
                 TournamentId = matchForm.TournamentId,
                 MatchRound = matchForm.MatchRound,
-                PlayerOneId = matchForm.PlayerOneId,
-                PlayerTwoId = matchForm.PlayerTwoId,
+                PlayerOneId = matchForm.PlayerOne.Id,
+                PlayerTwoId = matchForm.PlayerTwo.Id,
                 PlayerOneSetsWon = matchForm.PlayerOneSetsWon,
                 PlayerTwoSetsWon = matchForm.PlayerTwoSetsWon,
                 Winner = matchForm.Winner,
