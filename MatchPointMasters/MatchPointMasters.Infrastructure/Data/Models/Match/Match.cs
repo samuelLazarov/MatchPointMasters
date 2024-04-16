@@ -51,7 +51,7 @@
 
         [Required]
         [Comment("Indicates who wins the match")]
-        public Winner Winner { get; set; }
+        public Winner? Winner { get; set; }
 
         public ICollection<Set> Sets { get; set; } = new List<Set>();
 

@@ -30,7 +30,7 @@
         [Range(SetsMinRange, SetsMaxRange, ErrorMessage = RangeErrorMessage)]
         public int PlayerTwoSetsWon { get; set; } = 0;
 
-        public Winner Winner { get; set; }
+        public Winner? Winner { get; set; }
 
     }
 }

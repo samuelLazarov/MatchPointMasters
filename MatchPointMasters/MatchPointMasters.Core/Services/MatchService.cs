@@ -8,6 +8,7 @@
     using MatchPointMasters.Core.Models.Set.QueryModels;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Match;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
@@ -17,20 +18,26 @@
     public class MatchService : IMatchService
     {
         private readonly IRepository repository;
+        private readonly IUserService userService;
 
-        public MatchService(IRepository _repository)
+        public MatchService(IRepository _repository, IUserService _userService)
         {
             repository = _repository;
+            userService = _userService;
         }
 
         public async Task<int> AddMatchAsync(MatchAddViewModel matchForm)
         {
+            //var playerOne = repository.AllAsReadOnly<ApplicationUser>()
+            //    .Where(u => u.FirstName.Contains(matchForm.PlayerOneName.ToLower())
+            //    || u.LastName.Contains(matchForm.PlayerOneName.ToLower())
+            
             Match match = new Match()
             {
                 TournamentId = matchForm.TournamentId,
                 MatchRound = matchForm.MatchRound,
-                PlayerOneId = matchForm.PlayerOne.Id,
-                PlayerTwoId = matchForm.PlayerTwo.Id,
+                //PlayerOneId = playerOne.Id,
+                //PlayerTwoId = matchForm.PlayerTwo.Id,
                 PlayerOneSetsWon = matchForm.PlayerOneSetsWon,
                 PlayerTwoSetsWon = matchForm.PlayerTwoSetsWon,
                 Winner = matchForm.Winner,
@@ -53,8 +60,8 @@
                 Id = currentMatch.Id,
                 TournamentId= currentMatch.TournamentId,
                 MatchRound = currentMatch.MatchRound,
-                PlayerOneId = currentMatch.PlayerOneId,
-                PlayerTwoId= currentMatch.PlayerTwoId,
+                //PlayerOneId = currentMatch.PlayerOneId,
+                //PlayerTwoId= currentMatch.PlayerTwoId,
                 PlayerOneSetsWon= currentMatch.PlayerOneSetsWon,
                 PlayerTwoSetsWon= currentMatch.PlayerTwoSetsWon,
                 Winner = currentMatch.Winner
@@ -72,8 +79,8 @@
 
             match.TournamentId = matchForm.TournamentId;
             match.MatchRound = matchForm.MatchRound;
-            match.PlayerOneId = matchForm.PlayerOneId;
-            match.PlayerTwoId = matchForm.PlayerTwoId;
+            //match.PlayerOneId = matchForm.PlayerOneId;
+            //match.PlayerTwoId = matchForm.PlayerTwoId;
             match.PlayerOneSetsWon = matchForm.PlayerOneSetsWon;
             match.PlayerTwoSetsWon = matchForm.PlayerTwoSetsWon;
             match.Winner = matchForm.Winner;
@@ -92,8 +99,8 @@
 
             var deleteForm = new MatchDeleteViewModel()
             {
-                PlayerOneId = match.PlayerOneId,
-                PlayerTwoId = match.PlayerTwoId,
+                //PlayerOneId = match.PlayerOneId,
+                //PlayerTwoId = match.PlayerTwoId,
                 MatchRound = match.MatchRound,
             };
 

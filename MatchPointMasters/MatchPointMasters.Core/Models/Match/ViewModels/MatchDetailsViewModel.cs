@@ -9,6 +9,6 @@
         public int PlayerTwoId { get; set; }
         public int PlayerOneSetsWon { get; set; } = 0;
         public int PlayerTwoSetsWon { get; set; } = 0;
-        public Winner Winner { get; set; }
+        public Winner? Winner { get; set; }
     }
 }
