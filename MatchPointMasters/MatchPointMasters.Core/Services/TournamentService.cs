@@ -11,6 +11,7 @@
     using MatchPointMasters.Infrastructure.Data.Models.Mappings;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
     using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class TournamentService : ITournamentService
@@ -233,8 +234,20 @@
             throw new NotImplementedException();
         }
 
-       
-
-        
+        public async Task<IEnumerable<TournamentIndexViewModel>> LastThreeTournamentsAsync()
+        {
+            return await repository
+                 .AllAsReadOnly<Tournament>()
+                 .OrderByDescending(t => t.StartDate)
+                 .Select(tvm => new TournamentIndexViewModel()
+                 {
+                     Id = tvm.Id,
+                     Name = tvm.Name,
+                     ImageUrl = tvm.ImageUrl,
+                     HostClub = tvm.HostClub.Name
+                 })
+                 .Take(3)
+                 .ToListAsync();
+        }
     }
 }

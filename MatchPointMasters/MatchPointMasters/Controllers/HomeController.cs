@@ -1,28 +1,44 @@
-﻿using MatchPointMasters.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
+﻿
 namespace MatchPointMasters.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using MatchPointMasters.Core.Contracts;
+
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
+        private readonly ITournamentService tournamentService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> _logger, ITournamentService _tournamentService)
         {
-            _logger = logger;
+            logger = _logger;
+            tournamentService = _tournamentService;
+
         }
 
-        public IActionResult Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var tournamentModel = await tournamentService.LastThreeTournamentsAsync();
+
+            return View(tournamentModel);
         }
 
-
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int statusCode)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (statusCode == 400)
+            {
+                return View("Error400");
+            }
+            else if (statusCode == 401)
+            {
+                return View("Error401");
+            }
+
+            return View();
         }
     }
 }

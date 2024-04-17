@@ -36,5 +36,6 @@
         Task<TournamentDetailsViewModel> DetailsAsync(int tournamentId);
         Task<PlayerQueryServiceModel> GetAllPlayersInTournamentAsync(int tournamentId);
         Task<MatchQueryServiceModel> GetAllMatchesInTournamentAsync(int tournamentId);
+        Task<IEnumerable<TournamentIndexViewModel>> LastThreeTournamentsAsync();
     }
 }
