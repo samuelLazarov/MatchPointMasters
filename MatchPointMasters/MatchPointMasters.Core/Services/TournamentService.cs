@@ -2,6 +2,7 @@
 {
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Enumerations;
+    using MatchPointMasters.Core.Extensions;
     using MatchPointMasters.Core.Models.Match.QueryModels;
     using MatchPointMasters.Core.Models.Roles.QueryModels;
     using MatchPointMasters.Core.Models.Tournament;
@@ -9,8 +10,11 @@
     using MatchPointMasters.Core.Models.Tournament.ViewModels;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Mappings;
+    using MatchPointMasters.Infrastructure.Data.Models.Match;
+    using MatchPointMasters.Infrastructure.Data.Models.Player;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -85,7 +89,7 @@
             tournament.Fee = tournamentForm.Fee;
             tournament.Capacity = tournamentForm.Capacity;
             tournament.ImageUrl = tournamentForm.ImageUrl;
-               
+
             await repository.SaveChangesAsync();
 
             return tournament.Id;
@@ -94,39 +98,87 @@
 
         public async Task<TournamentDeleteViewModel> DeleteTournamentAsync(int tournamentId)
         {
-            throw new NotImplementedException();
+            var currentTournament = await repository.GetByIdAsync<Tournament>(tournamentId);
+
+            var deleteForm = new TournamentDeleteViewModel()
+            {
+                Id = currentTournament.Id,
+                Name = currentTournament.Name,
+                HostClub = currentTournament.HostClub.Name,
+                ImageUrl = currentTournament.ImageUrl
+
+            };
+
+            return deleteForm;
         }
 
         public async Task<int> DeleteTournamentConfirmedAsync(int tournamentId)
         {
-            throw new NotImplementedException();
+            var currentTournament = await repository.GetByIdAsync<Tournament>(tournamentId);
+
+            await repository.RemoveAsync<Tournament>(currentTournament);
+            await repository.SaveChangesAsync();
+
+            return currentTournament.Id;
         }
 
         public async Task<bool> MatchExistsInTournamentAsync(int matchId, int tournamentId)
         {
-            throw new NotImplementedException();
+            return await repository.AllAsReadOnly<TournamentMatch>()
+                .AnyAsync(tm => tm.MatchId == matchId && tm.TournamentId == tournamentId);
         }
 
-        public Task<TournamentMatch> AddMatchToTournamentAsync(int matchId, int tournamentId)
+        public async Task<TournamentMatch> AddMatchToTournamentAsync(int matchId, int tournamentId)
         {
-            throw new NotImplementedException();
+            var tournamentMatch = await repository.All<TournamentMatch>()
+                .Where(tm => tm.MatchId == matchId && tm.TournamentId == tournamentId)
+                .FirstOrDefaultAsync();
+            if (tournamentMatch == null)
+            {
+                tournamentMatch = new TournamentMatch()
+                {
+                    MatchId = matchId,
+                    TournamentId = tournamentId
+                };
+
+                await repository.AddAsync(tournamentMatch);
+                await repository.SaveChangesAsync();
+            }
+
+            return tournamentMatch;
         }
 
-        public Task<TournamentMatchDeleteViewModel> RemoveMatchFromTournamentAsync(int matchId, int tournamentId)
+        public async Task<TournamentMatchDeleteViewModel> RemoveMatchFromTournamentAsync(int matchId, int tournamentId)
         {
-            throw new NotImplementedException();
+            var match = await repository.GetByIdAsync<Match>(matchId);
+            var tournament = await repository.GetByIdAsync<Tournament>(tournamentId);
+
+            var deleteForm = new TournamentMatchDeleteViewModel()
+            {
+                MatchId = match.Id,
+                TournamentId = tournament.Id,
+                MatchRound = match.MatchRound,
+                TournamentName = tournament.Name
+            };
+
+            return deleteForm;
         }
 
-        public Task RemoveMatchFromTournamentConfirmedAsync(int matchId, int tournamentId)
+        public async Task RemoveMatchFromTournamentConfirmedAsync(int matchId, int tournamentId)
         {
-            throw new NotImplementedException();
+            var matchInTheCurrentTournament = await repository.All<TournamentMatch>()
+                .Where(tm => tm.MatchId == matchId && tm.TournamentId == tournamentId)
+                .FirstOrDefaultAsync();
+
+            await repository.RemoveAsync<TournamentMatch>(matchInTheCurrentTournament);
+            await repository.SaveChangesAsync();
         }
 
         public async Task<TournamentQueryServiceModel> AllAsync(
-            string? searchTerm = null, 
-            TournamentSorting sorting = TournamentSorting.Newest, 
-            TournamentStatus status = TournamentStatus.All, 
-            int currentPage = 1, 
+            string? searchTerm = null,
+            TournamentSorting sorting = TournamentSorting.Newest,
+            TournamentStatus status = TournamentStatus.All,
+            int currentPage = 1,
             int tournamentsPerPage = 4)
         {
             var tournamentsToShow = repository.AllAsReadOnly<Tournament>();
@@ -141,7 +193,7 @@
                 tournamentsToShow = tournamentsToShow
                     .Where(t => t.EndDate <= DateTime.Now);
             }
-            
+
             if (searchTerm != null)
             {
                 string normalizedSearchTerm = searchTerm.ToLower();
@@ -163,6 +215,7 @@
                 _ => tournamentsToShow.OrderByDescending(t => t.Id)
             };
 
+
             var tournaments = await tournamentsToShow
                 .Skip((currentPage - 1) * tournamentsPerPage)
                 .Take(tournamentsPerPage)
@@ -170,7 +223,7 @@
                 {
                     Id = t.Id,
                     Name = t.Name,
-                    //HostClubId = t.HostClubId,
+                    HostClub = t.HostClub.Name,
                     Description = t.Description,
                     StartDate = t.StartDate,
                     EndDate = t.EndDate,
@@ -224,14 +277,91 @@
         }
 
 
-        public Task<MatchQueryServiceModel> GetAllMatchesInTournamentAsync(int tournamentId)
+        public async Task<MatchQueryServiceModel> GetAllMatchesInTournamentAsync(
+            int tournamentId,
+            string? searchTerm = null,
+            MatchStatus matchStatus = MatchStatus.All,
+            int currentPage = 1,
+            int matchesPerPage = 4)
         {
-            throw new NotImplementedException();
+            var matchesToShow = repository.AllAsReadOnly<Match>()
+                .Where(m => m.TournamentMatches.Any(tm => tm.TournamentId == tournamentId));
+
+            if (searchTerm != null)
+            {
+                string normalizedSearchTerm = searchTerm.ToLower();
+
+                //TODO use better properties
+                matchesToShow = matchesToShow
+                    .Where(m => normalizedSearchTerm.Contains(m.PlayerOneId.ToString().ToLower())
+                    || m.PlayerOneId.ToString().ToLower().Contains(normalizedSearchTerm));
+            }
+
+            //TODO order in a more ordinary way
+            matchesToShow = matchStatus switch
+            {
+                MatchStatus.InProgress => matchesToShow.OrderBy(m => m.Id),
+                MatchStatus.Upcoming => matchesToShow.OrderBy(m => m.Id),
+                MatchStatus.HasEnded => matchesToShow.OrderBy(m => m.Id),
+                MatchStatus.All => matchesToShow.OrderBy(m => m.Id),
+                _ => matchesToShow.OrderByDescending(m => m.Id),
+            };
+
+            var matches = await matchesToShow
+                .Skip((currentPage - 1) * matchesPerPage)
+                .Take(matchesPerPage)
+                .ProjectToMatchServiceModel()
+                .ToListAsync();
+
+            int totalMatches = await matchesToShow.CountAsync();
+
+            return new MatchQueryServiceModel()
+            {
+                Matches = matches,
+                TotalMatchesCount = totalMatches
+            };
         }
 
-        public Task<PlayerQueryServiceModel> GetAllPlayersInTournamentAsync(int tournamentId)
+        public async Task<PlayerQueryServiceModel> GetAllPlayersInTournamentAsync(
+            int tournamentId,
+            string? searchTerm = null,
+            PlayerSorting sorting,
+            int currentPage = 1,
+            int playersPerPage = 4)
         {
-            throw new NotImplementedException();
+            var playersToShow = repository.AllAsReadOnly<Player>()
+                .Where(p => p.PlayerTournaments.Any(pt => pt.TournamentId == tournamentId));
+
+            if (searchTerm != null)
+            {
+                string normalizedSearchTerm = searchTerm.ToLower();
+
+                //TODO use better properties
+                playersToShow = playersToShow
+                    .Where(p => normalizedSearchTerm.Contains(p.UserId)
+                    || p.UserId.ToString().ToLower().Contains(normalizedSearchTerm));
+            }
+
+            //TODO Sorting
+            playersToShow = sorting switch
+            {
+
+            _ => playersToShow.OrderByDescending(p => p.Id)
+            };
+
+            var players = await playersToShow
+                .Skip((currentPage - 1) * playersPerPage)
+                .Take(playersPerPage)
+                .ProjectToPlayerServiceModel()
+                .ToListAsync();
+
+            int totalPlayers = await playersToShow.CountAsync();
+
+            return new PlayerQueryServiceModel()
+            {
+                Players = players,
+                TotalPlayersCount = totalPlayers
+            };
         }
 
         public async Task<IEnumerable<TournamentIndexViewModel>> LastThreeTournamentsAsync()

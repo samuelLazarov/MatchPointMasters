@@ -2,7 +2,6 @@
 {
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Enumerations;
-    using MatchPointMasters.Core.Models.Admin;
     using MatchPointMasters.Core.Models.Admin.QueryModels;
     using MatchPointMasters.Infrastructure.Data.Common;
     using MatchPointMasters.Infrastructure.Data.Models.Roles;
@@ -113,6 +112,22 @@
         public async Task<ApplicationUser> GetUserByIdAsync(string userId)
         {
             return await repository.GetByIdAsync<ApplicationUser>(userId);
+        }
+
+        public async Task<UserServiceModel> DetailsAsync(string userId)
+        {
+            ApplicationUser? currentUser = await repository.GetByIdAsync<ApplicationUser>(userId);
+
+            var userDetails = new UserServiceModel()
+            {
+                Id = currentUser.Id,
+                FullName = $"{currentUser.FirstName} {currentUser.LastName}",
+                Email = currentUser.Email,
+                IsTournamentHost = tournamentHostService.ExistsByUserIdAsync(currentUser.Id).Result,
+                IsAdmin = userManager.IsInRoleAsync(currentUser, AdminRole).Result
+            };
+
+            return userDetails;
         }
     }
 }

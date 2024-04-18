@@ -6,7 +6,13 @@
     {
         public static string GetInformation(this ITournamentModel currentTournament)
         {
-            return string.Empty;
+            return currentTournament.Name.Replace(" ", "-") + GetHostClub(currentTournament.HostClub);
+        }
+
+        private static string GetHostClub(string hostClub)
+        {
+            hostClub = string.Join("-", hostClub.Split(" "));
+            return hostClub;
         }
 
     }

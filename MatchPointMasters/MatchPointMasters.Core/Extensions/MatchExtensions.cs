@@ -6,12 +6,8 @@
     {
         public static string GetInformation(this IMatchModel currentMatch)
         {
-            return "";
+            return $"{currentMatch.PlayerOneName} - {currentMatch.PlayerTwoName}";
         }
 
-        //private static string GetPlayerName(string playerName)
-        //{
-
-        //}
     }
 }
