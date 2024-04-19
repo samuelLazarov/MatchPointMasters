@@ -9,6 +9,7 @@ namespace MatchPointMasters.Controllers
     using MatchPointMasters.Attributes;
     using MatchPointMasters.Core.Models.Article.QueryModels;
     using MatchPointMasters.Core.Models.Article.ViewModels;
+    using System.Security.Claims;
 
     public class ArticleController : BaseController
     {

@@ -1,6 +1,5 @@
-﻿namespace MatchPointMasters.Extensions
+﻿namespace System.Security.Claims
 {
-    using Microsoft.AspNetCore.Identity;
     using System.Security.Claims;
     using static MatchPointMasters.Core.Constants.AdministratorConstants;
     public static class ClaimsPrincipalsExtension
@@ -14,11 +13,5 @@
         {
             return user.IsInRole(AdminRole);
         }
-
-        //public static async Task<bool> IsAdminAsync(this IdentityUser user, UserManager<IdentityUser> userManager)
-        //{
-        //    // Check if the user is in the Admin role
-        //    return await userManager.IsInRoleAsync(user, "Admin");
-        //}
     }
 }

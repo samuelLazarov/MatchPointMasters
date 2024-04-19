@@ -90,13 +90,13 @@
             };
         }
 
-        public async Task<bool> ExistByEmailAsync(string userEmail)
+        public async Task<bool> ExistsByEmailAsync(string userEmail)
         {
             return await repository.AllAsReadOnly<ApplicationUser>()
                 .AnyAsync(u => u.Email.ToLower() == userEmail.ToLower());
         }
 
-        public async Task<bool> ExistByIdAsync(string userId)
+        public async Task<bool> ExistsByIdAsync(string userId)
         {
             return await repository.AllAsReadOnly<ApplicationUser>()
                 .AnyAsync(u => u.Id == userId);

@@ -1,0 +1,90 @@
+﻿@model AllUsersQueryModel
+
+@{
+    ViewBag.Title = "Всички Потребители";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+
+<form method="get">
+    <div class="row justify-content-center align-items-end">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="SearchTerm"></label>
+                <input asp-for="SearchTerm" class="form-control" placeholder="Търси...">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="RoleStatus"></label>
+                <select asp-for="RoleStatus" class="form-control">
+                    <option value="0">Всички</option>
+                    <option value="1">TournamentHost-ове</option>
+                    <option value="2">Admin-и</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <input type="submit" value="Търси" class="btn btn-success w-100" />
+        </div>
+    </div>
+</form>
+
+@if (!Model.Users.Any())
+{
+    <h2 class="text-center mt-5">Няма намерени потребители!</h2>
+}
+else
+{
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th><label>Име</label></th>
+                <th><label>Имейл</label></th>
+                <th><label>TournamentHost</label></th>
+                <th><label>Admin</label></th>
+                <th><label>Действия</label></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>
+                        <label>@user.FullName</label>
+                    </td>
+                    <td>
+                        <label>@user.Email</label>
+                    </td>
+                    <td>
+                        @if (user.IsTournamentHost)
+                        {
+                            <label>✔</label>
+                        }
+                        else
+                        {
+                            <label class="text-center">❌</label>
+                        }
+                    </td>
+                    <td>
+                        @if (user.IsAdmin)
+                        {
+                            <label>✔</label>
+                        }
+                        else
+                        {
+                            <label class="text-center">❌</label>
+                        }
+                    </td>
+                    <td>
+                        <a asp-area="Admin" asp-controller="User" asp-action="Details" asp-route-userId="@user.Id" class="btn btn-outline-danger">Действия</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <partial name="_UserPagesPartial" model="@Model" />
+}

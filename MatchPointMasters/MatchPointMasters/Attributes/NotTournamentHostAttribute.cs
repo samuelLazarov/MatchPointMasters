@@ -4,8 +4,9 @@
 	using MatchPointMasters.Extensions;
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.AspNetCore.Mvc.Filters;
+    using System.Security.Claims;
 
-	public class NotTournamentHostAttribute : ActionFilterAttribute
+    public class NotTournamentHostAttribute : ActionFilterAttribute
 	{
 		public override void OnActionExecuting(ActionExecutingContext context)
 		{

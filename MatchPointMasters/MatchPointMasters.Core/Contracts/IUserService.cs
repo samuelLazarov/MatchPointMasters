@@ -12,8 +12,8 @@
             UserRoleStatus roleSorting = UserRoleStatus.All,
             int currentPage = 1,
             int usersPerPage = 8);
-        Task<bool> ExistByIdAsync(string userId);
-        Task<bool> ExistByEmailAsync(string userEmail);
+        Task<bool> ExistsByIdAsync(string userId);
+        Task<bool> ExistsByEmailAsync(string userEmail);
         Task<ApplicationUser> GetUserByIdAsync(string userId);
         Task<ApplicationUser> GetUserByEmailAsync(string userEmail);
         Task<UserServiceModel> DetailsAsync(string userId);

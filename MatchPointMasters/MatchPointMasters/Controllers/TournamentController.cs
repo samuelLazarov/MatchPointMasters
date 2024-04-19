@@ -9,6 +9,7 @@ namespace MatchPointMasters.Controllers
     using MatchPointMasters.Core.Models.Tournament.QueryModels;
     using MatchPointMasters.Extensions;
     using MatchPointMasters.Core.Models.Tournament.ViewModels;
+    using System.Security.Claims;
 
     public class TournamentController : BaseController
     {
