@@ -26,7 +26,7 @@
             }
         }
     </div>
-    <a asp-controller="Tournament" asp-action="Details" asp-route-information="@Model.GetInformation()" asp-route-id="@Model.Id" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж повече</a>
+    <a asp-controller="Tournament" asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetInformation()" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж повече</a>
 
     @if (DateTime.Now < Model.StartDate && Model.Capacity > 0)
     {

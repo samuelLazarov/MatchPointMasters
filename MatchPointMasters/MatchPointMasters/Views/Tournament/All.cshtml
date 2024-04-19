@@ -11,7 +11,7 @@
 @if (await tournamentHostService.ExistsByUserIdAsync(User.Id()))
 {
         <div class="text-center mb-4">
-            <a asp-controller="Article" asp-action="Add" class="btn btn-primary btn-lg">Добави Турнир</a>
+            <a asp-controller="Tournament" asp-action="Add" class="btn btn-primary btn-lg">Добави Турнир</a>
         </div>
 }
 

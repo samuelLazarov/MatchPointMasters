@@ -34,8 +34,18 @@
         Task<bool> TournamentExistsByIdAsync(int tournamentId);
         Task<Tournament> FindTournamentByIdAsync(int tournamentId);
         Task<TournamentDetailsViewModel> DetailsAsync(int tournamentId);
-        Task<PlayerQueryServiceModel> GetAllPlayersInTournamentAsync(int tournamentId);
-        Task<MatchQueryServiceModel> GetAllMatchesInTournamentAsync(int tournamentId);
+        Task<PlayerQueryServiceModel> GetAllPlayersInTournamentAsync(
+            int tournamentId,
+            string? searchTerm = null,
+            PlayerSorting sorting = PlayerSorting.All,
+            int currentPage = 1,
+            int matchesPerPage = 4);
+        Task<MatchQueryServiceModel> GetAllMatchesInTournamentAsync(
+            int tournamentId,
+            string? searchTerm = null,
+            MatchStatus matchStatus = MatchStatus.All,
+            int currentPage = 1,
+            int matchesPerPage = 4);
         Task<IEnumerable<TournamentIndexViewModel>> LastThreeTournamentsAsync();
     }
 }

@@ -12,7 +12,9 @@
     using MatchPointMasters.Infrastructure.Data.Models.Mappings;
     using MatchPointMasters.Infrastructure.Data.Models.Match;
     using MatchPointMasters.Infrastructure.Data.Models.Player;
+    using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
     using System.Collections.Generic;
@@ -23,12 +25,14 @@
 
         private readonly IRepository repository;
         private readonly IMatchService matchService;
+        private readonly UserManager<ApplicationUser> userManager;
 
 
-        public TournamentService(IRepository _repository, IMatchService _matchService)
+        public TournamentService(IRepository _repository, IMatchService _matchService, UserManager<ApplicationUser> _userManager)
         {
             repository = _repository;
             matchService = _matchService;
+            userManager = _userManager;
         }
 
         public async Task<int> AddTournamentAsync(TournamentAddViewModel tournamentForm)
@@ -257,20 +261,21 @@
         public async Task<TournamentDetailsViewModel> DetailsAsync(int tournamentId)
         {
             Tournament? currentTournament = await repository.GetByIdAsync<Tournament>(tournamentId);
+            int clubId = currentTournament.TournamentHostId;
+            Club? currentClub = await repository.GetByIdAsync<Club>(clubId);
 
             var currentTournamentDetails = new TournamentDetailsViewModel()
             {
                 Id = currentTournament.Id,
                 Name = currentTournament.Name,
                 Description = currentTournament.Description,
-                HostClub = currentTournament.HostClub.Name,
+                HostClub = currentClub.Name,
                 StartDate = currentTournament.StartDate,
                 EndDate = currentTournament.EndDate,
                 Capacity = currentTournament.Capacity,
                 Fee = currentTournament.Fee,
                 ImageUrl = currentTournament.ImageUrl,
                 TournamentBalls = currentTournament.TournamentBalls
-
             };
 
             return currentTournamentDetails;
@@ -325,7 +330,7 @@
         public async Task<PlayerQueryServiceModel> GetAllPlayersInTournamentAsync(
             int tournamentId,
             string? searchTerm = null,
-            PlayerSorting sorting,
+            PlayerSorting sorting = PlayerSorting.All,
             int currentPage = 1,
             int playersPerPage = 4)
         {
@@ -345,7 +350,9 @@
             //TODO Sorting
             playersToShow = sorting switch
             {
-
+                PlayerSorting.All => playersToShow,
+                PlayerSorting.WinsAscending => playersToShow.OrderBy(p => p.Wins).ThenBy(p => p.Losses),
+                PlayerSorting.LossesAscending => playersToShow.OrderBy(p => p.Losses).ThenBy(p => p.Wins),
             _ => playersToShow.OrderByDescending(p => p.Id)
             };
 
