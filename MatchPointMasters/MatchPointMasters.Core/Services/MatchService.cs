@@ -19,11 +19,13 @@
     {
         private readonly IRepository repository;
         private readonly IUserService userService;
+        private readonly IPlayerService playerService;
 
-        public MatchService(IRepository _repository, IUserService _userService)
+        public MatchService(IRepository _repository, IUserService _userService, IPlayerService _playerService)
         {
             repository = _repository;
             userService = _userService;
+            playerService = _playerService;
         }
 
         public async Task<int> AddMatchAsync(MatchAddViewModel matchForm)
@@ -192,12 +194,14 @@
             Match? currentMatch = await repository.AllAsReadOnly<Match>()
                 .FirstOrDefaultAsync(m => m.Id == matchId);
 
+            //var playerOne = await playerService.GetPlayerById()
+
             var currentMatchDetails = new MatchDetailsViewModel()
             {
                 Id = currentMatch.Id,
                 MatchRound = currentMatch.MatchRound,
-                PlayerOneId = currentMatch.PlayerOneId,
-                PlayerTwoId = currentMatch.PlayerTwoId,
+                //PlayerOneName = currentMatch.PlayerOneId,
+                //PlayerTwoName = currentMatch.PlayerTwoId,
                 PlayerOneSetsWon = currentMatch.PlayerOneSetsWon,
                 PlayerTwoSetsWon = currentMatch.PlayerTwoSetsWon,
                 Winner = currentMatch.Winner,

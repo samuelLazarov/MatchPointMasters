@@ -1,5 +1,4 @@
-﻿
-namespace MatchPointMasters.Areas.Admin.Controllers
+﻿namespace MatchPointMasters.Areas.Admin.Controllers
 {
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Core.Models.Admin.QueryModels;
