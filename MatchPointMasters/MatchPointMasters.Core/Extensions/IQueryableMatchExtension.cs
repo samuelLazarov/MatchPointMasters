@@ -19,7 +19,6 @@ namespace MatchPointMasters.Core.Extensions
                 Winner = m.Winner
             });
 
-            
         }
     }
 }

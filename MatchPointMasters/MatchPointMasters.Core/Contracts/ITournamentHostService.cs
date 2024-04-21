@@ -13,7 +13,7 @@
         Task<bool> ExistsByTournamentHostIdAsync(int userId);
         Task<bool> ExistsByUserIdAsync(string userId);
         Task<bool> ExistsByEmailAsync(string publisherEmail);
-        Task<TournamentHost> GetPublisherByEmailAsync(string publisherEmail);
+        Task<TournamentHost> GetTournamentHostByEmailAsync(string publisherEmail);
         Task<int?> GetTournamentHostIdAsync(string UserId);
 
     }

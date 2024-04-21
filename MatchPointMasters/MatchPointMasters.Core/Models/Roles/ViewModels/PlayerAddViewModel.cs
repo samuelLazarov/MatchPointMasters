@@ -1,21 +1,21 @@
-﻿namespace MatchPointMasters.Core.Models.Roles.QueryModels
+﻿namespace MatchPointMasters.Core.Models.Roles.ViewModels
 {
     using MatchPointMasters.Core.Contracts;
     using MatchPointMasters.Infrastructure.Data.Enums.Player;
+    using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants;
     using static MatchPointMasters.Infrastructure.Constants.DataConstants.PlayerConstants;
 
-
-    public class PlayerServiceModel : IPlayerModel
+    public class PlayerAddViewModel : IPlayerModel
     {
 
-        public int Id { get; set; }
+        [Required]
+        [StringLength(PlayerNameMaxLength, MinimumLength = PlayerNameMinLength, ErrorMessage = LengthErrorMessage)]
+        public string FullName { get; set; } = string.Empty;
 
         [Required]
-        public string UserId { get; set; } = string.Empty;
-
-        [Required]
+        [StringLength(PlayerPhoneMaxLength, MinimumLength = PlayerPhoneMinLength, ErrorMessage = LengthErrorMessage)]
         public string PhoneNumber { get; set; } = string.Empty;
 
         [Required]
@@ -32,14 +32,10 @@
 
         public TennisRacket? TennisRacket { get; set; }
 
-        public int Wins { get; set; }
-
-        public int Losses { get; set; }
-
-        public int? TournamentWins { get; set; }
-
         [Required]
+        [StringLength(PlayerImageUrlMaxLength, MinimumLength = PlayerImageUrlMinLength, ErrorMessage = LengthErrorMessage)]
         public string ImageUrl { get; set; } = string.Empty;
-        public string FullName { get; set; } = string.Empty;
+
+        
     }
 }

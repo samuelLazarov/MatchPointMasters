@@ -1,0 +1,15 @@
+﻿@model PlayerQueryServiceModel
+
+<h1>Players</h1>
+<br />
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    @{
+        foreach (var player in Model.Players)
+        {
+            <div class="col">
+                <partial name="_PlayerPartial" model="@player" />
+            </div>
+        }
+    }
+</div>

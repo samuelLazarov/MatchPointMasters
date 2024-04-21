@@ -35,7 +35,7 @@
                 .AnyAsync(u => u.User.Email.ToLower() == tournamentHostEmail.ToLower());
         }
 
-        public async Task<TournamentHost> GetPublisherByEmailAsync(string tournamentHostEmail)
+        public async Task<TournamentHost> GetTournamentHostByEmailAsync(string tournamentHostEmail)
         {
             return await repository
                 .All<TournamentHost>()

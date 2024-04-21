@@ -1,17 +1,18 @@
 ﻿@inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav flex-grow-1">
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Matches" asp-action="All">Мачове</a>
-    </li>
+    
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Club" asp-action="All">Тенис-Клубове</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="All">Статии</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Tournament" asp-action="All">Турнири</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Tournament" asp-action="All">Турнири</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="All">Ранглиста</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="All">Статии</a>
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Tournament" asp-action="Mine" asp-route-id="@UserManager.GetUserId(User)">Моите Турнири</a>
