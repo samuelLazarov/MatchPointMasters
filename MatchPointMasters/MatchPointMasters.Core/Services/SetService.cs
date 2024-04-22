@@ -43,12 +43,9 @@ namespace MatchPointMasters.Core.Services
 
             var tiebreakForm = new SetEditViewModel()
             {
-                Id = currentSet.Id,
-                MatchId = currentSet.MatchId,
                 PlayerOneGamesWon = currentSet.PlayerOneGamesWon,
                 PlayerTwoGamesWon = currentSet.PlayerTwoGamesWon,
                 HasTiebreak = currentSet.HasTiebreak,
-                TiebreakId = currentSet.TiebreakId,
             };
 
             return tiebreakForm;
@@ -60,11 +57,9 @@ namespace MatchPointMasters.Core.Services
                 .Where(t => t.Id == setForm.Id)
                 .FirstOrDefaultAsync();
 
-            set.MatchId = setForm.MatchId;
             set.PlayerOneGamesWon = setForm.PlayerOneGamesWon;
             set.PlayerTwoGamesWon = setForm.PlayerTwoGamesWon;
             set.HasTiebreak = setForm.HasTiebreak;
-            set.TiebreakId = setForm.TiebreakId;
 
             await repository.SaveChangesAsync();
 
@@ -79,10 +74,8 @@ namespace MatchPointMasters.Core.Services
 
             var deleteForm = new SetDeleteViewModel()
             {
-                Id = set.Id,
                 PlayerOneGamesWon = set.PlayerOneGamesWon,
                 PlayerTwoGamesWon = set.PlayerTwoGamesWon,
-                MatchId = set.MatchId,
             };
 
             return deleteForm;
@@ -149,12 +142,10 @@ namespace MatchPointMasters.Core.Services
 
             var currentTiebrakDetails = new SetDetailsViewModel()
             {
-                Id = currentSet.Id,
                 MatchId = currentSet.MatchId,
                 PlayerOneGamesWon = currentSet.PlayerOneGamesWon,
                 PlayerTwoGamesWon = currentSet.PlayerTwoGamesWon,
                 HasTiebreak = currentSet.HasTiebreak,
-                TiebreakId = currentSet.TiebreakId,
             };
 
             return currentTiebrakDetails;

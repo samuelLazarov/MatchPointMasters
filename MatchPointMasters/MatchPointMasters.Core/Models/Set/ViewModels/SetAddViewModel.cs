@@ -7,8 +7,6 @@
 
     public class SetAddViewModel : ISetModel
     {
-        [Required]
-        public int MatchId { get; set; }
 
         [Required]
         [Range(GamesMinRange, GamesMaxRange, ErrorMessage = RangeErrorMessage)]

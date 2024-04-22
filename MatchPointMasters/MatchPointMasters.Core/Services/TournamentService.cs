@@ -283,33 +283,40 @@
 
 
         public async Task<MatchQueryServiceModel> GetAllMatchesInTournamentAsync(
-            int tournamentId,
-            string? searchTerm = null,
-            MatchStatus matchStatus = MatchStatus.All,
-            int currentPage = 1,
-            int matchesPerPage = 4)
+             int tournamentId,
+             string? matchRound = null,
+             string? searchTerm = null,
+             MatchStatus status = MatchStatus.All,
+             int currentPage = 1,
+             int matchesPerPage = 4)
         {
             var matchesToShow = repository.AllAsReadOnly<Match>()
                 .Where(m => m.TournamentMatches.Any(tm => tm.TournamentId == tournamentId));
 
+            if (matchRound != null)
+            {
+                matchesToShow = matchesToShow
+                    .Where(m => m.MatchRound.ToString() == matchRound);
+            }
+
             if (searchTerm != null)
             {
                 string normalizedSearchTerm = searchTerm.ToLower();
-
-                //TODO use better properties
                 matchesToShow = matchesToShow
                     .Where(m => normalizedSearchTerm.Contains(m.PlayerOneId.ToString().ToLower())
-                    || m.PlayerOneId.ToString().ToLower().Contains(normalizedSearchTerm));
+                    || normalizedSearchTerm.Contains(m.PlayerTwoId.ToString().ToLower())
+
+                    || m.PlayerOneId.ToString().ToLower().Contains(normalizedSearchTerm)
+                    || m.PlayerTwoId.ToString().ToLower().Contains(normalizedSearchTerm)
+                    );
             }
 
-            //TODO order in a more ordinary way
-            matchesToShow = matchStatus switch
+            matchesToShow = status switch
             {
+                MatchStatus.HasEnded => matchesToShow.OrderBy(m => m.Id),
                 MatchStatus.InProgress => matchesToShow.OrderBy(m => m.Id),
                 MatchStatus.Upcoming => matchesToShow.OrderBy(m => m.Id),
-                MatchStatus.HasEnded => matchesToShow.OrderBy(m => m.Id),
-                MatchStatus.All => matchesToShow.OrderBy(m => m.Id),
-                _ => matchesToShow.OrderByDescending(m => m.Id),
+                _ => matchesToShow.OrderByDescending(m => m.Id)
             };
 
             var matches = await matchesToShow

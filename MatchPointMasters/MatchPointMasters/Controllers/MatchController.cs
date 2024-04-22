@@ -9,10 +9,12 @@ namespace MatchPointMasters.Controllers
     public class MatchController : BaseController
     {
         private readonly IMatchService matchService;
+        private readonly ITournamentService tournamentService;
 
-        public MatchController(IMatchService _matchService)
+        public MatchController(IMatchService _matchService, ITournamentService tournamentService)
         {
             matchService = _matchService;
+            this.tournamentService = tournamentService;
         }
 
 
@@ -20,7 +22,7 @@ namespace MatchPointMasters.Controllers
         [HttpGet]
         public async Task<IActionResult> All([FromQuery] AllMatchesQueryModel model)
         {
-            var allMatches = await matchService.AllMatchesInTournamentAsync(
+            var allMatches = await tournamentService.GetAllMatchesInTournamentAsync(
                 model.TournamentId,
                 model.MatchRound.ToString(),
                 model.SearchTerm,

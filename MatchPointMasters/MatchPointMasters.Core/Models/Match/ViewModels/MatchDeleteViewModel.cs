@@ -9,5 +9,6 @@ namespace MatchPointMasters.Core.Models.Match.ViewModels
         public MatchRound MatchRound { get; set; }
         public string PlayerOneName { get; set; } = string.Empty;
         public string PlayerTwoName { get; set; } = string.Empty;
+        public string TournamentName {  get; set; } = string.Empty;
     }
 }

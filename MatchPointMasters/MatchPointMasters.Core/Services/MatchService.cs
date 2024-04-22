@@ -30,20 +30,17 @@
 
         public async Task<int> AddMatchAsync(MatchAddViewModel matchForm)
         {
-            //var playerOne = repository.AllAsReadOnly<ApplicationUser>()
-            //    .Where(u => u.FirstName.Contains(matchForm.PlayerOneName.ToLower())
-            //    || u.LastName.Contains(matchForm.PlayerOneName.ToLower())
-            
+            var playerOne = userService.GetUserByFullNameAsync(matchForm.PlayerOneName);
+            var playerTwo = userService.GetUserByFullNameAsync(matchForm.PlayerTwoName);
             Match match = new Match()
             {
                 TournamentId = matchForm.TournamentId,
                 MatchRound = matchForm.MatchRound,
-                //PlayerOneId = playerOne.Id,
-                //PlayerTwoId = matchForm.PlayerTwo.Id,
+                PlayerOneId = playerOne.Id,
+                PlayerTwoId = playerTwo.Id,
                 PlayerOneSetsWon = matchForm.PlayerOneSetsWon,
                 PlayerTwoSetsWon = matchForm.PlayerTwoSetsWon,
                 Winner = matchForm.Winner,
-                
             };
 
             await repository.AddAsync(match);
@@ -57,13 +54,19 @@
             var currentMatch = await repository.All<Match>()
                 .FirstOrDefaultAsync(m => m.Id == matchId);
 
+            var playerOne = await playerService.FindPlayerByIdAsync(currentMatch.PlayerOneId);
+            var playerOneName = await userService.UserFullNameAsync(playerOne.UserId);
+
+            var playerTwo = await playerService.FindPlayerByIdAsync(currentMatch.PlayerTwoId);
+            var playerTwoName = await userService.UserFullNameAsync(playerTwo.UserId);
+
             var matchForm = new MatchEditViewModel()
             {
                 Id = currentMatch.Id,
                 TournamentId= currentMatch.TournamentId,
                 MatchRound = currentMatch.MatchRound,
-                //PlayerOneId = currentMatch.PlayerOneId,
-                //PlayerTwoId= currentMatch.PlayerTwoId,
+                PlayerOneName = playerOneName,
+                PlayerTwoName= playerTwoName,
                 PlayerOneSetsWon= currentMatch.PlayerOneSetsWon,
                 PlayerTwoSetsWon= currentMatch.PlayerTwoSetsWon,
                 Winner = currentMatch.Winner
@@ -79,10 +82,15 @@
                 .Where(m => m.Id == matchForm.Id)
                 .FirstOrDefaultAsync();
 
+            var userOne = await userService.GetUserByIdAsync(matchForm.PlayerOneName);
+            var playerOne = await playerService.FindPlayerByUserIdAsync(userOne.Id);
+            var userTwo = await userService.GetUserByIdAsync(matchForm.PlayerTwoName);
+            var playerTwo = await playerService.FindPlayerByUserIdAsync(userTwo.Id);
+
             match.TournamentId = matchForm.TournamentId;
             match.MatchRound = matchForm.MatchRound;
-            //match.PlayerOneId = matchForm.PlayerOneId;
-            //match.PlayerTwoId = matchForm.PlayerTwoId;
+            match.PlayerOneId = playerOne.Id;
+            match.PlayerTwoId = playerTwo.Id;
             match.PlayerOneSetsWon = matchForm.PlayerOneSetsWon;
             match.PlayerTwoSetsWon = matchForm.PlayerTwoSetsWon;
             match.Winner = matchForm.Winner;
@@ -95,15 +103,22 @@
 
         public async Task<MatchDeleteViewModel> DeleteMatchAsync(int matchId)
         {
-            var match = await repository
+            var currentMatch = await repository
                 .AllAsReadOnly<Match>().Where(m => m.Id == matchId)
                 .FirstOrDefaultAsync();
 
+            var playerOne = await playerService.FindPlayerByIdAsync(currentMatch.PlayerOneId);
+            var playerOneName = await userService.UserFullNameAsync(playerOne.UserId);
+
+            var playerTwo = await playerService.FindPlayerByIdAsync(currentMatch.PlayerTwoId);
+            var playerTwoName = await userService.UserFullNameAsync(playerTwo.UserId);
+
             var deleteForm = new MatchDeleteViewModel()
             {
-                //PlayerOneId = match.PlayerOneId,
-                //PlayerTwoId = match.PlayerTwoId,
-                MatchRound = match.MatchRound,
+                PlayerOneName = playerOneName,
+                PlayerTwoName = playerTwoName,
+                MatchRound = currentMatch.MatchRound,
+                TournamentName = currentMatch.Tournament.Name
             };
 
             return deleteForm;
@@ -123,57 +138,7 @@
         }
 
 
-        public async Task<MatchQueryServiceModel> AllMatchesInTournamentAsync(
-            int tournamentId,
-            string? matchRound = null, 
-            string? searchTerm = null,
-            MatchStatus status = MatchStatus.All, 
-            int currentPage = 1, 
-            int matchesPerPage = 4)
-        {
-            var matchesToShow = repository.AllAsReadOnly<Match>()
-                .Where(m => m.TournamentMatches.Any(tm => tm.TournamentId == tournamentId));
-
-            if (matchRound != null)
-            {
-                matchesToShow = matchesToShow
-                    .Where(m => m.MatchRound.ToString() == matchRound);
-            }
-            
-            if (searchTerm != null)
-            {
-                string normalizedSearchTerm = searchTerm.ToLower();
-                matchesToShow = matchesToShow
-                    .Where(m => normalizedSearchTerm.Contains(m.PlayerOneId.ToString().ToLower())
-                    || normalizedSearchTerm.Contains(m.PlayerTwoId.ToString().ToLower())
-                    
-                    || m.PlayerOneId.ToString().ToLower().Contains(normalizedSearchTerm)
-                    || m.PlayerTwoId.ToString().ToLower().Contains(normalizedSearchTerm)
-                    );
-            }
-
-            matchesToShow = status switch
-            {
-                MatchStatus.HasEnded => matchesToShow.OrderBy(m => m.Id),
-                MatchStatus.InProgress => matchesToShow.OrderBy(m => m.Id),
-                MatchStatus.Upcoming => matchesToShow.OrderBy(m => m.Id),
-                _ => matchesToShow.OrderByDescending(m => m.Id)
-            };
-
-            var matches = await matchesToShow
-                .Skip((currentPage -1) * matchesPerPage)
-                .Take(matchesPerPage)
-                .ProjectToMatchServiceModel()
-                .ToListAsync();
-
-            int totalMatches = await matchesToShow.CountAsync();
-
-            return new MatchQueryServiceModel()
-            {
-                Matches = matches,
-                TotalMatchesCount = totalMatches
-            };
-        }
+        
 
         public async Task<SetQueryServiceModel> GetAllSetsInMatchAsync(int matchId)
         {

@@ -16,6 +16,7 @@
         Task<bool> ExistsByEmailAsync(string userEmail);
         Task<ApplicationUser> GetUserByIdAsync(string userId);
         Task<ApplicationUser> GetUserByEmailAsync(string userEmail);
+        Task<ApplicationUser> GetUserByFullNameAsync(string userFullName);
         Task<UserServiceModel> DetailsAsync(string userId);
     }
 }

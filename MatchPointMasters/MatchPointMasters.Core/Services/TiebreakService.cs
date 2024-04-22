@@ -2,7 +2,6 @@
 namespace MatchPointMasters.Core.Services
 {
     using MatchPointMasters.Core.Contracts;
-    using MatchPointMasters.Core.Models.Tiebreak;
     using MatchPointMasters.Core.Models.Tiebreak.QueryModels;
     using MatchPointMasters.Core.Models.Tiebreak.ViewModels;
     using MatchPointMasters.Infrastructure.Data.Common;
@@ -57,7 +56,6 @@ namespace MatchPointMasters.Core.Services
 
             tiebreak.PlayerOnePoints = tiebreakForm.PlayerOnePoints;
             tiebreak.PlayerTwoPoints = tiebreakForm.PlayerTwoPoints;
-            tiebreak.SetId = tiebreakForm.SetId;
 
             await repository.SaveChangesAsync();
 
@@ -73,7 +71,6 @@ namespace MatchPointMasters.Core.Services
 
             var deleteForm = new TiebreakDeleteViewModel()
             {
-                Id = tiebreak.Id,
                 PlayerOnePoints = tiebreak.PlayerOnePoints,
                 PlayerTwoPoints = tiebreak.PlayerTwoPoints,
             };
@@ -116,13 +113,8 @@ namespace MatchPointMasters.Core.Services
 
         public async Task<Tiebreak> FindTiebreakByIdAsync(int tiebreakId)
         {
-            var currentTiebreak = await repository.AllAsReadOnly<Tiebreak>()
+            return await repository.AllAsReadOnly<Tiebreak>()
                 .FirstOrDefaultAsync(t => t.Id == tiebreakId);
-            if (currentTiebreak == null)
-            {
-                throw new Exception();
-            }
-            return currentTiebreak;
         }
 
         public async Task<TiebreakDetailsViewModel> TiebreakDetailsAsync(int tiebreakId)
@@ -132,7 +124,6 @@ namespace MatchPointMasters.Core.Services
 
             var currentTiebrakDetails = new TiebreakDetailsViewModel()
             {
-                Id = currentTiebreak.Id,
                 PlayerOnePoints = currentTiebreak.PlayerOnePoints,
                 PlayerTwoPoints = currentTiebreak.PlayerTwoPoints,
             };

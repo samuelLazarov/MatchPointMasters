@@ -17,17 +17,10 @@
         Task<int> DeleteMatchConfirmedAsync(int matchId);
 
         //Query operations
-        Task<MatchQueryServiceModel> AllMatchesInTournamentAsync(
-            int tournamentId,
-            string? matchRound = null,
-            string? searchTerm = null,
-            MatchStatus status = MatchStatus.All,
-            int currentPage = 1,
-            int matchesPerPage = 4);
         Task<bool> MatchExistsAsync(int matchId);
         Task<Match> FindMatchByIdAsync(int matchId);
         Task<MatchDetailsViewModel> MatchDetailsAsync(int matchId);
-        Task<SetQueryServiceModel> GetAllSetsInMatchAsync(int tourId);
+        Task<SetQueryServiceModel> GetAllSetsInMatchAsync(int matchId);
 
     }
 }

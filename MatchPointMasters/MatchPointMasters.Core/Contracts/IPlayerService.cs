@@ -5,6 +5,7 @@
     using MatchPointMasters.Core.Models.Roles.QueryModels;
     using MatchPointMasters.Core.Models.Roles.ViewModels;
     using MatchPointMasters.Core.Models.Tournament.QueryModels;
+    using MatchPointMasters.Infrastructure.Data.Models.Mappings;
     using MatchPointMasters.Infrastructure.Data.Models.Player;
 
     public interface IPlayerService
@@ -20,6 +21,8 @@
         Task<bool> PlayerExistsByIdAsync(int playerId);
         Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber);
         Task<Player> FindPlayerByIdAsync(int playerId);
+        Task<Player> FindPlayerByUserIdAsync(string userId);
+        Task<string> PlayerFullNameAsync(string userId);
         Task<MatchQueryServiceModel> GetPlayerMatches(
             int playerId,
             MatchStatus status = MatchStatus.All,
@@ -32,6 +35,9 @@
             int matchesPerPage = 8);
         
         Task<bool> PlayerIsInTournamentAsync(int playerId, int tournamentId);
-        Task<int> AddPlayerToTournamentAsync(int playerId, int tournamentId);
+        Task<PlayerTournament> AddPlayerToTournamentAsync(int playerId, int tournamentId);
+        Task<PlayerTournamentDeleteViewModel> RemovePlayerFromTournamentAsync(int playerId, int tournamentId);
+        Task RemovePlayerFromTournamentConfirmedAsync(int playerId, int tournamentId);
+
     }
 }

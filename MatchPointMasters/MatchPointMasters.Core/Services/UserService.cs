@@ -114,6 +114,20 @@
             return await repository.GetByIdAsync<ApplicationUser>(userId);
         }
 
+
+        public async Task<ApplicationUser> GetUserByFullNameAsync(string userFullName)
+        {
+            userFullName = userFullName.ToLower();
+            var userQuery = repository.AllAsReadOnly<ApplicationUser>();
+
+            userQuery = userQuery
+                .Where(u => userFullName.Contains(u.FirstName.ToLower())
+                && userFullName.Contains(u.LastName.ToLower()));
+
+            return await userQuery.FirstOrDefaultAsync();
+
+        }
+
         public async Task<UserServiceModel> DetailsAsync(string userId)
         {
             ApplicationUser? currentUser = await repository.GetByIdAsync<ApplicationUser>(userId);

@@ -5,8 +5,6 @@ namespace MatchPointMasters.Core.Models.Set.ViewModels
 {
     public class SetDetailsViewModel : ISetModel
     {
-        public int Id { get; set; }
-
         public int MatchId { get; set; }
 
         public int PlayerOneGamesWon { get; set; }
@@ -14,7 +12,5 @@ namespace MatchPointMasters.Core.Models.Set.ViewModels
         public int PlayerTwoGamesWon { get; set; }
 
         public bool HasTiebreak { get; set; } = false;
-
-        public int? TiebreakId { get; set; }
     }
 }

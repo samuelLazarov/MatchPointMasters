@@ -7,10 +7,8 @@
 
     public class SetEditViewModel : ISetModel
     {
-        public int Id { get; set; }
-
         [Required]
-        public int MatchId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Range(GamesMinRange, GamesMaxRange, ErrorMessage = RangeErrorMessage)]

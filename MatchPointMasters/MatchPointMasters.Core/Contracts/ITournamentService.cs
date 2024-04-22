@@ -42,6 +42,7 @@
             int matchesPerPage = 4);
         Task<MatchQueryServiceModel> GetAllMatchesInTournamentAsync(
             int tournamentId,
+            string? matchRound = null,
             string? searchTerm = null,
             MatchStatus matchStatus = MatchStatus.All,
             int currentPage = 1,

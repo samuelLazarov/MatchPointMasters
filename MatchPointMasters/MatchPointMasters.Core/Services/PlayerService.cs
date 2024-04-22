@@ -8,6 +8,7 @@
     using MatchPointMasters.Core.Models.Roles.ViewModels;
     using MatchPointMasters.Core.Models.Tournament.QueryModels;
     using MatchPointMasters.Infrastructure.Data.Common;
+    using MatchPointMasters.Infrastructure.Data.Models.Mappings;
     using MatchPointMasters.Infrastructure.Data.Models.Player;
     using MatchPointMasters.Infrastructure.Data.Models.Roles;
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
@@ -17,31 +18,11 @@
     public class PlayerService : IPlayerService
     {
         private readonly IRepository repository;
-        private readonly IUserService userService;
 
 
-        public PlayerService(IRepository _repository, IUserService _userService)
+        public PlayerService(IRepository _repository)
         {
             repository = _repository;
-            userService = _userService;
-        }
-
-        public async Task<string> PlayerFullNameAsync(string userId)
-        {
-            string result = string.Empty;
-            var player = await repository.GetByIdAsync<ApplicationUser>(userId);
-
-            if (player != null)
-            {
-                result = $"{player.FirstName} {player.LastName}";
-            }
-            return result;
-        }
-
-        public async Task<bool> PlayerExistsByIdAsync(int playerId)
-        {
-            return await repository.AllAsReadOnly<Player>()
-                .AnyAsync(p => p.Id == playerId);
         }
 
         public async Task AddAsync(string userId, PlayerAddViewModel playerForm)
@@ -69,7 +50,7 @@
         {
             var currentPlayer = await repository.All<Player>()
                 .FirstOrDefaultAsync(p => p.Id == playerId);
-            
+
             var playerForm = new PlayerEditViewModel()
             {
                 Id = currentPlayer.Id,
@@ -107,9 +88,9 @@
         }
 
         public async Task<PlayerQueryServiceModel> AllAsync(
-            string? searchTerm = null, 
-            PlayerSorting sorting = PlayerSorting.All, 
-            int currentPage = 1, 
+            string? searchTerm = null,
+            PlayerSorting sorting = PlayerSorting.All,
+            int currentPage = 1,
             int playersPerPage = 8)
         {
 
@@ -130,9 +111,44 @@
             };
         }
 
+
+        public async Task<bool> PlayerExistsByIdAsync(int playerId)
+        {
+            return await repository.AllAsReadOnly<Player>()
+                .AnyAsync(p => p.Id == playerId);
+        }
+
+        public async Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
+        {
+            return await repository.AllAsReadOnly<Player>()
+                .AnyAsync(p => p.PhoneNumber == phoneNumber);
+        }
+
+
         public async Task<Player> FindPlayerByIdAsync(int playerId)
         {
             return await repository.GetByIdAsync<Player>(playerId);
+        }
+
+        public async Task<Player> FindPlayerByUserIdAsync(string userId)
+        {
+            var user = await repository.GetByIdAsync<ApplicationUser>(userId);
+            var player = await repository.AllAsReadOnly<Player>()
+                .Where(p => p.UserId == user.Id)
+                .FirstOrDefaultAsync();
+            return player;
+        }
+
+        public async Task<string> PlayerFullNameAsync(string userId)
+        {
+            string result = string.Empty;
+            var player = await repository.GetByIdAsync<ApplicationUser>(userId);
+
+            if (player != null)
+            {
+                result = $"{player.FirstName} {player.LastName}";
+            }
+            return result;
         }
 
         public async Task<MatchQueryServiceModel> GetPlayerMatches(
@@ -197,18 +213,53 @@
 
         public async Task<bool> PlayerIsInTournamentAsync(int playerId, int tournamentId)
         {
-            throw new NotImplementedException();
+            return await repository.AllAsReadOnly<PlayerTournament>()
+                .AnyAsync(pt => pt.PlayerId == playerId && pt.TournamentId == tournamentId);
         }
 
-        public async Task<int> AddPlayerToTournamentAsync(int playerId, int tournamentId)
+        public async Task<PlayerTournament> AddPlayerToTournamentAsync(int playerId, int tournamentId)
         {
-            throw new NotImplementedException();
+            var playerTournament = await repository.All<PlayerTournament>()
+                .Where(pt => pt.PlayerId == playerId && pt.TournamentId == tournamentId)
+                .FirstOrDefaultAsync();
+
+            if (playerTournament == null)
+            {
+                playerTournament = new PlayerTournament()
+                {
+                    PlayerId = playerId,
+                    TournamentId = tournamentId
+                };
+
+                await repository.AddAsync(playerTournament);
+                await repository.SaveChangesAsync();
+            }
+
+            return playerTournament;
         }
 
-        public async Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
+        public async Task<PlayerTournamentDeleteViewModel> RemovePlayerFromTournamentAsync(int playerId, int tournamentId)
         {
-            return await repository.AllAsReadOnly<Player>()
-                .AnyAsync(p => p.PhoneNumber == phoneNumber);
+            var player = await repository.GetByIdAsync<Player>(playerId);
+            var tournament = await repository.GetByIdAsync<Tournament>(tournamentId);
+            var deleteForm = new PlayerTournamentDeleteViewModel()
+            {
+                PlayerName = $"{player.User.FirstName} {player.User.LastName}",
+                TournamentName = tournament.Name
+            };
+
+            return deleteForm;
         }
-    } 
+
+        public async Task RemovePlayerFromTournamentConfirmedAsync(int playerId, int tournamentId)
+        {
+            var playerInTheCurrentTournament = await repository.All<PlayerTournament>()
+                .Where(pt => pt.PlayerId == playerId && pt.TournamentId == tournamentId)
+                .FirstOrDefaultAsync();
+
+            await repository.RemoveAsync<PlayerTournament>(playerInTheCurrentTournament);
+            await repository.SaveChangesAsync();
+        }
+
+    }
 }
