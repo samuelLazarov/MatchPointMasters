@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MatchPointMasters.Core.Contracts;
+using System.ComponentModel.DataAnnotations;
 
 namespace MatchPointMasters.Core.Models.Tiebreak.ViewModels
 {
-    public class TiebreakDetailsViewModel
+    public class TiebreakDetailsViewModel : ITiebreakModel
     {
         public int PlayerOnePoints { get; set; }
         public int PlayerTwoPoints { get; set; }

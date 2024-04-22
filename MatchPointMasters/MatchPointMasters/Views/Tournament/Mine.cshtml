@@ -1,0 +1,61 @@
+﻿@model TournamentQueryServiceModel
+
+@{
+    ViewBag.Title = "Моите Турнири";
+}
+<h2 class="text-center mt-4 mb-3">@ViewBag.Title</h2>
+<hr />
+
+<div class="col mb-4">
+    @if (!Model.Tournaments.Any())
+    {
+        <h4 class="text-center">Все още не сте записани в нито един турнир.</h4>
+    }
+    else
+    {
+        <h2 class="text-center mt-4 mb-3">Турнири, в които сте записани в момента:</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-5">
+            @foreach (var tournament in Model.Tournaments.OrderByDescending(m => m.Id).Take(4).Select((value, index) => new { Value = value, Index = index }))
+            {
+                <div class="col mb-4
+                    @if (tournament.Index == 3)
+                    {
+                        <text>overlay-white</text>
+                    }">
+                    <div class="card h-100 text-center">
+                        <img class="card-img-top" src="@tournament.Value.ImageUrl" alt="Tournament Image">
+                        <div class="card-body">
+                            <h4 class="card-title"><strong>@tournament.Value.Name</strong></h4>
+                            <p class="card-text"><strong>Информация:</strong> @tournament.Value.Description</p>
+                        </div>
+                        <a asp-controller="Tournament" asp-action="Details" asp-route-id="@tournament.Value.Id" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж Повече</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="text-center">
+            <a asp-controller="Tournament" asp-action="All" class="btn btn-primary btn-lg">Виж Всички</a>
+        </div>
+    }
+</div>
+
+<hr />
+
+<style>
+    .overlay-white {
+        position: relative;
+    }
+
+        .overlay-white::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            opacity: 0.7;
+            z-index: 1;
+        }
+</style>

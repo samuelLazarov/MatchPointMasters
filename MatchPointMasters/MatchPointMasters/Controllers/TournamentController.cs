@@ -20,13 +20,13 @@ namespace MatchPointMasters.Controllers
         {
             tournamentService = _tournamentService;
             tournamentHostService = _tournamentHostService;
-            
+
         }
 
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All([FromQuery]AllTournamentsQueryModel model)
+        public async Task<IActionResult> All([FromQuery] AllTournamentsQueryModel model)
         {
             var allTournaments = await tournamentService.AllAsync(
                 model.SearchTerm,
@@ -59,6 +59,24 @@ namespace MatchPointMasters.Controllers
 
             return View(currentTournament);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Mine(string id, [FromQuery] AllTournamentsQueryModel model)
+        {
+            var userId = User.Id();
+
+            if (userId != id)
+            {
+                return Unauthorized();
+            }
+
+            var tournamentsCollection = await tournamentService.AllTournamentsByUserIdAsync(
+                    userId, model.SearchTerm, model.Sorting, model.Status, model.CurrentPage, model.TournamentsPerPage);
+
+            return View(tournamentsCollection);
+        }
+
 
         [HttpGet]
         [MustBeATournamentHost]
@@ -149,7 +167,7 @@ namespace MatchPointMasters.Controllers
             int id = tournamentForm.Id;
             await tournamentService.EditTournamentPostAsync(tournamentForm);
 
-            return RedirectToAction("Details", "Tournament", new {id, information = tournamentForm.GetInformation()});
+            return RedirectToAction("Details", "Tournament", new { id, information = tournamentForm.GetInformation() });
         }
 
         [HttpGet]

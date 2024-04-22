@@ -5,7 +5,6 @@ namespace MatchPointMasters.Core.Models.Tournament.QueryModels
 {
     public class AllTournamentsQueryModel
     {
-        public int TournamentsPerPage { get; } = 8;
 
         [Display(Name = "Търсене")]
         public string SearchTerm { get; set; } = null!;
@@ -18,6 +17,7 @@ namespace MatchPointMasters.Core.Models.Tournament.QueryModels
 
         public int TotalTournamentsCount { get; set; }
         public int CurrentPage { get; set; } = 1;
+        public int TournamentsPerPage { get; } = 8;
 
         public IEnumerable<TournamentServiceModel> Tournaments { get; set; } = new HashSet<TournamentServiceModel>();
     }

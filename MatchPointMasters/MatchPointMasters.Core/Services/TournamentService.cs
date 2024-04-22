@@ -25,14 +25,20 @@
 
         private readonly IRepository repository;
         private readonly IMatchService matchService;
+        private readonly IPlayerService playerService;
         private readonly UserManager<ApplicationUser> userManager;
 
 
-        public TournamentService(IRepository _repository, IMatchService _matchService, UserManager<ApplicationUser> _userManager)
+        public TournamentService(
+            IRepository _repository,
+            IMatchService _matchService,
+            UserManager<ApplicationUser> _userManager,
+            IPlayerService _playerService)
         {
             repository = _repository;
             matchService = _matchService;
             userManager = _userManager;
+            playerService = _playerService;
         }
 
         public async Task<int> AddTournamentAsync(TournamentAddViewModel tournamentForm)
@@ -360,7 +366,7 @@
                 PlayerSorting.All => playersToShow,
                 PlayerSorting.WinsAscending => playersToShow.OrderBy(p => p.Wins).ThenBy(p => p.Losses),
                 PlayerSorting.LossesAscending => playersToShow.OrderBy(p => p.Losses).ThenBy(p => p.Wins),
-            _ => playersToShow.OrderByDescending(p => p.Id)
+                _ => playersToShow.OrderByDescending(p => p.Id)
             };
 
             var players = await playersToShow
@@ -392,6 +398,62 @@
                  })
                  .Take(3)
                  .ToListAsync();
+        }
+
+        public async Task<TournamentQueryServiceModel> AllTournamentsByUserIdAsync(
+            string userId,
+            string? searchTerm = null,
+            TournamentSorting sorting = TournamentSorting.Newest,
+            TournamentStatus tournamentStatus = TournamentStatus.All,
+            int currentPage = 1,
+            int tournamentsPerPage = 4)
+        {
+
+            var player = playerService.FindPlayerByUserIdAsync(userId);
+            var tournamentsToShow = repository.AllAsReadOnly<Tournament>()
+                .Where(t => t.PlayerTournaments.Any(pt => pt.PlayerId == player.Id));
+
+            if (searchTerm != null)
+            {
+                string normalizedSearchTerm = searchTerm.ToLower();
+                tournamentsToShow = tournamentsToShow
+                    .Where(t => normalizedSearchTerm.Contains(t.Name.ToLower())
+                    || normalizedSearchTerm.Contains(t.HostClub.Name.ToLower())
+                    || t.Name.ToLower().Contains(normalizedSearchTerm)
+                    || t.HostClub.Name.ToLower().Contains(normalizedSearchTerm));
+            }
+
+            if (tournamentStatus == TournamentStatus.Upcoming)
+            {
+                tournamentsToShow = tournamentsToShow
+                    .Where(t => t.StartDate > DateTime.Now);
+            }
+            else if (tournamentStatus == TournamentStatus.HasEnded)
+            {
+                tournamentsToShow = tournamentsToShow
+                    .Where(t => t.EndDate <= DateTime.Now);
+            }
+
+            tournamentsToShow = sorting switch
+            {
+                TournamentSorting.Oldest => tournamentsToShow.OrderBy(t => t.StartDate),
+                TournamentSorting.Newest => tournamentsToShow.OrderByDescending(t => t.StartDate),
+                _ => tournamentsToShow.OrderByDescending(t => t.Id)
+            };
+
+            var tournaments = await tournamentsToShow
+                .Skip((currentPage - 1) * tournamentsPerPage)
+                .Take(tournamentsPerPage)
+                .ProjectToTournamentServiceModel()
+                .ToListAsync();
+
+            int totalTournaments = await tournamentsToShow.CountAsync();
+
+            return new TournamentQueryServiceModel()
+            {
+                Tournaments = tournaments,
+                TotalTournamentsCount = totalTournaments
+            };
         }
     }
 }

@@ -48,5 +48,12 @@
             int currentPage = 1,
             int matchesPerPage = 4);
         Task<IEnumerable<TournamentIndexViewModel>> LastThreeTournamentsAsync();
+        Task<TournamentQueryServiceModel> AllTournamentsByUserIdAsync(
+            string userId,
+            string? SearchTerm = null,
+            TournamentSorting sorting = TournamentSorting.Newest,
+            TournamentStatus tournamentStatus = TournamentStatus.All,
+            int currentPage = 1,
+            int tournamentsPerPage = 4);
     }
 }
