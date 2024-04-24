@@ -156,5 +156,26 @@ namespace MatchPointMasters.Core.Services
             return await repository.AllAsReadOnly<Set>()
                 .AnyAsync(t => t.Id == setId);
         }
+
+        //TODO - fill current set with properties
+        public async Task<Set> AddTiebreakToSetAsync(int tiebreakId, int setId)
+        {
+            var currentSet = await repository.All<Set>()
+                .Where(s => s.TiebreakId == tiebreakId && s.Id == setId)
+                .FirstOrDefaultAsync();
+
+            if (currentSet == null)
+            {
+                currentSet = new Set()
+                {
+                    Id = setId,
+                    
+                };
+                await repository.AddAsync(currentSet);
+                await repository.SaveChangesAsync();
+            }
+
+            return currentSet;
+        }
     }
 }

@@ -22,6 +22,7 @@
         Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber);
         Task<Player> FindPlayerByIdAsync(int playerId);
         Task<Player> FindPlayerByUserIdAsync(string userId);
+        Task<Player> FindPlayerByNameAsync(string name);
         Task<string> PlayerFullNameAsync(string userId);
         Task<MatchQueryServiceModel> GetPlayerMatches(
             int playerId,

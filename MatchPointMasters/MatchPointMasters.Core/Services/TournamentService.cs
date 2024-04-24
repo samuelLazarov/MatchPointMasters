@@ -27,18 +27,21 @@
         private readonly IMatchService matchService;
         private readonly IPlayerService playerService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUserService userService;
 
 
         public TournamentService(
             IRepository _repository,
             IMatchService _matchService,
             UserManager<ApplicationUser> _userManager,
-            IPlayerService _playerService)
+            IPlayerService _playerService,
+            IUserService _userService)
         {
             repository = _repository;
             matchService = _matchService;
             userManager = _userManager;
             playerService = _playerService;
+            userService = _userService;
         }
 
         public async Task<int> AddTournamentAsync(TournamentAddViewModel tournamentForm)
@@ -317,13 +320,22 @@
                     );
             }
 
-            matchesToShow = status switch
+            if (status == MatchStatus.HasEnded)
             {
-                MatchStatus.HasEnded => matchesToShow.OrderBy(m => m.Id),
-                MatchStatus.InProgress => matchesToShow.OrderBy(m => m.Id),
-                MatchStatus.Upcoming => matchesToShow.OrderBy(m => m.Id),
-                _ => matchesToShow.OrderByDescending(m => m.Id)
-            };
+                matchesToShow = matchesToShow
+                    .Where(m => m.Winner != null);
+            }
+            else if (status == MatchStatus.InProgress)
+            {
+                matchesToShow = matchesToShow
+                    .Where(m => m.Winner == Infrastructure.Data.Enums.Match.Winner.StillPlaying
+                    && m.Sets.Any(s => s.PlayerOneGamesWon > 0 || s.PlayerTwoGamesWon > 0));
+            }
+            if (status == MatchStatus.Upcoming)
+            {
+                matchesToShow = matchesToShow
+                    .Where(m => m.Sets.Count == 0 && m.Winner != Infrastructure.Data.Enums.Match.Winner.StillPlaying);
+            }
 
             var matches = await matchesToShow
                 .Skip((currentPage - 1) * matchesPerPage)
@@ -350,20 +362,32 @@
             var playersToShow = repository.AllAsReadOnly<Player>()
                 .Where(p => p.PlayerTournaments.Any(pt => pt.TournamentId == tournamentId));
 
+            var playersUserIds = await playersToShow.Select(p => p.UserId).ToListAsync();
+            var playersKVP = new Dictionary<string, string>();
+            foreach (var userId in playersUserIds)
+            {
+                string currentPlayerFullName = await userService.UserFullNameAsync(userId);
+                playersKVP.Add(userId, currentPlayerFullName);
+            }
+
             if (searchTerm != null)
             {
                 string normalizedSearchTerm = searchTerm.ToLower();
 
-                //TODO use better properties
-                playersToShow = playersToShow
-                    .Where(p => normalizedSearchTerm.Contains(p.UserId)
-                    || p.UserId.ToString().ToLower().Contains(normalizedSearchTerm));
+                foreach (var player in playersKVP)
+                {
+                    if (normalizedSearchTerm.Contains(player.Value.ToLower()) 
+                        || player.Value.ToLower().Contains(normalizedSearchTerm))
+                    {
+                        playersToShow = playersToShow
+                            .Where(p => p.UserId == player.Key);
+                    }
+                }
+
             }
 
-            //TODO Sorting
             playersToShow = sorting switch
             {
-                PlayerSorting.All => playersToShow,
                 PlayerSorting.WinsAscending => playersToShow.OrderBy(p => p.Wins).ThenBy(p => p.Losses),
                 PlayerSorting.LossesAscending => playersToShow.OrderBy(p => p.Losses).ThenBy(p => p.Wins),
                 _ => playersToShow.OrderByDescending(p => p.Id)

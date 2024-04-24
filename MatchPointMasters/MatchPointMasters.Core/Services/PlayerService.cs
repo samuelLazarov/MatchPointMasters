@@ -261,5 +261,17 @@
             await repository.SaveChangesAsync();
         }
 
+        public async Task<Player> FindPlayerByNameAsync(string name)
+        {
+            var user = await repository.AllAsReadOnly<ApplicationUser>()
+                .Where(u => u.FirstName.ToLower() + " " + u.LastName.ToLower() == name.ToLower())
+                .FirstOrDefaultAsync();
+
+            var player = await repository.AllAsReadOnly<Player>()
+                .Where(p => p.UserId == user.Id)
+                .FirstOrDefaultAsync();
+
+            return player;
+        }
     }
 }

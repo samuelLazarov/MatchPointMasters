@@ -12,6 +12,7 @@
         Task<int> EditSetPostAsync(SetEditViewModel setForm);
         Task<SetDeleteViewModel> DeleteSetAsync(int setId);
         Task<int> DeleteSetConfirmedAsync(int setId);
+        Task<Set> AddTiebreakToSetAsync(int tiebreakId, int setId);
 
         //Query operations
         Task<SetQueryServiceModel> AllAsync();
@@ -19,5 +20,6 @@
         Task<Set> FindSetByIdAsync(int setId);
         Task<SetDetailsViewModel> SetDetailsAsync(int setId);
         Task<bool> HasTiebreakAsync(int setId);
+        
     }
 }

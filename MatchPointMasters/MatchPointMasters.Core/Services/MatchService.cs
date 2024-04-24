@@ -159,14 +159,17 @@
             Match? currentMatch = await repository.AllAsReadOnly<Match>()
                 .FirstOrDefaultAsync(m => m.Id == matchId);
 
-            //var playerOne = await playerService.GetPlayerById()
+            var playerOne = await playerService.FindPlayerByIdAsync(currentMatch.PlayerOneId);
+            var playerOneName = await userService.UserFullNameAsync(playerOne.UserId);
+            var playerTwo = await playerService.FindPlayerByIdAsync(currentMatch.PlayerTwoId);
+            var playerTwoName = await userService.UserFullNameAsync(playerTwo.UserId);
 
             var currentMatchDetails = new MatchDetailsViewModel()
             {
                 Id = currentMatch.Id,
                 MatchRound = currentMatch.MatchRound,
-                //PlayerOneName = currentMatch.PlayerOneId,
-                //PlayerTwoName = currentMatch.PlayerTwoId,
+                PlayerOneName = playerOneName,
+                PlayerTwoName = playerTwoName,
                 PlayerOneSetsWon = currentMatch.PlayerOneSetsWon,
                 PlayerTwoSetsWon = currentMatch.PlayerTwoSetsWon,
                 Winner = currentMatch.Winner,
@@ -184,6 +187,58 @@
         public async Task<Match> FindMatchByIdAsync(int matchId)
         {
             return await repository.GetByIdAsync<Match>(matchId);
+        }
+
+        public async Task<MatchQueryServiceModel> AllMatchesByUserIdAsync(
+            string userId, 
+            string? searchTerm = null, 
+            MatchStatus matchStatus = MatchStatus.All, 
+            int currentPage = 1, int matchesPerPage = 8)
+        {
+            var player = playerService.FindPlayerByUserIdAsync(userId);
+            var matchesToShow = repository.AllAsReadOnly<Match>()
+                .Where(m => m.PlayerMatches.Any(pm => pm.PlayerId == player.Id));
+
+            if(searchTerm != null)
+            {
+                string normalizedSearchTerm = searchTerm.ToLower();
+                matchesToShow = matchesToShow
+                    .Where(m => normalizedSearchTerm.Contains(m.PlayerOne.UserId.ToLower())
+                    || normalizedSearchTerm.Contains(m.PlayerTwo.UserId.ToLower())
+                    || m.PlayerOne.UserId.ToLower().Contains(normalizedSearchTerm)
+                    || m.PlayerTwo.UserId.ToLower().Contains(normalizedSearchTerm));
+            }
+
+            if (matchStatus == MatchStatus.HasEnded)
+            {
+                matchesToShow = matchesToShow
+                    .Where(m => m.Winner != null);
+            }
+            else if (matchStatus == MatchStatus.InProgress)
+            {
+                matchesToShow = matchesToShow
+                    .Where(m => m.Winner == Infrastructure.Data.Enums.Match.Winner.StillPlaying
+                    && m.Sets.Any(s => s.PlayerOneGamesWon > 0 || s.PlayerTwoGamesWon > 0));
+            }
+            if (matchStatus == MatchStatus.Upcoming)
+            {
+                matchesToShow = matchesToShow
+                    .Where(m => m.Sets.Count == 0 && m.Winner != Infrastructure.Data.Enums.Match.Winner.StillPlaying);
+            }
+
+            var matches = await matchesToShow
+                .Skip((currentPage - 1) * matchesPerPage)
+                .Take(matchesPerPage)
+                .ProjectToMatchServiceModel()
+                .ToListAsync();
+
+            int totalMatches = await matchesToShow.CountAsync();
+
+            return new MatchQueryServiceModel()
+            {
+                Matches = matches,
+                TotalMatchesCount = totalMatches
+            };
         }
     }
 }

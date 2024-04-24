@@ -21,6 +21,12 @@
         Task<Match> FindMatchByIdAsync(int matchId);
         Task<MatchDetailsViewModel> MatchDetailsAsync(int matchId);
         Task<SetQueryServiceModel> GetAllSetsInMatchAsync(int matchId);
+        Task<MatchQueryServiceModel> AllMatchesByUserIdAsync(
+            string userId,
+            string? searchTerm = null,
+            MatchStatus matchStatus = MatchStatus.All,
+            int currentPage = 1,
+            int matchesPerPage = 8);
 
     }
 }

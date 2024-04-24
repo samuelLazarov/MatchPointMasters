@@ -17,6 +17,9 @@
         public int PlayerTwoGamesWon { get; set; }
 
         [Required]
+        public int MatchId { get; set; }
+
+        [Required]
         public bool HasTiebreak { get; set; } = false;
 
         public int? TiebreakId { get; set; }
