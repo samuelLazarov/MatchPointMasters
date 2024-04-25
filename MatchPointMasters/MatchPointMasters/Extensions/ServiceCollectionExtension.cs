@@ -23,6 +23,7 @@
             services.AddScoped<ITournamentHostService, TournamentHostService>();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<UserManager<ApplicationUser>>();
+            services.AddScoped<IClubService, ClubService>();
 
             return services;
         }

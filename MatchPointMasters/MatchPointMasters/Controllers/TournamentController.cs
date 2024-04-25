@@ -15,12 +15,16 @@ namespace MatchPointMasters.Controllers
     {
         private readonly ITournamentService tournamentService;
         private readonly ITournamentHostService tournamentHostService;
+        private readonly IClubService clubService;
 
-        public TournamentController(ITournamentService _tournamentService, ITournamentHostService _tournamentHostService)
+        public TournamentController(
+            ITournamentService _tournamentService,
+            ITournamentHostService _tournamentHostService,
+            IClubService _clubService)
         {
             tournamentService = _tournamentService;
             tournamentHostService = _tournamentHostService;
-
+            clubService = _clubService;
         }
 
 
@@ -87,7 +91,14 @@ namespace MatchPointMasters.Controllers
                 return Unauthorized();
             }
 
+            var clubs = await clubService.GetAllForTournament();
+            if (clubs == null)
+            {
+                return BadRequest();
+            }
+
             var tournamentForm = new TournamentAddViewModel();
+            tournamentForm.Clubs = clubs;
 
             return View(tournamentForm);
         }
@@ -97,6 +108,27 @@ namespace MatchPointMasters.Controllers
         [MustBeATournamentHost]
         public async Task<IActionResult> AddTournament(TournamentAddViewModel tournamentForm)
         {
+            var clubs = await clubService.GetAllForTournament();
+
+            var userId = User.Id();
+
+            var tournamentHostId
+                = await tournamentHostService.GetTournamentHostIdAsync(userId);
+
+            if (tournamentHostId == null)
+            {
+                return Unauthorized();
+            }
+
+            tournamentForm.TournamentHostId = (int)tournamentHostId;
+
+            if (clubs == null)
+            {
+                return BadRequest();
+            }
+
+            tournamentForm.Clubs = clubs;
+
             if (await tournamentHostService.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
                 return Unauthorized();
@@ -108,10 +140,10 @@ namespace MatchPointMasters.Controllers
                 ModelState.AddModelError("EndDate", "Invalid timespan!");
             }
 
-            if (!ModelState.IsValid)
-            {
-                return View(tournamentForm);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(tournamentForm);
+            //}
 
             await tournamentService.AddTournamentAsync(tournamentForm);
 

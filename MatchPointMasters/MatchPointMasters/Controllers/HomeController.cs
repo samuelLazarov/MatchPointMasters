@@ -4,6 +4,7 @@ namespace MatchPointMasters.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using MatchPointMasters.Core.Contracts;
+    using System.Security.Claims;
 
     public class HomeController : BaseController
     {
@@ -20,6 +21,10 @@ namespace MatchPointMasters.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
+            if (User.IsAdmin())
+            {
+                return RedirectToAction("Index", "Home", new { Area = "Admin" });
+            }
             var tournamentModel = await tournamentService.LastThreeTournamentsAsync();
 
             return View(tournamentModel);

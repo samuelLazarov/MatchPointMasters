@@ -1,5 +1,48 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model SetEditViewModel
+
 @{
+    ViewBag.Title = "Редактирай сет към мач";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Set</title>
+</head>
+<body>
+    <h1>Edit Set</h1>
+
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(model => model.PlayerOneGamesWon)
+            @Html.TextBoxFor(model => model.PlayerOneGamesWon)
+            @Html.ValidationMessageFor(model => model.PlayerOneGamesWon)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.PlayerTwoGamesWon)
+            @Html.TextBoxFor(model => model.PlayerTwoGamesWon)
+            @Html.ValidationMessageFor(model => model.PlayerTwoGamesWon)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.HasTiebreak)
+            @Html.CheckBoxFor(model => model.HasTiebreak)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.TiebreakId)
+            @Html.TextBoxFor(model => model.TiebreakId)
+        </div>
+
+        <input type="submit" value="Save" />
+    }
+</body>
+</html>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

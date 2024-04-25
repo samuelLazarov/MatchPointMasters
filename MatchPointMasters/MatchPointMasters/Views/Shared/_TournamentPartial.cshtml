@@ -15,21 +15,13 @@
         <p class="card-text">
             <strong>Край:</strong> @Model.EndDate.ToString("dd/MM/yyyy HH:mm")
         </p>
-        @if (DateTime.Now < Model.StartDate)
+        <p class="card-text"><strong>Максимален брой участници:</strong> @Model.Capacity</p>
+        <p class="card-text"><strong>Такса:</strong> @Model.Fee лв.</p>
+        @if (Model.Capacity < 10 && Model.Capacity > 0)
         {
-            <p class="card-text"><strong>Максимален брой участници:</strong> @Model.Capacity</p>
-            <p class="card-text"><strong>Такса:</strong> @Model.Fee лв.</p>
-
-            @if (Model.Capacity < 10 && Model.Capacity > 0)
-            {
-                <h5 class="card-text text-danger"><strong>ПОСЛЕДНИ МЕСТА В ТУРНИРА!</strong> Заяви участие преди да са свършили!</h5>
-            }
+            <h5 class="card-text text-danger"><strong>ПОСЛЕДНИ МЕСТА В ТУРНИРА!</strong> Заяви участие преди да са свършили!</h5>
         }
     </div>
     <a asp-controller="Tournament" asp-action="Details" asp-route-id="@Model.Id" asp-route-information="@Model.GetInformation()" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж повече</a>
-
-    @if (DateTime.Now < Model.StartDate && Model.Capacity > 0)
-    {
-        <a asp-controller="Tournament" asp-action="RegisterInTournament" asp-route-id="@Model.Id" class="btn btn-success mb-1 w-100 p-3 fw-bold">Заяви участие</a>
-    }
+    <a asp-controller="Tournament" asp-action="RegisterInTournament" asp-route-id="@Model.Id" class="btn btn-success mb-1 w-100 p-3 fw-bold">Заяви участие</a>
 </div>

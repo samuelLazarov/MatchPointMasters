@@ -52,7 +52,8 @@
                 Description = tournamentForm.Description,
                 StartDate = tournamentForm.StartDate,
                 EndDate = tournamentForm.EndDate,
-                //HostClubId = tournamentForm.HostClubId,
+                TournamentHostId = tournamentForm.TournamentHostId,
+                HostClubId = tournamentForm.ClubId,
                 TournamentBalls = tournamentForm.TournamentBalls,
                 Fee = tournamentForm.Fee,
                 Capacity = tournamentForm.Capacity,
@@ -77,7 +78,7 @@
                 Description = currentTournament.Description,
                 StartDate = currentTournament.StartDate,
                 EndDate = currentTournament.EndDate,
-                //HostClubId = currentTournament.HostClubId,
+                HostClub = currentTournament.HostClub.Name,
                 TournamentBalls = currentTournament.TournamentBalls,
                 Fee = currentTournament.Fee,
                 Capacity = currentTournament.Capacity,
@@ -376,7 +377,7 @@
 
                 foreach (var player in playersKVP)
                 {
-                    if (normalizedSearchTerm.Contains(player.Value.ToLower()) 
+                    if (normalizedSearchTerm.Contains(player.Value.ToLower())
                         || player.Value.ToLower().Contains(normalizedSearchTerm))
                     {
                         playersToShow = playersToShow

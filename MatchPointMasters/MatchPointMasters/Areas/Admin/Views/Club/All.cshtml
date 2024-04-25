@@ -1,0 +1,33 @@
+﻿@using MatchPointMasters.Core.Models.Club
+@model IEnumerable<AllClubViewModel>
+
+<h2>All Clubs</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Image</th>
+            <th>Court Surface</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var club in Model)
+        {
+            <tr>
+                <td>@club.Name</td>
+                <td>@club.Address</td>
+                <td>@club.PhoneNumber</td>
+                <td><img src="@club.ImageUrl" alt="@club.Name" width="100" height="100"></td>
+                <td>@club.CourtSurface</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@club.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@club.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

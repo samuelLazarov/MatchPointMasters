@@ -1,0 +1,42 @@
+﻿@using MatchPointMasters.Infrastructure.Data.Enums.Tournament
+@using MatchPointMasters.Infrastructure.ViewModels
+@model AddClubFormModel
+
+<h2>Add New Club</h2>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="Name">Club Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address">Club Address</label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNumber">Phone Number</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageUrl">Image URL</label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CourtSurface">Court Surface</label>
+        <select asp-for="CourtSurface" asp-items="Html.GetEnumSelectList<CourtSurface>()" class="form-control"></select>
+        <span asp-validation-for="CourtSurface" class="text-danger"></span>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Add Club</button>
+    </div>
+    
+</form>
