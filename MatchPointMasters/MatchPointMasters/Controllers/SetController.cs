@@ -85,7 +85,7 @@ namespace MatchPointMasters.Controllers
                 return BadRequest();
             }
 
-            await setService.AddTiebreakToSetAsync(tiebreakId, setId);
+            await setService.AddTiebreakToSetAsync(setId);
             return RedirectToAction("All", "Set", new { id = setId });
         }
 

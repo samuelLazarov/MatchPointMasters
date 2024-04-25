@@ -1,5 +1,51 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model SetAddViewModel
+
 @{
+    ViewBag.Title = "Добави нов сет към мач";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-action="Add" method="post">
+            <div class="mb-3">
+                <label asp-for="@Model.MatchId" class="form-label-add-edit"><bold>Текущ мач</bold></label>
+                <input asp-for="@Model.MatchId" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.MatchId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.PlayerOneGamesWon" class="form-label-add-edit"><bold>Геймове на Играч 1</bold></label>
+                <textarea asp-for="@Model.PlayerOneGamesWon" class="form-control" aria-required="true" rows="5"></textarea>
+                <span asp-validation-for="@Model.PlayerOneGamesWon" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.PlayerTwoGamesWon" class="form-label-add-edit"><bold>Геймове на Играч 2</bold></label>
+                <input asp-for="@Model.PlayerTwoGamesWon" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.PlayerTwoGamesWon" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.HasTiebreak" class="form-label-add-edit"><bold>Тайбрейк?</bold></label>
+                <input asp-for="@Model.HasTiebreak" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.HasTiebreak" class="text-danger"></span>
+            </div>
+            @if (Model.HasTiebreak == true)
+            {
+                <div class="mb-3">
+                    <label asp-for="@Model.TiebreakId" class="form-label-add-edit"><bold>Номер на тайбрек</bold></label>
+                    <input asp-for="@Model.TiebreakId" class="form-control" aria-required="true" />
+                    <span asp-validation-for="@Model.TiebreakId" class="text-danger"></span>
+                </div>
+            }
+            <div class="mb-3">
+                <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Добави" />
+                <a asp-action="All" class="btn btn-secondary mb-1 w-100 p-3 fw-bold">Обратно към Всички</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

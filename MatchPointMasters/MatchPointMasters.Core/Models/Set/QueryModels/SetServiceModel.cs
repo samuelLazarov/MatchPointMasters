@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MatchPointMasters.Core.Contracts;
+using System.ComponentModel.DataAnnotations;
 
 namespace MatchPointMasters.Core.Models.Set.QueryModels
 {
-    public class SetServiceModel
+    public class SetServiceModel : ISetModel
     {
         public int Id { get; set; }
 

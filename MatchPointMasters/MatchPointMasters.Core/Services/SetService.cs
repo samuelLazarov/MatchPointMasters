@@ -13,10 +13,13 @@ namespace MatchPointMasters.Core.Services
     public class SetService : ISetService
     {
         private readonly IRepository repository;
+        private readonly ITiebreakService tiebreakService;
 
-        public SetService(IRepository _repository)
+        public SetService(IRepository _repository, ITiebreakService _tiebreakService)
+
         {
             repository = _repository;
+            tiebreakService = _tiebreakService;
         }
 
         public async Task<int> AddSetAsync(SetAddViewModel setForm, int matchId)
@@ -158,10 +161,10 @@ namespace MatchPointMasters.Core.Services
         }
 
         //TODO - fill current set with properties
-        public async Task<Set> AddTiebreakToSetAsync(int tiebreakId, int setId)
+        public async Task<Set> AddTiebreakToSetAsync(int setId)
         {
             var currentSet = await repository.All<Set>()
-                .Where(s => s.TiebreakId == tiebreakId && s.Id == setId)
+                .Where(s => s.Id == setId && s.HasTiebreak == true)
                 .FirstOrDefaultAsync();
 
             if (currentSet == null)
@@ -169,7 +172,6 @@ namespace MatchPointMasters.Core.Services
                 currentSet = new Set()
                 {
                     Id = setId,
-                    
                 };
                 await repository.AddAsync(currentSet);
                 await repository.SaveChangesAsync();
