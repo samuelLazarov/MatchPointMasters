@@ -1,6 +1,8 @@
 ﻿namespace MatchPointMasters.Controllers
 {
     using MatchPointMasters.Core.Contracts;
+    using MatchPointMasters.Core.Extensions;
+    using MatchPointMasters.Core.Models.Roles.QueryModels;
     using MatchPointMasters.Core.Models.Roles.ViewModels;
     using Microsoft.AspNetCore.Mvc;
     using System.Security.Claims;
@@ -19,7 +21,7 @@
 
 
         [HttpGet]
-        public IActionResult BecomePlayerGet()
+        public IActionResult Become()
         {
             var model = new PlayerAddViewModel();
 
@@ -27,7 +29,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> BecomePlayerPost(PlayerAddViewModel model)
+        public async Task<IActionResult> Become(PlayerAddViewModel model)
         {
             if (await playerService.UserWithPhoneNumberExistsAsync(model.PhoneNumber))
             {
@@ -46,16 +48,35 @@
         }
 
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery] AllPlayersQueryModel model)
         {
-            var players = await playerService.AllAsync();
+            var players = await playerService.AllAsync(
+                model.SearchTerm, 
+                model.Sorting, 
+                model.CurrentPage, 
+                model.PlayersPerPage);
+
+            model.TotalPlayersCount = players.TotalPlayersCount;
+            model.Players = players.Players;
 
             return View(players);
         }
 
-        public async Task<IActionResult> Details(string playerId)
+        public async Task<IActionResult> Details(string playerId, string information)
         {
-            return null;
+            if (!await userService.ExistsByIdAsync(playerId))
+            {
+                return BadRequest();
+            }
+
+            var player = await playerService.PlayerDetailsByIdAsync(playerId);
+
+            if (information != player.GetInformation())
+            {
+                return BadRequest();
+            }
+
+            return View(player);
         }
     }
 }

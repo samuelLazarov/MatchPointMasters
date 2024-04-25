@@ -20,12 +20,18 @@
         private readonly IRepository repository;
         private readonly IUserService userService;
         private readonly IPlayerService playerService;
+        private readonly ISetService setService;
 
-        public MatchService(IRepository _repository, IUserService _userService, IPlayerService _playerService)
+        public MatchService(
+            IRepository _repository, 
+            IUserService _userService, 
+            IPlayerService _playerService,
+            ISetService _setService)
         {
             repository = _repository;
             userService = _userService;
             playerService = _playerService;
+            setService = _setService;
         }
 
         public async Task<int> AddMatchAsync(MatchAddViewModel matchForm)
@@ -240,5 +246,29 @@
                 TotalMatchesCount = totalMatches
             };
         }
+
+        //TODO - fill current match with data?
+        public async Task<Match> AddSetToMatchAsync(int matchId, int setId)
+        {
+            var currentMatch = await repository.All<Match>()
+            .Where(m => m.Id == matchId && m.Sets.Any(s => s.Id == setId))
+            .FirstOrDefaultAsync();
+
+            if (currentMatch == null)
+            {
+                currentMatch = new Match()
+                {
+                    Id = matchId,
+                    //More props
+                };
+
+                await repository.AddAsync(currentMatch);
+                await repository.SaveChangesAsync();
+            }
+
+            return currentMatch;
+
+        }
+
     }
 }

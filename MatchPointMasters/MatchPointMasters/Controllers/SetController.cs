@@ -1,9 +1,8 @@
 ﻿using MatchPointMasters.Attributes;
 using MatchPointMasters.Core.Contracts;
+using MatchPointMasters.Core.Extensions;
 using MatchPointMasters.Core.Models.Set.QueryModels;
 using MatchPointMasters.Core.Models.Set.ViewModels;
-using MatchPointMasters.Core.Models.Tiebreak.ViewModels;
-using MatchPointMasters.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -35,7 +34,7 @@ namespace MatchPointMasters.Controllers
 
         [HttpGet]
         [MustBeATournamentHost]
-        public async Task<IActionResult> AddSet()
+        public async Task<IActionResult> Add()
         {
             if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -49,7 +48,7 @@ namespace MatchPointMasters.Controllers
 
         [HttpPost]
         [MustBeATournamentHost]
-        public async Task<IActionResult> AddSet(SetAddViewModel setForm, int setid)
+        public async Task<IActionResult> Add(SetAddViewModel setForm, int setid)
         {
             if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -88,6 +87,84 @@ namespace MatchPointMasters.Controllers
 
             await setService.AddTiebreakToSetAsync(tiebreakId, setId);
             return RedirectToAction("All", "Set", new { id = setId });
+        }
+
+
+        [HttpGet]
+        [MustBeATournamentHost]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
+            {
+                return Unauthorized();
+            }
+
+            if (!await setService.SetExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            var set = await setService.EditSetAsyncGetAsync(id);
+
+            return View(set);
+        }
+
+        [HttpPost]
+        [MustBeATournamentHost]
+        public async Task<IActionResult> Edit(SetEditViewModel model)
+        {
+            if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
+            {
+                return Unauthorized();
+            }
+
+            if (!await setService.SetExistsAsync(model.Id))
+            {
+                return BadRequest();
+            }
+
+            await setService.EditSetPostAsync(model);
+
+            return RedirectToAction("Details", new { id = model.Id, information = model.GetInformation() });
+        }
+
+        [HttpGet]
+        [MustBeATournamentHost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
+            {
+                return Unauthorized();
+            }
+
+            if (!await setService.SetExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            var searchedSet = await setService.DeleteSetAsync(id);
+
+
+            return View(searchedSet);
+        }
+
+        [HttpPost]
+        [MustBeATournamentHost]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
+            {
+                return Unauthorized();
+            }
+
+            if (!await setService.SetExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            await setService.DeleteSetConfirmedAsync(id);
+
+            return RedirectToAction("All", "Set");
         }
     }
 }

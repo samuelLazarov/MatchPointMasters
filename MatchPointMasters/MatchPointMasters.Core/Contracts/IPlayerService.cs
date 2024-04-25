@@ -39,6 +39,6 @@
         Task<PlayerTournament> AddPlayerToTournamentAsync(int playerId, int tournamentId);
         Task<PlayerTournamentDeleteViewModel> RemovePlayerFromTournamentAsync(int playerId, int tournamentId);
         Task RemovePlayerFromTournamentConfirmedAsync(int playerId, int tournamentId);
-
+        Task<PlayerDetailsViewModel> PlayerDetailsByIdAsync(string playerId);
     }
 }

@@ -273,5 +273,29 @@
 
             return player;
         }
+
+        public async Task<PlayerDetailsViewModel> PlayerDetailsByIdAsync(string playerId)
+        {
+            var user = await repository.GetByIdAsync<ApplicationUser>(playerId);
+
+            var player = await repository.AllAsReadOnly<Player>()
+                .Where(p => p.UserId == user.Id)
+                .FirstOrDefaultAsync();
+
+            return new PlayerDetailsViewModel()
+            {
+                FullName = $"{user.FirstName} {user.LastName}",
+                BirthDate = player.BirthDate,
+                Gender = player.Gender,
+                DominantHand = player.DominantHand,
+                Backhand = player.Backhand,
+                PlayingStyle = player.PlayingStyle,
+                TennisRacket = player.TennisRacket,
+                Wins = player.Wins,
+                Losses = player.Losses,
+                TournamentWins = player.TournamentWins,
+                ImageUrl = player.ImageUrl,
+            };
+        }
     }
 }

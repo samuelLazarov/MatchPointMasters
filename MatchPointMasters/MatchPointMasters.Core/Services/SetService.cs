@@ -36,7 +36,7 @@ namespace MatchPointMasters.Core.Services
             return set.Id;
         }
 
-        public async Task<SetEditViewModel> EditSetASyncGetAsync(int setId)
+        public async Task<SetEditViewModel> EditSetAsyncGetAsync(int setId)
         {
             var currentSet = await repository.All<Set>()
                 .FirstOrDefaultAsync(s => s.Id == setId);

@@ -27,6 +27,6 @@
             MatchStatus matchStatus = MatchStatus.All,
             int currentPage = 1,
             int matchesPerPage = 8);
-
+        Task <Match> AddSetToMatchAsync(int matchId, int setId);
     }
 }

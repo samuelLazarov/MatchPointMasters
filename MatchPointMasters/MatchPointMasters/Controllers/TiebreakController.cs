@@ -35,9 +35,29 @@ namespace MatchPointMasters.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Details(int id, string information)
+        {
+            if (!await tiebreakService.TiebreakExistsAsync(id))
+            {
+                return BadRequest();
+            }
+
+            var currentTiebreak = await tiebreakService.TiebreakDetailsAsync(id);
+
+            if (information != currentTiebreak.GetInformation())
+            {
+                return BadRequest();
+            }
+
+            return View(currentTiebreak);
+
+        }
+
         [HttpGet]
         [MustBeATournamentHost]
-        public async Task<IActionResult> AddTiebreak()
+        public async Task<IActionResult> Add()
         {
             if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -51,7 +71,7 @@ namespace MatchPointMasters.Controllers
 
         [HttpPost]
         [MustBeATournamentHost]
-        public async Task<IActionResult> AddTiebreak(TiebreakAddViewModel tiebreakForm, int setid)
+        public async Task<IActionResult> Add(TiebreakAddViewModel tiebreakForm, int setid)
         {
             if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -76,7 +96,7 @@ namespace MatchPointMasters.Controllers
 
         [HttpGet]
         [MustBeATournamentHost]
-        public async Task<IActionResult> EditTiebreak(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -93,7 +113,7 @@ namespace MatchPointMasters.Controllers
 
         [HttpPost]
         [MustBeATournamentHost]
-        public async Task<IActionResult> EditTiebreak(TiebreakEditViewModel tiebreakForm)
+        public async Task<IActionResult> Edit(TiebreakEditViewModel tiebreakForm)
         {
             if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -118,7 +138,7 @@ namespace MatchPointMasters.Controllers
 
         [HttpGet]
         [MustBeATournamentHost]
-        public async Task<IActionResult> DeleteTiebreak(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -138,7 +158,7 @@ namespace MatchPointMasters.Controllers
 
         [HttpPost]
         [MustBeATournamentHost]
-        public async Task<IActionResult> DeleteTiebreakConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (await tournamentHost.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -154,29 +174,6 @@ namespace MatchPointMasters.Controllers
 
             return RedirectToAction("All", "Tiebreak");
         }
-
-
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<IActionResult> Details(int id, string information)
-        {
-            if(!await tiebreakService.TiebreakExistsAsync(id))
-            {
-                return BadRequest();
-            }
-
-            var currentTiebreak = await tiebreakService.TiebreakDetailsAsync(id);
-
-            if (information != currentTiebreak.GetInformation())
-            {
-                return BadRequest();
-            }
-
-            return View(currentTiebreak);
-
-        }
-
-        
 
     }
 }

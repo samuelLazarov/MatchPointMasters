@@ -8,7 +8,7 @@
     {
         //CRUD operations
         Task<int> AddSetAsync(SetAddViewModel setForm, int matchId);
-        Task<SetEditViewModel> EditSetASyncGetAsync(int setId);
+        Task<SetEditViewModel> EditSetAsyncGetAsync(int setId);
         Task<int> EditSetPostAsync(SetEditViewModel setForm);
         Task<SetDeleteViewModel> DeleteSetAsync(int setId);
         Task<int> DeleteSetConfirmedAsync(int setId);
