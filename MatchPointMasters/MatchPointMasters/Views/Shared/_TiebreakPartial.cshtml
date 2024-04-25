@@ -1,0 +1,11 @@
+﻿@model TiebreakServiceModel
+
+<div class="col mb-4">
+    <div class="card h-100 text-center">
+        <div class="card-body">
+            <h4 class="card-title"><strong>@Model.Id</strong></h4>
+            <p class="card-text"> @Model.PlayerOnePoints / @Model.PlayerTwoPoints</p>
+        </div>
+        <a asp-controller="Tiebreak" asp-action="Details" asp-route-information="@Model.GetInformation()" asp-route-id="@Model.Id" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж Повече</a>
+    </div>
+</div>

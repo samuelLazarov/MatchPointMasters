@@ -1,7 +1,7 @@
-﻿@model TournamentAddViewModel
+﻿@model TiebreakAddViewModel
 
 @{
-    ViewBag.Title = "Добави Статия";
+    ViewBag.Title = "Добави нов тайбрек към сет";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -11,19 +11,19 @@
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Add" method="post">
             <div class="mb-3">
-                <label asp-for="@Model.Name" class="form-label-add-edit"><bold>Име на турнира</bold></label>
-                <input asp-for="@Model.Name" class="form-control" aria-required="true" />
-                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                <label asp-for="@Model.SetId" class="form-label-add-edit"><bold>Текущ сет</bold></label>
+                <input asp-for="@Model.SetId" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.SetId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.Description" class="form-label-add-edit"><bold>Описание</bold></label>
-                <textarea asp-for="@Model.Description" class="form-control" aria-required="true" rows="5"></textarea>
-                <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                <label asp-for="@Model.PlayerOnePoints" class="form-label-add-edit"><bold>Точки на Играч 1</bold></label>
+                <textarea asp-for="@Model.PlayerOnePoints" class="form-control" aria-required="true" rows="5"></textarea>
+                <span asp-validation-for="@Model.PlayerOnePoints" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="@Model.ImageUrl" class="form-label-add-edit"><bold>Снимка (Линк)</bold></label>
-                <input asp-for="@Model.ImageUrl" class="form-control" aria-required="true" />
-                <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+                <label asp-for="@Model.PlayerTwoPoints" class="form-label-add-edit"><bold>Точки на Играч 2</bold></label>
+                <input asp-for="@Model.PlayerTwoPoints" class="form-control" aria-required="true" />
+                <span asp-validation-for="@Model.PlayerTwoPoints" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Добави" />

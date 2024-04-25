@@ -1,8 +1,9 @@
 ﻿namespace MatchPointMasters.Core.Models.Tiebreak.QueryModels
 {
+    using MatchPointMasters.Core.Contracts;
     using System.ComponentModel.DataAnnotations;
 
-    public class TiebreakServiceModel
+    public class TiebreakServiceModel : ITiebreakModel
     {
         public int Id { get; set; }
 
