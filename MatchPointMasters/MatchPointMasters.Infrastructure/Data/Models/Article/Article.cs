@@ -15,14 +15,6 @@
         public int Id { get; set; }
 
         [Required]
-        [Comment("The current author's identifier")]
-        public string HostUserId { get; set; }
-
-        [ForeignKey(nameof(HostUserId))]
-        [Comment("The current article's author")]
-        public ApplicationUser HostUser { get; set; } = null!;
-
-        [Required]
         [MaxLength(ArticleContentMaxLength)]
         [Comment("The current Article's Title")]
         public string Title { get; set; } = null!;

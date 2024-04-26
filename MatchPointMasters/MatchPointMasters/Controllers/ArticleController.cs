@@ -84,7 +84,7 @@ namespace MatchPointMasters.Controllers
 			{
 				return View(articleForm);
 			}
-
+			
 			await articleService.AddAsync(articleForm);
 			return RedirectToAction(nameof(All));
 		}
