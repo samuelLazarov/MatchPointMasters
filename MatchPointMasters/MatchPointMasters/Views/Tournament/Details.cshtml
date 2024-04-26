@@ -33,7 +33,10 @@
                 <a asp-controller="Tournament" asp-action="All" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Обратно към Всички Турнири</a>
                 @if (Model.Capacity > 0 && !isAlreadyIn)
                 {
-                    <a asp-controller="Match" asp-action="AddTournament" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Добави към "Моите турнири"</a>
+                    <form asp-controller="Tournament" asp-action="RegisterInTournament" method="post">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <button type="submit" class="btn btn-success mb-1 w-100 p-3 fw-bold">Заяви участие</button>
+                    </form>
                 }
                 
             </div>

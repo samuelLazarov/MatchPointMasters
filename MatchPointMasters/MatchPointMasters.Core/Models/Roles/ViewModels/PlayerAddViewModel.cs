@@ -20,7 +20,7 @@
 
         [Required]
 
-        public DateTime BirthDate { get; set; } = new DateTime(2006, 1, 1);
+        public DateTime BirthDate { get; set; } = new DateTime(1940, 1, 1);
 
         [Required]
         public Gender Gender { get; set; }
