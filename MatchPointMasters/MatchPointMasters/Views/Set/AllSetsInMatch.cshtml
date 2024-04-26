@@ -1,5 +1,60 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model SetQueryServiceModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sets Information</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sets Information</h1>
+
+    @if (Model.Sets.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Set ID</th>
+                    <th>Match ID</th>
+                    <th>Player One Games Won</th>
+                    <th>Player Two Games Won</th>
+                    <th>Has Tiebreak</th>
+                    <th>Tiebreak ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var set in Model.Sets)
+                {
+                    <tr>
+                        <td>@set.Id</td>
+                        <td>@set.MatchId</td>
+                        <td>@set.PlayerOneGamesWon</td>
+                        <td>@set.PlayerTwoGamesWon</td>
+                        <td>@(set.HasTiebreak ? "Yes" : "No")</td>
+                        <td>@set.TiebreakId</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No sets found.</p>
+    }
+</body>
+</html>
