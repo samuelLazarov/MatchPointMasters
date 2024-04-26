@@ -1,11 +1,10 @@
-
 using MatchPointMasters.ModelBinders;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MatchPointMasters.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using MatchPointMasters.Infrastructure.Data.Models.Roles;
 using MatchPointMasters.Extensions;
+using MatchPointMasters.Core.Contracts;
+using MatchPointMasters.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'MatchPointMastersDbContextConnection' not found.");

@@ -19,8 +19,8 @@
     {
         private readonly IRepository repository;
 
-
-        public PlayerService(IRepository _repository)
+        public PlayerService(
+            IRepository _repository)
         {
             repository = _repository;
         }
@@ -95,7 +95,7 @@
         {
 
             var playersToShow = repository.AllAsReadOnly<Player>()
-                .OrderBy(p => p.Wins)
+                .OrderByDescending(p => p.Wins)
                 .ThenBy(p => p.Losses);
 
             var players = await playersToShow
@@ -296,6 +296,21 @@
                 TournamentWins = player.TournamentWins,
                 ImageUrl = player.ImageUrl,
             };
+        }
+
+        public async Task<bool> PlayerExistsByUserIdAsync(string userId)
+        {
+            var user = await repository.GetByIdAsync<ApplicationUser>(userId);
+
+            var player = await repository.AllAsReadOnly<Player>()
+                .FirstOrDefaultAsync(p => p.UserId == userId);
+
+            if (player == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

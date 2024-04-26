@@ -5,7 +5,6 @@
     using MatchPointMasters.Core.Extensions;
     using MatchPointMasters.Core.Models.Match.QueryModels;
     using MatchPointMasters.Core.Models.Roles.QueryModels;
-    using MatchPointMasters.Core.Models.Tournament;
     using MatchPointMasters.Core.Models.Tournament.QueryModels;
     using MatchPointMasters.Core.Models.Tournament.ViewModels;
     using MatchPointMasters.Infrastructure.Data.Common;
@@ -16,9 +15,10 @@
     using MatchPointMasters.Infrastructure.Data.Models.Tournament;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
     using System.Collections.Generic;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+    using Match = Infrastructure.Data.Models.Match.Match;
 
     public class TournamentService : ITournamentService
     {
@@ -52,7 +52,8 @@
                 Description = tournamentForm.Description,
                 StartDate = tournamentForm.StartDate,
                 EndDate = tournamentForm.EndDate,
-                //HostClubId = tournamentForm.HostClubId,
+                TournamentHostId = tournamentForm.TournamentHostId,
+                HostClubId = tournamentForm.ClubId,
                 TournamentBalls = tournamentForm.TournamentBalls,
                 Fee = tournamentForm.Fee,
                 Capacity = tournamentForm.Capacity,
@@ -424,8 +425,8 @@
                  .ToListAsync();
         }
 
-        public async Task<TournamentQueryServiceModel> AllTournamentsByUserIdAsync(
-            string userId,
+        public async Task<TournamentQueryServiceModel> AllTournamentsByPlayerIdAsync(
+            int playerId,
             string? searchTerm = null,
             TournamentSorting sorting = TournamentSorting.Newest,
             TournamentStatus tournamentStatus = TournamentStatus.All,
@@ -433,9 +434,9 @@
             int tournamentsPerPage = 4)
         {
 
-            var player = playerService.FindPlayerByUserIdAsync(userId);
             var tournamentsToShow = repository.AllAsReadOnly<Tournament>()
-                .Where(t => t.PlayerTournaments.Any(pt => pt.PlayerId == player.Id));
+                .Where(t => t.PlayerTournaments.Any(pt => pt.PlayerId == playerId))
+                .AsNoTracking();
 
             if (searchTerm != null)
             {
@@ -478,6 +479,12 @@
                 Tournaments = tournaments,
                 TotalTournamentsCount = totalTournaments
             };
+        }
+
+        public async Task<bool> PlayerExistsInTournamentAsync(int playerId, int tournamentId)
+        {
+            return await repository.AllAsReadOnly<PlayerTournament>()
+                .AnyAsync(pt => pt.PlayerId == playerId && pt.TournamentId == tournamentId);
         }
     }
 }

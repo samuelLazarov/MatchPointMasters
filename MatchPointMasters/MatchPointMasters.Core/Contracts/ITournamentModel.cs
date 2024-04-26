@@ -4,6 +4,6 @@
     {
         public string Name { get; set; }
         public string HostClub { get; set; }
-       
+
     }
 }

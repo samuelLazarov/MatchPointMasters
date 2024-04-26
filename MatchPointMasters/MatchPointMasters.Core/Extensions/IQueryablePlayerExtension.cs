@@ -11,10 +11,12 @@ namespace MatchPointMasters.Core.Extensions
             return players.Select(p => new PlayerServiceModel()
             {
                 Id = p.Id,
+                FullName = p.User.FirstName + " " + p.User.LastName,
                 UserId = p.UserId,
                 BirthDate = p.BirthDate,
                 Gender = p.Gender,
                 DominantHand = p.DominantHand,
+                PhoneNumber = p.PhoneNumber,
                 Backhand = p.Backhand,
                 PlayingStyle = p.PlayingStyle,
                 TennisRacket = p.TennisRacket,

@@ -19,7 +19,8 @@
         public string PhoneNumber { get; set; } = string.Empty;
 
         [Required]
-        public DateTime BirthDate { get; set; }
+
+        public DateTime BirthDate { get; set; } = new DateTime(2006, 1, 1);
 
         [Required]
         public Gender Gender { get; set; }

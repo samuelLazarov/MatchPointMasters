@@ -15,12 +15,19 @@ namespace MatchPointMasters.Controllers
     {
         private readonly ITournamentService tournamentService;
         private readonly ITournamentHostService tournamentHostService;
+        private readonly IPlayerService playerService;
+        private readonly IClubService clubService;
 
-        public TournamentController(ITournamentService _tournamentService, ITournamentHostService _tournamentHostService)
+        public TournamentController(
+            ITournamentService _tournamentService,
+            ITournamentHostService _tournamentHostService,
+            IPlayerService _playerService,
+            IClubService _clubService)
         {
             tournamentService = _tournamentService;
             tournamentHostService = _tournamentHostService;
-
+            playerService = _playerService;
+            clubService = _clubService;
         }
 
 
@@ -41,7 +48,7 @@ namespace MatchPointMasters.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpGet] 
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id, string information)
         {
@@ -59,20 +66,41 @@ namespace MatchPointMasters.Controllers
 
             return View(currentTournament);
         }
+        [HttpGet("Tournament/Details/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (!await tournamentService.TournamentExistsByIdAsync(id))
+            {
+                return BadRequest();
+            }
 
+            var currentTournament = await tournamentService.DetailsAsync(id);
+
+            return View(currentTournament);
+        }
 
         [HttpGet]
-        public async Task<IActionResult> Mine(string id, [FromQuery] AllTournamentsQueryModel model)
+        public async Task<IActionResult> Mine([FromQuery] AllTournamentsQueryModel model)
         {
             var userId = User.Id();
 
-            if (userId != id)
+            if (userId == null)
             {
                 return Unauthorized();
             }
 
-            var tournamentsCollection = await tournamentService.AllTournamentsByUserIdAsync(
-                    userId, model.SearchTerm, model.Sorting, model.Status, model.CurrentPage, model.TournamentsPerPage);
+            var player = await playerService.FindPlayerByUserIdAsync(userId);
+
+            if (player == null)
+            {
+                return Unauthorized();
+            }
+
+            int playerId = player.Id;
+
+            var tournamentsCollection = await tournamentService.AllTournamentsByPlayerIdAsync(
+                    playerId, model.SearchTerm, model.Sorting, model.Status, model.CurrentPage, model.TournamentsPerPage);
 
             return View(tournamentsCollection);
         }
@@ -87,7 +115,14 @@ namespace MatchPointMasters.Controllers
                 return Unauthorized();
             }
 
+            var clubs = await clubService.GetAllForTournament();
+            if (clubs == null)
+            {
+                return BadRequest();
+            }
+
             var tournamentForm = new TournamentAddViewModel();
+            tournamentForm.Clubs = clubs;
 
             return View(tournamentForm);
         }
@@ -97,6 +132,27 @@ namespace MatchPointMasters.Controllers
         [MustBeATournamentHost]
         public async Task<IActionResult> AddTournament(TournamentAddViewModel tournamentForm)
         {
+            var clubs = await clubService.GetAllForTournament();
+
+            var userId = User.Id();
+
+            var tournamentHostId
+                = await tournamentHostService.GetTournamentHostIdAsync(userId);
+
+            if (tournamentHostId == null)
+            {
+                return Unauthorized();
+            }
+
+            tournamentForm.TournamentHostId = (int)tournamentHostId;
+
+            if (clubs == null)
+            {
+                return BadRequest();
+            }
+
+            tournamentForm.Clubs = clubs;
+
             if (await tournamentHostService.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
                 return Unauthorized();
@@ -108,10 +164,10 @@ namespace MatchPointMasters.Controllers
                 ModelState.AddModelError("EndDate", "Invalid timespan!");
             }
 
-            if (!ModelState.IsValid)
-            {
-                return View(tournamentForm);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(tournamentForm);
+            //}
 
             await tournamentService.AddTournamentAsync(tournamentForm);
 
@@ -208,6 +264,24 @@ namespace MatchPointMasters.Controllers
 
             return RedirectToAction("All", "Tournament");
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> RegisterInTournament(int id)
+        {
+            string userId = User.Id();
+
+            var player = await playerService.FindPlayerByUserIdAsync(userId);
+
+            if (player == null)
+            {
+                return RedirectToAction("Login", "Account", new {Area = "Identity"});
+            }
+
+            int playerId = player.Id;
+
+            await playerService.AddPlayerToTournamentAsync(playerId, id);
+
+            return RedirectToAction("Mine", "Tournament");
         }
 
     }

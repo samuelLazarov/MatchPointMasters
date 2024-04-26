@@ -15,10 +15,14 @@
                 <input asp-for="@Model.Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label asp-for="@Model.HostClub" class="form-label-add-edit"><bold>Тенис-клуб</bold></label>
-                <input asp-for="@Model.HostClub" class="form-control" aria-required="true" />
-                <span asp-validation-for="@Model.HostClub" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="@Model.ClubId">Host Club</label>
+                <select asp-for="@Model.ClubId" class="form-control">
+                    @foreach (var club in Model.Clubs)
+                    {
+                        <option value="@club.Id">@club.Name</option>
+                    }
+                </select>
             </div>
             <div class="mb-3">
                 <label asp-for="@Model.Description" class="form-label-add-edit"><bold>Описание</bold></label>

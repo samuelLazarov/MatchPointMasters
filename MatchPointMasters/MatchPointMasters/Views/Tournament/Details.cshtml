@@ -1,9 +1,17 @@
 ﻿@model TournamentDetailsViewModel
 @inject ITournamentHostService tournamentHost
+@inject ITournamentService tournamentService
+@inject IPlayerService playerService
 
 @{
     ViewBag.Title = "Турнири";
     CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("en-EN");
+
+    string userId = User.Id();
+    var player = await playerService.FindPlayerByUserIdAsync(userId);
+    int tournamentId = int.Parse(ViewContext.RouteData.Values["id"]?.ToString());
+
+    bool isAlreadyIn = await tournamentService.PlayerExistsInTournamentAsync(player.Id, tournamentId);
 }
 
 <div class="container text-center mt-5">
@@ -23,7 +31,7 @@
 
             <div class="text-center mt-1">
                 <a asp-controller="Tournament" asp-action="All" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Обратно към Всички Турнири</a>
-                @if (Model.Capacity > 0)
+                @if (Model.Capacity > 0 && !isAlreadyIn)
                 {
                     <a asp-controller="Match" asp-action="AddTournament" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Добави към "Моите турнири"</a>
                 }

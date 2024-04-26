@@ -1,15 +1,41 @@
 ﻿@model PlayerQueryServiceModel
 
-<h1>Players</h1>
-<br />
+@{
+    ViewBag.Title = "Players";
+}
 
-<div class="row row-cols-1 row-cols-md-4 g-4">
-    @{
-        foreach (var player in Model.Players)
+<div class="container mt-5">
+    <h2 class="text-center mb-4">All Players</h2>
+
+    <div class="row">
+        @foreach (var player in Model.Players)
         {
-            <div class="col">
-                <partial name="_PlayerPartial" model="@player" />
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="@player.ImageUrl" class="card-img-top" alt="@player.FullName">
+                    <div class="card-body">
+                        <h5 class="card-title">@player.FullName</h5>
+                        <p class="card-text">Phone: @player.PhoneNumber</p>
+                        <p class="card-text">Gender: @player.Gender</p>
+                        <p class="card-text">Birth Date: @player.BirthDate.ToString("yyyy-MM-dd")</p>
+                        <p class="card-text">Wins: @player.Wins</p>
+                        <p class="card-text">Losses: @player.Losses</p>
+                        @if (player.TournamentWins.HasValue)
+                        {
+                            <p class="card-text">Tournament Wins: @player.TournamentWins.Value</p>
+                        }
+                    </div>
+                </div>
             </div>
         }
+    </div>
+
+    @if (Model.TotalPlayersCount == 0)
+    {
+        <p class="text-center mt-4">No players found.</p>
+    }
+    else
+    {
+        <p class="text-center mt-4">Total Players: @Model.TotalPlayersCount</p>
     }
 </div>

@@ -28,9 +28,9 @@
                     <ul class="navbar-nav">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
+                            @* <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Match" asp-action="All" asp-route-id="@UserManager.GetUserId(User)">Моите мачове</a>
-                            </li>
+                            </li> *@
                         }
                         @if (User.IsAdmin())
                         {

@@ -19,6 +19,7 @@
             int currentPage = 1,
             int playersPerPage = 8);
         Task<bool> PlayerExistsByIdAsync(int playerId);
+        Task<bool> PlayerExistsByUserIdAsync(string userId);
         Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber);
         Task<Player> FindPlayerByIdAsync(int playerId);
         Task<Player> FindPlayerByUserIdAsync(string userId);

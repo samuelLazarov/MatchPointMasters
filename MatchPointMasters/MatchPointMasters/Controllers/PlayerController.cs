@@ -21,8 +21,17 @@
 
 
         [HttpGet]
-        public IActionResult Become()
+        public async Task<IActionResult> Become()
         {
+            string userId = User.Id();
+
+            var player = await playerService.FindPlayerByUserIdAsync(userId);
+
+            if (player != null)
+            {
+                return RedirectToAction("All", "Tournament");
+            }
+
             var model = new PlayerAddViewModel();
 
             return View(model);
@@ -43,7 +52,7 @@
 
             await playerService.AddAsync(User.Id(), model);
 
-            return RedirectToAction("Mine", "Tournament");
+            return RedirectToAction("All", "Tournament");
 
         }
 

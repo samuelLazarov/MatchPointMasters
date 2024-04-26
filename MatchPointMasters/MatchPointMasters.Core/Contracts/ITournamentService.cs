@@ -32,6 +32,7 @@
             int tournamentsPerPage = 4
             );
         Task<bool> TournamentExistsByIdAsync(int tournamentId);
+        Task<bool> PlayerExistsInTournamentAsync(int playerId, int tournamentId);
         Task<Tournament> FindTournamentByIdAsync(int tournamentId);
         Task<TournamentDetailsViewModel> DetailsAsync(int tournamentId);
         Task<PlayerQueryServiceModel> GetAllPlayersInTournamentAsync(
@@ -48,8 +49,8 @@
             int currentPage = 1,
             int matchesPerPage = 4);
         Task<IEnumerable<TournamentIndexViewModel>> LastThreeTournamentsAsync();
-        Task<TournamentQueryServiceModel> AllTournamentsByUserIdAsync(
-            string userId,
+        Task<TournamentQueryServiceModel> AllTournamentsByPlayerIdAsync(
+            int playerId,
             string? SearchTerm = null,
             TournamentSorting sorting = TournamentSorting.Newest,
             TournamentStatus tournamentStatus = TournamentStatus.All,

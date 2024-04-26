@@ -30,6 +30,7 @@ namespace MatchPointMasters.Infrastructure.Data
         public DbSet<PlayerTournament> PlayersTournaments { get; set; } = null!;
         public DbSet<TournamentMatch> TournamentMatches { get; set; } = null!;
         public DbSet<Article> Articles { get; set; } = null!;
+        public DbSet<Club> Clubs { get; set; } = null!;
         public DbSet<ArticleComment> ArticleComments { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
