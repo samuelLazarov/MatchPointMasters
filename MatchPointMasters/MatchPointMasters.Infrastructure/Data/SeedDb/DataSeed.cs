@@ -140,8 +140,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             HostUser = new ApplicationUser()
             {
                 Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
-                UserName = "Ivan_Pandeliev",
-                NormalizedUserName = "ivan_pandeliev",
+                UserName = "hostuser@gmail.com",
+                NormalizedUserName = "HOSTUSER@GMAIL.COM",
                 Email = "hostuser@gmail.com",
                 NormalizedEmail = "hostuser@gmail.com",
                 FirstName = "Ivan",
@@ -161,8 +161,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player1User = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d83950p1",
-                UserName = "Samuel_Lazarov",
-                NormalizedUserName = "samuel_lazarov",
+                UserName = "player1@gmail.com",
+                NormalizedUserName = "PLAYER1@GMAIL.COM",
                 Email = "player1@gmail.com",
                 NormalizedEmail = "player1@gmail.com",
                 FirstName = "Samuel",
@@ -182,8 +182,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player2User = new ApplicationUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d83950p2",
-                UserName = "Sarkis_Haralampiev",
-                NormalizedUserName = "sarkis_haralampiev",
+                UserName = "player1@gmail.com",
+                NormalizedUserName = "PLAYER2@GMAIL.COM",
                 Email = "player2@gmail.com",
                 NormalizedEmail = "player2@gmail.com",
                 FirstName = "Sarkis",
@@ -204,8 +204,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player3User = new ApplicationUser()
             {
                 Id = "f98e572e-f64b-40f5-a37f-783d2d1ff0p3",
-                UserName = "Ivan_Pritargov",
-                NormalizedUserName = "ivan_pritargov",
+                UserName = "player3@gmail.com",
+                NormalizedUserName = "PLAYER3@GMAIL.COM",
                 Email = "player3@gmail.com",
                 NormalizedEmail = "player3@gmail.com",
                 FirstName = "Ivan",
@@ -225,8 +225,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player4User = new ApplicationUser()
             {
                 Id = "4a08e50c-9f8d-4ac7-bbc1-05a7f0f146p4",
-                UserName = "Daniil_Kurian",
-                NormalizedUserName = "daniil_kurian",
+                UserName = "player4@gmail.com",
+                NormalizedUserName = "PLAYER4@GMAIL.COM",
                 Email = "player4@gmail.com",
                 NormalizedEmail = "player4@gmail.com",
                 FirstName = "Daniil",
@@ -246,8 +246,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player5User = new ApplicationUser()
             {
                 Id = "adb4186a-f51d-4969-aa0f-938a524128p5",
-                UserName = "Rado_Vladimirov",
-                NormalizedUserName = "rado_vladimirov",
+                UserName = "player5@gmail.com",
+                NormalizedUserName = "PLAYER5@GMAIL.COM",
                 Email = "player5@gmail.com",
                 NormalizedEmail = "player5@gmail.com",
                 FirstName = "Rado",
@@ -267,8 +267,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player6User = new ApplicationUser()
             {
                 Id = "4319f732-1f7d-44e3-8b4b-7d698f7c44p6",
-                UserName = "Dimitar_Berdankov",
-                NormalizedUserName = "dimitar_berdankov",
+                UserName = "player6@gmail.com",
+                NormalizedUserName = "PLAYER6@GMAIL.COM",
                 Email = "player6@gmail.com",
                 NormalizedEmail = "player6@gmail.com",
                 FirstName = "Dimitar",
@@ -288,8 +288,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player7User = new ApplicationUser()
             {
                 Id = "9b9265e6-61b2-4b6f-af23-1e1af744b1p7",
-                UserName = "Dimitar_Randev",
-                NormalizedUserName = "dimitar_randev",
+                UserName = "player7@gmail.com",
+                NormalizedUserName = "PLAYER7@GMAIL.COM",
                 Email = "player7@gmail.com",
                 NormalizedEmail = "player7@gmail.com",
                 FirstName = "Dimitar",
@@ -309,8 +309,8 @@ namespace MatchPointMasters.Infrastructure.Data.SeedDb
             Player8User = new ApplicationUser()
             {
                 Id = "c45b149d-4c95-4742-b848-739af7b0bfp8",
-                UserName = "Rosen_Markov",
-                NormalizedUserName = "rosen_markov",
+                UserName = "player8@gmail.com",
+                NormalizedUserName = "PLAYER8@GMAIL.COM",
                 Email = "player8@gmail.com",
                 NormalizedEmail = "player8@gmail.com",
                 FirstName = "Rosen",
