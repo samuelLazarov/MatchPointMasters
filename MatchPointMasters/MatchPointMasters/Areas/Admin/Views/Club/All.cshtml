@@ -11,8 +11,8 @@
             <th>Phone Number</th>
             <th>Image</th>
             <th>Court Surface</th>
-            <th>Actions</th>
-        </tr>
+@*             <th>Actions</th>
+ *@        </tr>
     </thead>
     <tbody>
         @foreach (var club in Model)
@@ -23,10 +23,10 @@
                 <td>@club.PhoneNumber</td>
                 <td><img src="@club.ImageUrl" alt="@club.Name" width="100" height="100"></td>
                 <td>@club.CourtSurface</td>
-                <td>
+                @* <td>
                     <a asp-action="Edit" asp-route-id="@club.Id" class="btn btn-primary">Edit</a>
                     <a asp-action="Delete" asp-route-id="@club.Id" class="btn btn-danger">Delete</a>
-                </td>
+                </td> *@
             </tr>
         }
     </tbody>

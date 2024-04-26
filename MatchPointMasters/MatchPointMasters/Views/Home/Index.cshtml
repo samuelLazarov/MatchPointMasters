@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<TournamentIndexViewModel>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Home Page";
@@ -27,9 +29,13 @@
                 <div class="image-overlay"></div>
                 <h5 class="carousel-title">@tournament.Name</h5>
                 <img class="d-block w-100" style="height:500px" src="@tournament.ImageUrl" alt="@tournament.Name">
-                <div class="carousel-caption d-none d-md-block">
-                    <a class="btn btn-primary btn-view-more" asp-controller="Tournament" asp-action="Details" asp-route-information="@tournament.GetInformation()" asp-route-id="@tournament.Id" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж повече</a>
-                </div>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div class="carousel-caption d-none d-md-block">
+                        <a class="btn btn-primary btn-view-more" asp-controller="Tournament" asp-action="Details" asp-route-information="@tournament.GetInformation()" asp-route-id="@tournament.Id" class="btn btn-warning mb-1 w-100 p-3 fw-bold">Виж повече</a>
+                    </div>
+                }
+                
             </div>
         }
     </div>
