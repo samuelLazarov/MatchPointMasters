@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using static MatchPointMasters.Infrastructure.Constants.DataConstants;
 using static MatchPointMasters.Infrastructure.Constants.DataConstants.TournamentConstants;
 using static MatchPointMasters.Infrastructure.Constants.DataConstants.ClubConstants;
+using MatchPointMasters.Core.Models.Club;
 
 namespace MatchPointMasters.Core.Models.Tournament.ViewModels
 {
@@ -39,12 +40,19 @@ namespace MatchPointMasters.Core.Models.Tournament.ViewModels
         [Range(TournamentCapacityMinRange, TournamentCapacityMaxRange)]
         public int Capacity { get; set; }
 
+        public int HostClubId { get; set; }
+
+        public int TournamentHostId { get; set; }
+
         [Required]
         [StringLength(TournamentImageUrlMaxLength, MinimumLength = TournamentImageUrlMinLength, ErrorMessage = LengthErrorMessage)]
         public string ImageUrl { get; set; } = string.Empty;
 
         [Required]
         public TennisBalls TournamentBalls { get; set; }
+
+        public IEnumerable<ClubForTournamentViewModel> Clubs { get; set; } = new HashSet<ClubForTournamentViewModel>();
+
 
     }
 }

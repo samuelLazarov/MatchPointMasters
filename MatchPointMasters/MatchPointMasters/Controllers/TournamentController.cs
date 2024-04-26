@@ -163,10 +163,10 @@ namespace MatchPointMasters.Controllers
                 ModelState.AddModelError("EndDate", "Invalid timespan!");
             }
 
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(tournamentForm);
-            //}
+            if (!ModelState.IsValid)
+            {
+                return View(tournamentForm);
+            }
 
             await tournamentService.AddTournamentAsync(tournamentForm);
 
@@ -177,7 +177,7 @@ namespace MatchPointMasters.Controllers
 
         [HttpGet]
         [MustBeATournamentHost]
-        public async Task<IActionResult> EditTournament(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (await tournamentHostService.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -188,6 +188,7 @@ namespace MatchPointMasters.Controllers
             {
                 return BadRequest();
             }
+
 
             var tournamentForm = await tournamentService.EditTournamentGetAsync(id);
             return View(tournamentForm);
@@ -219,6 +220,15 @@ namespace MatchPointMasters.Controllers
                 return View(tournamentForm);
             }
 
+            var clubs = await clubService.GetAllForTournament();
+            tournamentForm.Clubs = clubs;
+            var userId = User.Id();
+
+            var tournamentHostId
+                = await tournamentHostService.GetTournamentHostIdAsync(userId);
+
+            tournamentForm.TournamentHostId = (int)tournamentHostId;
+
             int id = tournamentForm.Id;
             await tournamentService.EditTournamentPostAsync(tournamentForm);
 
@@ -227,7 +237,7 @@ namespace MatchPointMasters.Controllers
 
         [HttpGet]
         [MustBeATournamentHost]
-        public async Task<IActionResult> DeleteTournament(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (await tournamentHostService.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -247,7 +257,7 @@ namespace MatchPointMasters.Controllers
 
         [HttpPost]
         [MustBeATournamentHost]
-        public async Task<IActionResult> DeleteTournamentConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (await tournamentHostService.ExistsByUserIdAsync(User.Id()) == false && !User.IsAdmin())
             {
@@ -279,6 +289,44 @@ namespace MatchPointMasters.Controllers
             int playerId = player.Id;
 
             await playerService.AddPlayerToTournamentAsync(playerId, id);
+
+            return RedirectToAction("Mine", "Tournament");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> LeaveTournament(int id)
+        {
+            string userId = User.Id();
+
+            var player = await playerService.FindPlayerByUserIdAsync(userId);
+
+            if (player == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "Identity" });
+            }
+
+            int playerId = player.Id;
+
+            var model = await playerService.RemovePlayerFromTournamentAsync(playerId, id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LeaveTournamentConfirmed(int id)
+        {
+            string userId = User.Id();
+
+            var player = await playerService.FindPlayerByUserIdAsync(userId);
+
+            if (player == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "Identity" });
+            }
+
+            int playerId = player.Id;
+
+            await playerService.RemovePlayerFromTournamentConfirmedAsync(playerId, id);
 
             return RedirectToAction("Mine", "Tournament");
         }

@@ -53,7 +53,7 @@
                 StartDate = tournamentForm.StartDate,
                 EndDate = tournamentForm.EndDate,
                 TournamentHostId = tournamentForm.TournamentHostId,
-                HostClubId = tournamentForm.ClubId,
+                HostClubId = tournamentForm.HostClubId,
                 TournamentBalls = tournamentForm.TournamentBalls,
                 Fee = tournamentForm.Fee,
                 Capacity = tournamentForm.Capacity,
@@ -78,7 +78,7 @@
                 Description = currentTournament.Description,
                 StartDate = currentTournament.StartDate,
                 EndDate = currentTournament.EndDate,
-                HostClub = currentTournament.HostClub.Name,
+                HostClubId = currentTournament.HostClubId,
                 TournamentBalls = currentTournament.TournamentBalls,
                 Fee = currentTournament.Fee,
                 Capacity = currentTournament.Capacity,
@@ -118,7 +118,7 @@
             {
                 Id = currentTournament.Id,
                 Name = currentTournament.Name,
-                HostClub = currentTournament.HostClub.Name,
+                HostClubId = currentTournament.HostClubId,
                 ImageUrl = currentTournament.ImageUrl
 
             };
@@ -129,6 +129,15 @@
         public async Task<int> DeleteTournamentConfirmedAsync(int tournamentId)
         {
             var currentTournament = await repository.GetByIdAsync<Tournament>(tournamentId);
+
+            var playerTournaments = await repository.All<PlayerTournament>()
+                .Where(pt => pt.TournamentId == tournamentId)
+                .ToListAsync();
+
+            if (playerTournaments != null && playerTournaments.Any())
+            {
+                await repository.RemoveRangeAsync(playerTournaments);
+            }
 
             await repository.RemoveAsync<Tournament>(currentTournament);
             await repository.SaveChangesAsync();

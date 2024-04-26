@@ -16,8 +16,8 @@
                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="@Model.ClubId">Host Club</label>
-                <select asp-for="@Model.ClubId" class="form-control">
+                <label asp-for="@Model.HostClubId">Host Club</label>
+                <select asp-for="@Model.HostClubId" class="form-control">
                     @foreach (var club in Model.Clubs)
                     {
                         <option value="@club.Id">@club.Name</option>

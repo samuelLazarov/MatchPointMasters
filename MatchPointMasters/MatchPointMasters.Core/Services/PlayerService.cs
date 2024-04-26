@@ -244,6 +244,7 @@
             var tournament = await repository.GetByIdAsync<Tournament>(tournamentId);
             var deleteForm = new PlayerTournamentDeleteViewModel()
             {
+                Id = tournamentId,
                 PlayerName = $"{player.User.FirstName} {player.User.LastName}",
                 TournamentName = tournament.Name
             };

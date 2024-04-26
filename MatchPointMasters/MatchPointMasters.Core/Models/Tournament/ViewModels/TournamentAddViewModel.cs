@@ -43,7 +43,7 @@ namespace MatchPointMasters.Core.Models.Tournament.ViewModels
         [Required]
         public TennisBalls TournamentBalls { get; set; }
 
-        public int ClubId { get; set; }
+        public int HostClubId { get; set; }
 
         public int TournamentHostId { get; set; }
 

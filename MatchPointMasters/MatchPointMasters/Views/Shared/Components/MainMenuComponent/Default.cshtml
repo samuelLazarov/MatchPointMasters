@@ -1,8 +1,8 @@
-﻿@inject UserManager<ApplicationUser> UserManager
-@inject IPlayerService PlayerService;
+﻿@inject UserManager<ApplicationUser> userManager
+@inject IPlayerService playerService;
 
 @{
-    bool isPlayer = await PlayerService.PlayerExistsByUserIdAsync(User.Id());
+    bool isPlayer = await playerService.PlayerExistsByUserIdAsync(User.Id());
 }
 
 <ul class="navbar-nav flex-grow-1">
@@ -14,7 +14,7 @@
         <a class="nav-link text-dark" asp-area="" asp-controller="Tournament" asp-action="All">Турнири</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="All">Ранглиста</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="All">Играчи</a>
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="All">Статии</a>
